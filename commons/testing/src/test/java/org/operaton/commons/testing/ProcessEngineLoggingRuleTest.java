@@ -20,10 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
 
 import java.util.List;
-
+import org.junit.jupiter.api.Test;
 import org.operaton.commons.testing.util.ExampleProcessEngineLogger;
 import org.junit.Rule;
-import org.junit.Test;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 
@@ -42,7 +41,7 @@ public class ProcessEngineLoggingRuleTest {
                                                       .watch(PROCESS_APPLICATION_LOGGER, Level.INFO);
 
   @Test
-  public void testWithoutAnnotation() {
+  void withoutAnnotation() {
     // given
 
     // when
@@ -68,7 +67,7 @@ public class ProcessEngineLoggingRuleTest {
 
   @Test
   @WatchLogger(loggerNames = {CONTAINER_INTEGRATION_LOGGER}, level = "WARN")
-  public void testOverrideWithAnnotation() {
+  void overrideWithAnnotation() {
     // given
 
     // when
@@ -91,10 +90,10 @@ public class ProcessEngineLoggingRuleTest {
     testLogLevel(containerLog, Level.WARN);
     testLogLevel(processAppLogger, Level.INFO);
   }
-  
+
   @Test
   @WatchLogger(loggerNames = {JOB_EXECUTOR_LOGGER}, level = "ERROR")
-  public void testAddWatchedLoggerWithAnnotation() {
+  void addWatchedLoggerWithAnnotation() {
     // given
 
     // when
@@ -111,10 +110,10 @@ public class ProcessEngineLoggingRuleTest {
     testLogLevel(processAppLogger, Level.INFO);
     testLogLevel(jobExecutorLogger, Level.ERROR);
   }
-  
+
   @Test
   @WatchLogger(loggerNames = {CONTAINER_INTEGRATION_LOGGER}, level = "OFF")
-  public void testTurnOffWatcherWithAnnotation() {
+  void turnOffWatcherWithAnnotation() {
     // given
 
     // when
@@ -141,7 +140,7 @@ public class ProcessEngineLoggingRuleTest {
 
   @Test
   @WatchLogger(loggerNames = {JOB_EXECUTOR_LOGGER, PERSISTENCE_LOGGER, CONTAINER_INTEGRATION_LOGGER, PROCESS_APPLICATION_LOGGER}, level = "DEBUG")
-  public void testLogOrder() {
+  void logOrder() {
     logSomethingOnAllLevels();
 
     List<ILoggingEvent> fullLog = loggingRule.getLog();
