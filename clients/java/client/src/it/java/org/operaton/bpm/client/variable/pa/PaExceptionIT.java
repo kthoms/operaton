@@ -34,7 +34,6 @@ import org.operaton.bpm.client.util.RecordingInvocationHandler.RecordedInvocatio
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.RuleChain;
 
 import java.util.ArrayList;

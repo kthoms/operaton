@@ -45,7 +45,6 @@ import org.operaton.spin.SpinList;
 import org.operaton.spin.xml.SpinXmlElement;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 

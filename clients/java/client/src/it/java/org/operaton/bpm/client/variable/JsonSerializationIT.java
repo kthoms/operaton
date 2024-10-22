@@ -44,7 +44,6 @@ import org.operaton.bpm.engine.variable.value.ObjectValue;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 import org.skyscreamer.jsonassert.JSONAssert;
