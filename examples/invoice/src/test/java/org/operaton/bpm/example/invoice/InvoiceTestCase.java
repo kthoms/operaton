@@ -16,6 +16,10 @@
  */
 package org.operaton.bpm.example.invoice;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.operaton.bpm.engine.variable.Variables.fileValue;
 
 import java.io.InputStream;
@@ -23,7 +27,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.runtime.Job;
 import org.operaton.bpm.engine.runtime.ProcessInstance;
 import org.operaton.bpm.engine.task.IdentityLink;
@@ -33,10 +37,11 @@ import org.operaton.bpm.engine.test.ProcessEngineTestCase;
 import org.operaton.bpm.engine.variable.VariableMap;
 import org.operaton.bpm.engine.variable.Variables;
 
-public class InvoiceTestCase extends ProcessEngineTestCase {
+class InvoiceTestCase extends ProcessEngineTestCase {
 
-  @Deployment(resources= {"invoice.v1.bpmn", "invoiceBusinessDecisions.dmn"})
-  public void testHappyPathV1() {
+   @Deployment(resources = {"invoice.v1.bpmn", "invoiceBusinessDecisions.dmn"})
+   @Test
+   void happyPathV1() {
     InputStream invoiceInputStream = InvoiceProcessApplication.class.getClassLoader().getResourceAsStream("invoice.pdf");
     VariableMap variables = Variables.createVariables()
       .putValue("creditor", "Great Pizza for Everyone Inc.")
@@ -78,8 +83,9 @@ public class InvoiceTestCase extends ProcessEngineTestCase {
     assertProcessEnded(pi.getId());
   }
 
-  @Deployment(resources= {"invoice.v2.bpmn", "invoiceBusinessDecisions.dmn"})
-  public void testHappyPathV2() {
+   @Deployment(resources = {"invoice.v2.bpmn", "invoiceBusinessDecisions.dmn"})
+   @Test
+   void happyPathV2() {
     InputStream invoiceInputStream = InvoiceProcessApplication.class.getClassLoader().getResourceAsStream("invoice.pdf");
     VariableMap variables = Variables.createVariables()
       .putValue("creditor", "Great Pizza for Everyone Inc.")
@@ -121,8 +127,9 @@ public class InvoiceTestCase extends ProcessEngineTestCase {
     assertProcessEnded(pi.getId());
   }
 
-  @Deployment(resources= {"invoice.v2.bpmn", "invoiceBusinessDecisions.dmn"})
-  public void testApproveInvoiceAssignment() {
+   @Deployment(resources = {"invoice.v2.bpmn", "invoiceBusinessDecisions.dmn"})
+   @Test
+   void approveInvoiceAssignment() {
     InputStream invoiceInputStream = InvoiceProcessApplication.class.getClassLoader().getResourceAsStream("invoice.pdf");
 
     VariableMap variables = Variables.createVariables()
@@ -165,8 +172,9 @@ public class InvoiceTestCase extends ProcessEngineTestCase {
     assertEquals("mary", taskService.getVariable(task.getId(), "approver"));
   }
 
-  @Deployment(resources= {"invoice.v2.bpmn", "reviewInvoice.bpmn", "invoiceBusinessDecisions.dmn"})
-  public void testNonSuccessfulPath() {
+   @Deployment(resources = {"invoice.v2.bpmn", "reviewInvoice.bpmn", "invoiceBusinessDecisions.dmn"})
+   @Test
+   void nonSuccessfulPath() {
     InputStream invoiceInputStream = InvoiceProcessApplication.class.getClassLoader().getResourceAsStream("invoice.pdf");
     VariableMap variables = Variables.createVariables()
       .putValue("creditor", "Great Pizza for Everyone Inc.")
