@@ -18,18 +18,17 @@ package org.operaton.connect.httpclient;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import org.apache.http.protocol.HTTP;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.connect.httpclient.impl.HttpConnectorImpl;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 /**
  * Since Apache HTTP client makes it extremely hard to test the proper configuration
@@ -42,20 +41,19 @@ public class HttpConnectorSystemPropertiesTest {
 
   public static final int PORT = 51234;
 
-  @Rule
-  public WireMockRule wireMockRule = new WireMockRule(
-      WireMockConfiguration.wireMockConfig().port(PORT));
+  @RegisterExtension
+  public WireMockExtension wireMockRule = WireMockExtension.newInstance().options(WireMockConfiguration.wireMockConfig().port(PORT)).build();
 
   protected Set<String> updatedSystemProperties;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     updatedSystemProperties = new HashSet<String>();
     wireMockRule.stubFor(get(urlEqualTo("/")).willReturn(aResponse().withStatus(200)));
   }
 
-  @After
-  public void clearCustomSystemProperties() {
+  @AfterEach
+  void clearCustomSystemProperties() {
     for (String property : updatedSystemProperties) {
       System.getProperties().remove(property);
     }
@@ -73,7 +71,7 @@ public class HttpConnectorSystemPropertiesTest {
   }
 
   @Test
-  public void shouldSetUserAgentFromSystemProperty() {
+  void shouldSetUserAgentFromSystemProperty() {
     // given
     setSystemProperty("http.agent", "foo");
 
