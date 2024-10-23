@@ -16,7 +16,7 @@
  */
 package org.operaton.bpm.engine.cdi.test.bpmn;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 
@@ -32,11 +32,11 @@ import org.operaton.bpm.engine.delegate.JavaDelegate;
 import org.operaton.bpm.engine.runtime.ProcessInstance;
 import org.operaton.bpm.engine.test.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class SignalEventTest extends CdiProcessEngineTestCase {
+class SignalEventTest extends CdiProcessEngineTestCase {
 
   @Named
   @Dependent
@@ -72,9 +72,9 @@ public class SignalEventTest extends CdiProcessEngineTestCase {
   }
 
   @Test
-  @Deployment(resources = {"org/operaton/bpm/engine/cdi/test/bpmn/SignalEventTests.catchAlertSignalBoundaryWithReceiveTask.bpmn20.xml", 
-                          "org/operaton/bpm/engine/cdi/test/bpmn/SignalEventTests.throwAlertSignalWithDelegate.bpmn20.xml"})
-  public void testSignalCatchBoundaryWithVariables() {
+  @Deployment(resources = {"org/operaton/bpm/engine/cdi/test/bpmn/SignalEventTests.catchAlertSignalBoundaryWithReceiveTask.bpmn20.xml",
+      "org/operaton/bpm/engine/cdi/test/bpmn/SignalEventTests.throwAlertSignalWithDelegate.bpmn20.xml"})
+  void signalCatchBoundaryWithVariables() {
     HashMap<String, Object> variables1 = new HashMap<String, Object>();
     variables1.put("processName", "catchSignal");
     ProcessInstance piCatchSignal = runtimeService.startProcessInstanceByKey("catchSignal", variables1);

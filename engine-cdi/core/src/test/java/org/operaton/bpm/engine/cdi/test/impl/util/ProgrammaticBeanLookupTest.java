@@ -16,10 +16,11 @@
  */
 package org.operaton.bpm.engine.cdi.test.impl.util;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import javax.enterprise.inject.Alternative;
 import javax.inject.Named;
@@ -33,7 +34,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -86,7 +87,7 @@ public class ProgrammaticBeanLookupTest {
   }
 
   @Test
-  public void testLookupBean() {
+  void lookupBean() {
     deployer.deploy("normal");
     Object lookup = ProgrammaticBeanLookup.lookup("testOnly");
     assertThat(lookup, instanceOf(TestBean.class));
@@ -94,7 +95,7 @@ public class ProgrammaticBeanLookupTest {
   }
 
   @Test
-  public void testLookupShouldFindAlternative() {
+  void lookupShouldFindAlternative() {
     deployer.deploy("withAlternative");
     Object lookup = ProgrammaticBeanLookup.lookup("testOnly");
     assertThat(lookup.getClass().getName(),
@@ -103,7 +104,7 @@ public class ProgrammaticBeanLookupTest {
   }
 
   @Test
-  public void testLookupShouldFindSpecialization() {
+  void lookupShouldFindSpecialization() {
     deployer.deploy("withSpecialization");
     Object lookup = ProgrammaticBeanLookup.lookup("testOnly");
     assertThat(lookup.getClass().getName(),
@@ -112,7 +113,7 @@ public class ProgrammaticBeanLookupTest {
   }
 
   @Test
-  public void testLookupShouldSupportProducerMethods() {
+  void lookupShouldSupportProducerMethods() {
     deployer.deploy("withProducerMethod");
     assertEquals("exampleString", ProgrammaticBeanLookup.lookup("producedString"));
     deployer.undeploy("withProducerMethod");

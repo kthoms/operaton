@@ -19,9 +19,10 @@ package org.operaton.bpm.engine.cdi.test.impl.context;
 import org.operaton.bpm.engine.cdi.BusinessProcess;
 import org.operaton.bpm.engine.delegate.DelegateExecution;
 import org.operaton.bpm.engine.delegate.JavaDelegate;
-import org.junit.Assert;
 
 import javax.enterprise.context.Dependent;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -34,7 +35,7 @@ public class MultiInstanceDelegate implements JavaDelegate {
 
   @Override
   public void execute(DelegateExecution delegateExecution) {
-    Assert.assertNotNull("local variable should be set", businessProcess.getVariable("localVar"));
+    assertNotNull(businessProcess.getVariable("localVar"), "local variable should be set");
   }
 
 }

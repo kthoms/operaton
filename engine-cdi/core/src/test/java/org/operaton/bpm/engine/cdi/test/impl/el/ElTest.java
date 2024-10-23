@@ -16,7 +16,7 @@
  */
 package org.operaton.bpm.engine.cdi.test.impl.el;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 
@@ -25,18 +25,18 @@ import org.operaton.bpm.engine.cdi.test.impl.beans.MessageBean;
 import org.operaton.bpm.engine.cdi.test.impl.el.beans.DependentScopedBean;
 import org.operaton.bpm.engine.test.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 /**
  * @author Daniel Meyer
  */
 @RunWith(Arquillian.class)
-public class ElTest extends CdiProcessEngineTestCase {
+class ElTest extends CdiProcessEngineTestCase {
 
   @Test
   @Deployment
-  public void testSetBeanProperty() throws Exception {
+  void setBeanProperty() throws Exception {
     MessageBean messageBean = getBeanInstance(MessageBean.class);
     runtimeService.startProcessInstanceByKey("setBeanProperty");
     assertEquals("Greetings from Berlin", messageBean.getMessage());
@@ -44,7 +44,7 @@ public class ElTest extends CdiProcessEngineTestCase {
 
   @Test
   @Deployment
-  public void testDependentScoped() {
+  void dependentScoped() {
 
     DependentScopedBean.reset();
 

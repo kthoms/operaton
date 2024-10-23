@@ -21,19 +21,20 @@ import org.operaton.bpm.engine.cdi.test.CdiProcessEngineTestCase;
 import org.operaton.bpm.engine.cdi.test.impl.beans.CreditCard;
 import org.operaton.bpm.engine.cdi.test.impl.beans.ProcessScopedMessageBean;
 import org.operaton.bpm.engine.test.Deployment;
+
+
 import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 @RunWith(Arquillian.class)
-public class BusinessProcessContextConversationScopeTest extends CdiProcessEngineTestCase {
+class BusinessProcessContextConversationScopeTest extends CdiProcessEngineTestCase {
 
   @Test
   @Deployment
-  public void testConversationalBeanStoreFlush() throws Exception {
+  void conversationalBeanStoreFlush() throws Exception {
 
     getBeanInstance(BusinessProcess.class).setVariable("testVariable", "testValue");
     String pid =  getBeanInstance(BusinessProcess.class).startProcessByKey("testConversationalBeanStoreFlush").getId();

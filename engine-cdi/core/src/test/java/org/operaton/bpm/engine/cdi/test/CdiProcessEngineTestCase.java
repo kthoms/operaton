@@ -22,7 +22,8 @@ import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
 import javax.enterprise.inject.spi.BeanManager;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.operaton.bpm.BpmPlatform;
 import org.operaton.bpm.container.RuntimeContainerDelegate;
 import org.operaton.bpm.engine.AuthorizationService;
@@ -50,10 +51,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
-import org.junit.runner.RunWith;
 
 /**
  * @author Daniel Meyer
@@ -99,7 +97,7 @@ public abstract class CdiProcessEngineTestCase {
 
   protected ProcessEngineConfigurationImpl processEngineConfiguration;
 
-  @Before
+  @BeforeEach
   public void setUpCdiProcessEngineTestCase() throws Exception {
 
     if(BpmPlatform.getProcessEngineService().getDefaultProcessEngine() == null) {
@@ -123,7 +121,7 @@ public abstract class CdiProcessEngineTestCase {
     decisionService = processEngine.getDecisionService();
   }
 
-  @After
+  @AfterEach
   public void tearDownCdiProcessEngineTestCase() throws Exception {
     RuntimeContainerDelegate.INSTANCE.get().unregisterProcessEngine(processEngine);
     beanManager = null;

@@ -16,13 +16,15 @@
  */
 package org.operaton.bpm.engine.cdi.test.api.annotation;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.operaton.bpm.engine.cdi.BusinessProcess;
 import org.operaton.bpm.engine.cdi.test.CdiProcessEngineTestCase;
 import org.operaton.bpm.engine.test.Deployment;
+
+
 import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.runner.RunWith;
 
 /**
@@ -30,11 +32,11 @@ import org.junit.runner.RunWith;
  * @author Daniel Meyer
  */
 @RunWith(Arquillian.class)
-public class TaskIdTest extends CdiProcessEngineTestCase {
+class TaskIdTest extends CdiProcessEngineTestCase {
 
   @Test
   @Deployment
-  public void testTaskIdInjectable() {
+  void taskIdInjectable() {
     BusinessProcess businessProcess = getBeanInstance(BusinessProcess.class);
     businessProcess.startProcessByKey("keyOfTheProcess");  
     

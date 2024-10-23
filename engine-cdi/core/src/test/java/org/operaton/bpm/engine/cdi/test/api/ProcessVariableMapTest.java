@@ -16,9 +16,7 @@
  */
 package org.operaton.bpm.engine.cdi.test.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.operaton.bpm.engine.cdi.BusinessProcess;
 import org.operaton.bpm.engine.cdi.test.CdiProcessEngineTestCase;
@@ -28,20 +26,20 @@ import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.bpm.engine.variable.type.ValueType;
 import org.operaton.bpm.engine.variable.value.TypedValue;
 import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 /**
  * @author Michael Scholz
  */
 @RunWith(Arquillian.class)
-public class ProcessVariableMapTest extends CdiProcessEngineTestCase {
+class ProcessVariableMapTest extends CdiProcessEngineTestCase {
 
   private static final String VARNAME_1 = "aVariable";
   private static final String VARNAME_2 = "anotherVariable";
 
   @Test
-  public void testProcessVariableMap() {
+  void processVariableMap() {
     BusinessProcess businessProcess = getBeanInstance(BusinessProcess.class);
 
     VariableMap variables = (VariableMap) getBeanInstance("processVariableMap");
@@ -87,7 +85,7 @@ public class ProcessVariableMapTest extends CdiProcessEngineTestCase {
 
   @Test
   @Deployment(resources = "org/operaton/bpm/engine/cdi/test/api/BusinessProcessBeanTest.test.bpmn20.xml")
-  public void testProcessVariableMapLocal() {
+  void processVariableMapLocal() {
     BusinessProcess businessProcess = getBeanInstance(BusinessProcess.class);
     businessProcess.startProcessByKey("businessProcessBeanTest");
 

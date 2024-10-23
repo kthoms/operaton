@@ -16,7 +16,8 @@
  */
 package org.operaton.bpm.engine.cdi.test.api.annotation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Set;
 
@@ -28,8 +29,7 @@ import org.operaton.bpm.engine.cdi.annotation.ExecutionIdLiteral;
 import org.operaton.bpm.engine.cdi.test.CdiProcessEngineTestCase;
 import org.operaton.bpm.engine.test.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -37,23 +37,23 @@ import org.junit.runner.RunWith;
  * @author Daniel Meyer
  */
 @RunWith(Arquillian.class)
-public class ExecutionIdTest extends CdiProcessEngineTestCase {
-  
+class ExecutionIdTest extends CdiProcessEngineTestCase {
+
   @Test
   @Deployment
-  public void testExecutionIdInjectableByName() {
+  void executionIdInjectableByName() {
     getBeanInstance(BusinessProcess.class).startProcessByKey("keyOfTheProcess");
     String processInstanceId = (String) getBeanInstance("processInstanceId");
-    Assert.assertNotNull(processInstanceId);
+    assertNotNull(processInstanceId);
     String executionId = (String) getBeanInstance("executionId");
-    Assert.assertNotNull(executionId);
+    assertNotNull(executionId);
     
     assertEquals(processInstanceId, executionId);
   }
-  
+
   @Test
   @Deployment
-  public void testExecutionIdInjectableByQualifier() {
+  void executionIdInjectableByQualifier() {
     getBeanInstance(BusinessProcess.class).startProcessByKey("keyOfTheProcess");
     
     Set<Bean<?>> beans = beanManager.getBeans(String.class, new ExecutionIdLiteral());    
@@ -61,10 +61,10 @@ public class ExecutionIdTest extends CdiProcessEngineTestCase {
     
     CreationalContext<String> ctx = beanManager.createCreationalContext(bean);
     String executionId = (String) beanManager.getReference(bean, String.class, ctx);   
-    Assert.assertNotNull(executionId);
+    assertNotNull(executionId);
     
     String processInstanceId = (String) getBeanInstance("processInstanceId");
-    Assert.assertNotNull(processInstanceId);
+    assertNotNull(processInstanceId);
     
     assertEquals(processInstanceId, executionId);
   }

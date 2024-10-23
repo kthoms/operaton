@@ -20,24 +20,24 @@ import org.operaton.bpm.engine.cdi.test.CdiProcessEngineTestCase;
 import org.operaton.bpm.engine.task.Task;
 import org.operaton.bpm.engine.test.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.operaton.bpm.engine.cdi.test.impl.el.beans.CdiTaskListenerBean.*;
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author Sebastian Menski
  */
 @RunWith(Arquillian.class)
-public class TaskListenerInvocationTest extends CdiProcessEngineTestCase {
+class TaskListenerInvocationTest extends CdiProcessEngineTestCase {
 
   @Test
   @Deployment
-  public void test() {
+  void test() {
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put(VARIABLE_NAME, INITIAL_VALUE);
 

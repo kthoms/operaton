@@ -21,10 +21,10 @@ import org.operaton.bpm.engine.delegate.DelegateTask;
 import org.operaton.bpm.engine.delegate.TaskListener;
 
 import javax.enterprise.context.Dependent;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author Sebastian Menski
