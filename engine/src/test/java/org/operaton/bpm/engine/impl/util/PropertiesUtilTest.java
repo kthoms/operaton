@@ -16,12 +16,12 @@
  */
 package org.operaton.bpm.engine.impl.util;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.operaton.commons.testing.ProcessEngineLoggingRule;
-import org.operaton.commons.testing.WatchLogger;
 import org.junit.Rule;
 import org.junit.Test;
+import org.operaton.commons.testing.ProcessEngineLoggingRule;
+import org.operaton.commons.testing.WatchLogger;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PropertiesUtilTest {
 

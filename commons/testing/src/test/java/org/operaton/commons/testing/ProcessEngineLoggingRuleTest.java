@@ -16,15 +16,15 @@
  */
 package org.operaton.commons.testing;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-
-import java.util.List;
-import org.junit.jupiter.api.Test;
-import org.operaton.commons.testing.util.ExampleProcessEngineLogger;
-import org.junit.Rule;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import org.junit.jupiter.api.Test;
+import org.operaton.commons.testing.util.ExampleProcessEngineLogger;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 @SuppressWarnings("unused")
 public class ProcessEngineLoggingRuleTest {
@@ -34,7 +34,6 @@ public class ProcessEngineLoggingRuleTest {
   private static final String PROCESS_APPLICATION_LOGGER = "org.operaton.bpm.application"; //07
   private static final String JOB_EXECUTOR_LOGGER = "org.operaton.bpm.engine.jobexecutor"; //14
 
-  @Rule
   public ProcessEngineLoggingRule loggingRule = new ProcessEngineLoggingRule()
                                                       .watch(PERSISTENCE_LOGGER, CONTAINER_INTEGRATION_LOGGER)
                                                         .level(Level.DEBUG)

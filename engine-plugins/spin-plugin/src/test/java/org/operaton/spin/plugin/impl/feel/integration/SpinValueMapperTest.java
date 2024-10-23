@@ -16,19 +16,6 @@
  */
 package org.operaton.spin.plugin.impl.feel.integration;
 
-import static camundajar.impl.scala.jdk.CollectionConverters.ListHasAsScala;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.operaton.bpm.dmn.feel.impl.scala.ScalaFeelLogger;
-import org.operaton.bpm.dmn.feel.impl.scala.spin.SpinValueMapperFactory;
-import org.operaton.commons.testing.ProcessEngineLoggingRule;
-import org.operaton.commons.testing.WatchLogger;
 import org.camunda.feel.impl.DefaultValueMapper;
 import org.camunda.feel.syntaxtree.Val;
 import org.camunda.feel.syntaxtree.ValContext;
@@ -36,12 +23,25 @@ import org.camunda.feel.syntaxtree.ValList;
 import org.camunda.feel.syntaxtree.ValString;
 import org.camunda.feel.valuemapper.CustomValueMapper;
 import org.camunda.feel.valuemapper.ValueMapper;
-import org.operaton.spin.Spin;
-import org.operaton.spin.json.SpinJsonNode;
-import org.operaton.spin.xml.SpinXmlElement;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+import org.operaton.bpm.dmn.feel.impl.scala.ScalaFeelLogger;
+import org.operaton.bpm.dmn.feel.impl.scala.spin.SpinValueMapperFactory;
+import org.operaton.commons.testing.ProcessEngineLoggingRule;
+import org.operaton.commons.testing.WatchLogger;
+import org.operaton.spin.Spin;
+import org.operaton.spin.json.SpinJsonNode;
+import org.operaton.spin.xml.SpinXmlElement;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static camundajar.impl.scala.jdk.CollectionConverters.ListHasAsScala;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SpinValueMapperTest {
 

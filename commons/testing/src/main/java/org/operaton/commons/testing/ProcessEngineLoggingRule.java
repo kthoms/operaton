@@ -1,20 +1,13 @@
-/*
- * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
- * under one or more contributor license agreements. See the NOTICE file
- * distributed with this work for additional information regarding copyright
- * ownership. Camunda licenses this file to you under the Apache License,
- * Version 2.0; you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package org.operaton.commons.testing;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.read.ListAppender;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,16 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
-import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.read.ListAppender;
-
-public class ProcessEngineLoggingRule extends TestWatcher {
+public class ProcessEngineLoggingRule implements BeforeEachCallback, AfterEachCallback {
 
   public static final String LOGGER_NOT_FOUND_ERROR = "no logger found with name ";
   public static final String NOT_WATCHING_ERROR = "not watching any logger with name: ";
@@ -103,9 +87,11 @@ public class ProcessEngineLoggingRule extends TestWatcher {
   }
 
   @Override
-  protected void starting(Description description) {
+  public void beforeEach(ExtensionContext context) {
     Map<String, Logger> toWatch = new HashMap<>(globallyWatched);
-    WatchLogger watchLoggerAnnotation = description.getAnnotation(WatchLogger.class);
+    WatchLogger watchLoggerAnnotation = context.getTestMethod()
+            .map(method -> method.getAnnotation(WatchLogger.class))
+            .orElse(null);
     if (watchLoggerAnnotation != null) {
       Level level = Level.toLevel(watchLoggerAnnotation.level());
       if (level == null) {
@@ -121,7 +107,7 @@ public class ProcessEngineLoggingRule extends TestWatcher {
   }
 
   @Override
-  protected void finished(Description description) {
+  public void afterEach(ExtensionContext context) {
     // reset logback configuration
     for (Logger logger : allWatched.values()) {
       logger.detachAppender(APPENDER_NAME);

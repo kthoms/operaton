@@ -18,10 +18,16 @@ package org.operaton.connect.plugin;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import org.operaton.bpm.engine.BpmnParseException;
 import org.operaton.bpm.engine.ProcessEngineException;
@@ -39,16 +45,16 @@ import org.operaton.connect.httpclient.soap.SoapHttpConnector;
 import org.operaton.connect.plugin.util.TestConnector;
 import org.operaton.connect.spi.Connector;
 
-public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCase {
+class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCase {
 
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
+  @BeforeEach
+  void setUp() throws Exception {
     TestConnector.responseParameters.clear();
     TestConnector.requestParameters = null;
   }
 
-  public void testConnectorsRegistered() {
+  @Test
+  void connectorsRegistered() {
     Connector<?> http = Connectors.getConnector(HttpConnector.ID);
     assertNotNull(http);
     Connector<?> soap = Connectors.getConnector(SoapHttpConnector.ID);
@@ -57,7 +63,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     assertNotNull(test);
   }
 
-  public void testConnectorIdMissing() {
+  @Test
+  void connectorIdMissing() {
     try {
       repositoryService.createDeployment().addClasspathResource("org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorIdMissing.bpmn")
         .deploy();
@@ -69,7 +76,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
   }
 
   @Deployment
-  public void testConnectorIdUnknown() {
+  @Test
+  void connectorIdUnknown() {
     try {
       runtimeService.startProcessInstanceByKey("testProcess");
       fail("Exception expected");
@@ -80,7 +88,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
   }
 
   @Deployment
-  public void testConnectorInvoked() {
+  @Test
+  void connectorInvoked() {
     String outputParamValue = "someOutputValue";
     String inputVariableValue = "someInputVariableValue";
 
@@ -101,7 +110,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
   }
 
   @Deployment
-  public void testConnectorWithScriptInputOutputMapping() {
+  @Test
+  void connectorWithScriptInputOutputMapping() {
     int x = 3;
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("x", x);
@@ -120,7 +130,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
 
 
   @Deployment
-  public void testConnectorWithSetVariableInOutputMapping() {
+  @Test
+  void connectorWithSetVariableInOutputMapping() {
     // given process with set variable on connector in output mapping
 
     // when start process
@@ -131,8 +142,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     assertEquals(1, out.getValue());
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
-  public void testConnectorBpmnErrorThrownInScriptInputMappingIsHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
+  @Test
+  void connectorBpmnErrorThrownInScriptInputMappingIsHandledByBoundaryEvent() {
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "in");
     variables.put("exception", new BpmnError("error"));
@@ -142,8 +154,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     assertThat(task.getName(), is("User Task"));
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
-  public void testConnectorRuntimeExceptionThrownInScriptInputMappingIsNotHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
+  @Test
+  void connectorRuntimeExceptionThrownInScriptInputMappingIsNotHandledByBoundaryEvent() {
     String exceptionMessage = "myException";
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "in");
@@ -155,8 +168,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     }
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
-  public void testConnectorBpmnErrorThrownInScriptOutputMappingIsHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
+  @Test
+  void connectorBpmnErrorThrownInScriptOutputMappingIsHandledByBoundaryEvent() {
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "out");
     variables.put("exception", new BpmnError("error"));
@@ -166,8 +180,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     assertThat(task.getName(), is("User Task"));
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
-  public void testConnectorRuntimeExceptionThrownInScriptOutputMappingIsNotHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptInputOutputMapping.bpmn")
+  @Test
+  void connectorRuntimeExceptionThrownInScriptOutputMappingIsNotHandledByBoundaryEvent() {
     String exceptionMessage = "myException";
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "out");
@@ -179,8 +194,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     }
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
-  public void testConnectorBpmnErrorThrownInScriptResourceInputMappingIsHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
+  @Test
+  void connectorBpmnErrorThrownInScriptResourceInputMappingIsHandledByBoundaryEvent() {
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "in");
     variables.put("exception", new BpmnError("error"));
@@ -190,8 +206,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     assertThat(task.getName(), is("User Task"));
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
-  public void testConnectorRuntimeExceptionThrownInScriptResourceInputMappingIsNotHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
+  @Test
+  void connectorRuntimeExceptionThrownInScriptResourceInputMappingIsNotHandledByBoundaryEvent() {
     String exceptionMessage = "myException";
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "in");
@@ -203,8 +220,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     }
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
-  public void testConnectorBpmnErrorThrownInScriptResourceOutputMappingIsHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
+  @Test
+  void connectorBpmnErrorThrownInScriptResourceOutputMappingIsHandledByBoundaryEvent() {
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "out");
     variables.put("exception", new BpmnError("error"));
@@ -214,8 +232,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     assertThat(task.getName(), is("User Task"));
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
-  public void testConnectorRuntimeExceptionThrownInScriptResourceOutputMappingIsNotHandledByBoundaryEvent() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorWithThrownExceptionInScriptResourceInputOutputMapping.bpmn")
+  @Test
+  void connectorRuntimeExceptionThrownInScriptResourceOutputMappingIsNotHandledByBoundaryEvent() {
     String exceptionMessage = "myException";
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "out");
@@ -227,8 +246,9 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
     }
   }
 
-  @Deployment(resources="org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorBpmnErrorThrownInScriptResourceNoAsyncAfterJobIsCreated.bpmn")
-  public void testConnectorBpmnErrorThrownInScriptResourceNoAsyncAfterJobIsCreated() {
+  @Deployment(resources = "org/operaton/connect/plugin/ConnectProcessEnginePluginTest.testConnectorBpmnErrorThrownInScriptResourceNoAsyncAfterJobIsCreated.bpmn")
+  @Test
+  void connectorBpmnErrorThrownInScriptResourceNoAsyncAfterJobIsCreated() {
     // given
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("throwInMapping", "in");
@@ -247,7 +267,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
   }
 
   @Deployment
-  public void testFollowingExceptionIsNotHandledByConnector(){
+  @Test
+  void followingExceptionIsNotHandledByConnector() {
     try {
       runtimeService.startProcessInstanceByKey("testProcess");
     } catch(RuntimeException re){
@@ -256,7 +277,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
   }
 
   @Deployment
-  public void testSendTaskWithConnector() {
+  @Test
+  void sendTaskWithConnector() {
     String outputParamValue = "someSendTaskOutputValue";
     String inputVariableValue = "someSendTaskInputVariableValue";
 
@@ -278,7 +300,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
   }
 
   @Deployment
-  public void testIntermediateMessageThrowEventWithConnector() {
+  @Test
+  void intermediateMessageThrowEventWithConnector() {
     String outputParamValue = "someMessageThrowOutputValue";
     String inputVariableValue = "someMessageThrowInputVariableValue";
 
@@ -300,7 +323,8 @@ public class ConnectProcessEnginePluginTest extends PluggableProcessEngineTestCa
   }
 
   @Deployment
-  public void testMessageEndEventWithConnector() {
+  @Test
+  void messageEndEventWithConnector() {
     String outputParamValue = "someMessageEndOutputValue";
     String inputVariableValue = "someMessageEndInputVariableValue";
 

@@ -16,20 +16,19 @@
  */
 package org.operaton.bpm.engine.test.jobexecutor;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.operaton.bpm.engine.impl.persistence.entity.AcquirableJobEntity;
 import org.operaton.bpm.engine.runtime.Job;
 import org.operaton.bpm.engine.test.Deployment;
 import org.operaton.commons.testing.ProcessEngineLoggingRule;
 import org.operaton.commons.testing.WatchLogger;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
 
-import ch.qos.logback.classic.spi.ILoggingEvent;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Deployment(resources = "org/operaton/bpm/engine/test/jobexecutor/JobExecutorAcquireJobsForPriorityRangeTest.jobPrioProcess.bpmn20.xml")
 public class JobExecutorAcquireJobsForPriorityRangeTest extends AbstractJobExecutorAcquireJobsTest {

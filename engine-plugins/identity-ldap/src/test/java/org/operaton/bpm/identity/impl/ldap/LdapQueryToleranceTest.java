@@ -16,10 +16,12 @@
  */
 package org.operaton.bpm.identity.impl.ldap;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
 import org.operaton.bpm.engine.ProcessEngine;
 import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.User;
@@ -27,13 +29,10 @@ import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
 import org.operaton.commons.testing.ProcessEngineLoggingRule;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.spi.ILoggingEvent;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**
