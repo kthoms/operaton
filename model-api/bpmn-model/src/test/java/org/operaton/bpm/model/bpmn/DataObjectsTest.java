@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.bpmn;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.bpmn.instance.*;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.util.Collection;
 
@@ -27,17 +26,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Dario Campagna
  */
-public class DataObjectsTest {
+class DataObjectsTest {
 
   private static BpmnModelInstance modelInstance;
 
-  @BeforeClass
-  public static void parseModel() {
+  @BeforeAll
+  static void parseModel() {
     modelInstance = Bpmn.readModelFromStream(DataObjectsTest.class.getResourceAsStream("DataObjectTest.bpmn"));
   }
 
   @Test
-  public void testGetDataObject() {
+  void getDataObject() {
     DataObject dataObject = modelInstance.getModelElementById("_21");
     ItemDefinition itemDefinition = modelInstance.getModelElementById("_100");
     assertThat(dataObject).isNotNull();
@@ -47,7 +46,7 @@ public class DataObjectsTest {
   }
 
   @Test
-  public void testGetDataObjectReference() {
+  void getDataObjectReference() {
     DataObjectReference dataObjectReference = modelInstance.getModelElementById("_dataRef_7");
     DataObject dataObject = modelInstance.getModelElementById("_7");
     assertThat(dataObjectReference).isNotNull();
@@ -56,7 +55,7 @@ public class DataObjectsTest {
   }
 
   @Test
-  public void testDataObjectReferenceAsDataAssociationSource() {
+  void dataObjectReferenceAsDataAssociationSource() {
     ScriptTask scriptTask = modelInstance.getModelElementById("_3");
     DataObjectReference dataObjectReference = modelInstance.getModelElementById("_dataRef_11");
     DataInputAssociation dataInputAssociation = scriptTask.getDataInputAssociations().iterator().next();
@@ -66,7 +65,7 @@ public class DataObjectsTest {
   }
 
   @Test
-  public void testDataObjectReferenceAsDataAssociationTarget() {
+  void dataObjectReferenceAsDataAssociationTarget() {
     ScriptTask scriptTask = modelInstance.getModelElementById("_3");
     DataObjectReference dataObjectReference = modelInstance.getModelElementById("_dataRef_7");
     DataOutputAssociation dataOutputAssociation = scriptTask.getDataOutputAssociations().iterator().next();

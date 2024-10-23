@@ -15,16 +15,14 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.bpmn;
-
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.bpmn.instance.*;
 import org.operaton.bpm.model.bpmn.instance.Process;
 import org.operaton.bpm.model.bpmn.util.BpmnModelResource;
 import org.operaton.bpm.model.xml.ModelParseException;
 import org.operaton.bpm.model.xml.ModelReferenceException;
-import org.operaton.bpm.model.xml.ModelValidationException;
 import org.operaton.bpm.model.xml.impl.util.IoUtil;
-import org.junit.Assert;
-import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -32,6 +30,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.operaton.bpm.model.bpmn.impl.BpmnModelConstants.XML_SCHEMA_NS;
 import static org.operaton.bpm.model.bpmn.impl.BpmnModelConstants.XPATH_NS;
 
@@ -39,11 +38,11 @@ import static org.operaton.bpm.model.bpmn.impl.BpmnModelConstants.XPATH_NS;
  * @author Daniel Meyer
  *
  */
-public class DefinitionsTest extends BpmnModelTest {
+class DefinitionsTest extends BpmnModelTest {
 
   @Test
   @BpmnModelResource
-  public void shouldImportEmptyDefinitions() {
+  void shouldImportEmptyDefinitions() {
 
     Definitions definitions = bpmnModelInstance.getDefinitions();
     assertThat(definitions).isNotNull();
@@ -66,10 +65,10 @@ public class DefinitionsTest extends BpmnModelTest {
   }
 
   @Test
-  public void shouldNotImportWrongOrderedSequence() {
+  void shouldNotImportWrongOrderedSequence() {
     try {
       Bpmn.readModelFromStream(getClass().getResourceAsStream("DefinitionsTest.shouldNotImportWrongOrderedSequence.bpmn"));
-      Assert.fail("Model is invalid and should not pass the validation");
+      fail("Model is invalid and should not pass the validation");
     }
     catch (Exception e) {
       assertThat(e).isInstanceOf(ModelParseException.class);
@@ -77,7 +76,7 @@ public class DefinitionsTest extends BpmnModelTest {
   }
 
   @Test
-  public void shouldAddChildElementsInCorrectOrder() {
+  void shouldAddChildElementsInCorrectOrder() {
     // create an empty model
     BpmnModelInstance bpmnModelInstance = Bpmn.createEmptyModel();
 
@@ -111,17 +110,14 @@ public class DefinitionsTest extends BpmnModelTest {
     definitions.getImports().add(importElement);
 
     // validate model
-    try {
+    Assertions.assertDoesNotThrow(() -> {
       Bpmn.validateModel(bpmnModelInstance);
-    }
-    catch (ModelValidationException e) {
-      Assert.fail();
-    }
+    });
   }
 
   @Test
   @BpmnModelResource
-  public void shouldNotAffectComments() throws IOException {
+  void shouldNotAffectComments() throws IOException {
     Definitions definitions = bpmnModelInstance.getDefinitions();
     assertThat(definitions).isNotNull();
 
@@ -138,12 +134,9 @@ public class DefinitionsTest extends BpmnModelTest {
     definitions.getImports().add(importElement);
 
     // validate model
-    try {
+    Assertions.assertDoesNotThrow(() -> {
       Bpmn.validateModel(bpmnModelInstance);
-    }
-    catch (ModelValidationException e) {
-      Assert.fail();
-    }
+    });
 
     // convert the model to the XML string representation
     OutputStream outputStream = new ByteArrayOutputStream();
@@ -163,7 +156,7 @@ public class DefinitionsTest extends BpmnModelTest {
   }
 
   @Test
-  public void shouldAddMessageAndMessageEventDefinition() {
+  void shouldAddMessageAndMessageEventDefinition() {
     // create empty model
     BpmnModelInstance bpmnModelInstance = Bpmn.createEmptyModel();
 
@@ -210,7 +203,7 @@ public class DefinitionsTest extends BpmnModelTest {
     MessageEventDefinition anotherMessageEventDefinition = bpmnModelInstance.newInstance(MessageEventDefinition.class);
     try {
       anotherMessageEventDefinition.setMessage(anotherMessage);
-      Assert.fail("Message should not be added to message event definition, cause it is not part of the model");
+      fail("Message should not be added to message event definition, cause it is not part of the model");
     }
     catch(Exception e) {
       assertThat(e).isInstanceOf(ModelReferenceException.class);
@@ -226,16 +219,13 @@ public class DefinitionsTest extends BpmnModelTest {
     startEvent.getEventDefinitions().add(anotherMessageEventDefinition);
 
     // validate model
-    try {
+    Assertions.assertDoesNotThrow(() -> {
       Bpmn.validateModel(bpmnModelInstance);
-    }
-    catch (ModelValidationException e) {
-      Assert.fail();
-    }
+    });
   }
 
   @Test
-  public void shouldAddParentChildElementInCorrectOrder() {
+  void shouldAddParentChildElementInCorrectOrder() {
     // create empty model
     BpmnModelInstance bpmnModelInstance = Bpmn.createEmptyModel();
 
@@ -273,12 +263,9 @@ public class DefinitionsTest extends BpmnModelTest {
     process.setExtensionElements(extensionElements);
 
     // validate model
-    try {
+    Assertions.assertDoesNotThrow(() -> {
       Bpmn.validateModel(bpmnModelInstance);
-    }
-    catch (ModelValidationException e) {
-      Assert.fail();
-    }
+    });
   }
 
 }

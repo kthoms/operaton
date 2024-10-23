@@ -16,14 +16,14 @@
  */
 package org.operaton.bpm.model.dmn;
 
+import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Test;
-
-public class DmnTest {
+class DmnTest {
 
   @Test
-  public void testDmn() {
+  void dmn() {
     assertThat(Dmn.INSTANCE).isNotNull();
   }
 

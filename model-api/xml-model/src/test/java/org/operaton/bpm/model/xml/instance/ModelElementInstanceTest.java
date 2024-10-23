@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.instance;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
 import org.operaton.bpm.model.xml.testmodel.Gender;
@@ -24,15 +25,12 @@ import org.operaton.bpm.model.xml.testmodel.TestModelTest;
 import org.operaton.bpm.model.xml.testmodel.instance.Animals;
 import org.operaton.bpm.model.xml.testmodel.instance.Bird;
 import org.operaton.bpm.model.xml.type.ModelElementType;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.operaton.bpm.model.xml.testmodel.TestModelConstants.MODEL_NAMESPACE;
-import static org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author Daniel Meyer
@@ -75,8 +73,8 @@ public class ModelElementInstanceTest extends TestModelTest {
     return new Object[]{"created", modelInstance, modelParser};
   }
 
-  @Before
-  public void copyModelInstance() {
+  @BeforeEach
+  void copyModelInstance() {
     modelInstance = cloneModelInstance();
 
     animals = (Animals) modelInstance.getDocumentElement();
@@ -87,7 +85,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void testAttribute() {
+  void attribute() {
     String tweetyName = tweety.getId() + "-name";
     tweety.setAttributeValue("name", tweetyName);
     assertThat(tweety.getAttributeValue("name")).isEqualTo(tweetyName);
@@ -96,7 +94,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void testAttributeWithNamespace() {
+  void attributeWithNamespace() {
     String tweetyName = tweety.getId() + "-name";
     tweety.setAttributeValueNs(MODEL_NAMESPACE, "name", tweetyName);
     assertThat(tweety.getAttributeValue("name")).isEqualTo(tweetyName);
@@ -107,7 +105,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void TestElementType() {
+  void TestElementType() {
     ModelElementType birdType = modelInstance.getModel().getType(Bird.class);
     assertThat(tweety.getElementType()).isEqualTo(birdType);
     assertThat(donald.getElementType()).isEqualTo(birdType);
@@ -116,7 +114,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void TestParentElement() {
+  void TestParentElement() {
     assertThat(tweety.getParentElement()).isEqualTo(animals);
     assertThat(donald.getParentElement()).isEqualTo(animals);
     assertThat(daisy.getParentElement()).isEqualTo(animals);
@@ -129,7 +127,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void TestModelInstance() {
+  void TestModelInstance() {
     assertThat(tweety.getModelInstance()).isEqualTo(modelInstance);
     assertThat(donald.getModelInstance()).isEqualTo(modelInstance);
     assertThat(daisy.getModelInstance()).isEqualTo(modelInstance);
@@ -137,7 +135,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void testReplaceWithElement() {
+  void replaceWithElement() {
     Bird timmy = modelInstance.newInstance(Bird.class);
     timmy.setId("timmy");
     timmy.setGender(Gender.Male);
@@ -154,7 +152,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void testReplaceRootElement() {
+  void replaceRootElement() {
     assertThat(((Animals) modelInstance.getDocumentElement()).getAnimals()).isNotEmpty();
     Animals newAnimals = modelInstance.newInstance(Animals.class);
     modelInstance.setDocumentElement(newAnimals);
@@ -162,7 +160,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void testTextContent() {
+  void textContent() {
     assertThat(tweety.getTextContent()).isEqualTo("");
     assertThat(donald.getTextContent()).isEqualTo("some text content");
     assertThat(daisy.getTextContent()).isEqualTo("some text content with outer line breaks");
@@ -174,7 +172,7 @@ public class ModelElementInstanceTest extends TestModelTest {
   }
 
   @Test
-  public void testRawTextContent() {
+  void rawTextContent() {
     assertThat(tweety.getRawTextContent()).isEqualTo("");
     assertThat(donald.getRawTextContent()).isEqualTo("some text content");
     assertThat(daisy.getRawTextContent()).isEqualTo("\n        some text content with outer line breaks\n    ");

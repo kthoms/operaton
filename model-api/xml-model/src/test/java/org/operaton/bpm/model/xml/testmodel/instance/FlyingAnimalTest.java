@@ -15,14 +15,13 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.testmodel.instance;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
 import org.operaton.bpm.model.xml.testmodel.Gender;
 import org.operaton.bpm.model.xml.testmodel.TestModelParser;
 import org.operaton.bpm.model.xml.testmodel.TestModelTest;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +30,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.operaton.bpm.model.xml.testmodel.TestModelConstants.MODEL_NAMESPACE;
-import static org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author Sebastian Menski
@@ -85,8 +83,8 @@ public class FlyingAnimalTest extends TestModelTest {
     return new Object[]{"created", modelInstance, modelParser};
   }
 
-  @Before
-  public void copyModelInstance() {
+  @BeforeEach
+  void copyModelInstance() {
     modelInstance = cloneModelInstance();
     tweety = modelInstance.getModelElementById("tweety");
     hedwig = modelInstance.getModelElementById("hedwig");
@@ -98,21 +96,21 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testSetWingspanAttributeByHelper() {
+  void setWingspanAttributeByHelper() {
     double wingspan = 2.123;
     tweety.setWingspan(wingspan);
     assertThat(tweety.getWingspan()).isEqualTo(wingspan);
   }
 
   @Test
-  public void testSetWingspanAttributeByAttributeName() {
+  void setWingspanAttributeByAttributeName() {
     Double wingspan = 2.123;
     tweety.setAttributeValue("wingspan", wingspan.toString(), false);
     assertThat(tweety.getWingspan()).isEqualTo(wingspan);
   }
 
   @Test
-  public void testRemoveWingspanAttribute() {
+  void removeWingspanAttribute() {
     double wingspan = 2.123;
     tweety.setWingspan(wingspan);
     assertThat(tweety.getWingspan()).isEqualTo(wingspan);
@@ -123,44 +121,44 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testSetFlightInstructorByHelper() {
+  void setFlightInstructorByHelper() {
     tweety.setFlightInstructor(timmy);
     assertThat(tweety.getFlightInstructor()).isEqualTo(timmy);
   }
 
   @Test
-  public void testUpdateFlightInstructorByIdHelper() {
+  void updateFlightInstructorByIdHelper() {
     hedwig.setId("new-" + hedwig.getId());
     assertThat(tweety.getFlightInstructor()).isEqualTo(hedwig);
   }
 
   @Test
-  public void testUpdateFlightInstructorByIdAttributeName() {
+  void updateFlightInstructorByIdAttributeName() {
     hedwig.setAttributeValue("id", "new-" + hedwig.getId(), true);
     assertThat(tweety.getFlightInstructor()).isEqualTo(hedwig);
   }
 
   @Test
-  public void testUpdateFlightInstructorByReplaceElement() {
+  void updateFlightInstructorByReplaceElement() {
     hedwig.replaceWithElement(timmy);
     assertThat(tweety.getFlightInstructor()).isEqualTo(timmy);
   }
 
   @Test
-  public void testUpdateFlightInstructorByRemoveElement() {
+  void updateFlightInstructorByRemoveElement() {
     Animals animals = (Animals) modelInstance.getDocumentElement();
     animals.getAnimals().remove(hedwig);
     assertThat(tweety.getFlightInstructor()).isNull();
   }
 
   @Test
-  public void testClearFlightInstructor() {
+  void clearFlightInstructor() {
     tweety.removeFlightInstructor();
     assertThat(tweety.getFlightInstructor()).isNull();
   }
 
   @Test
-  public void testAddFlightPartnerRefsByHelper() {
+  void addFlightPartnerRefsByHelper() {
     assertThat(tweety.getFlightPartnerRefs())
       .isNotEmpty()
       .hasSize(4)
@@ -176,7 +174,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateFlightPartnerRefsByIdByHelper() {
+  void updateFlightPartnerRefsByIdByHelper() {
     hedwig.setId("new-" + hedwig.getId());
     plucky.setId("new-" + plucky.getId());
     assertThat(tweety.getFlightPartnerRefs())
@@ -185,7 +183,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateFlightPartnerRefsByIdByAttributeName() {
+  void updateFlightPartnerRefsByIdByAttributeName() {
     birdo.setAttributeValue("id", "new-" + birdo.getId(), true);
     fiffy.setAttributeValue("id", "new-" + fiffy.getId(), true);
     assertThat(tweety.getFlightPartnerRefs())
@@ -194,7 +192,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateFlightPartnerRefsByReplaceElements() {
+  void updateFlightPartnerRefsByReplaceElements() {
     hedwig.replaceWithElement(timmy);
     plucky.replaceWithElement(daisy);
     assertThat(tweety.getFlightPartnerRefs())
@@ -203,7 +201,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateFlightPartnerRefsByRemoveElements() {
+  void updateFlightPartnerRefsByRemoveElements() {
     tweety.getFlightPartnerRefs().remove(birdo);
     tweety.getFlightPartnerRefs().remove(fiffy);
     assertThat(tweety.getFlightPartnerRefs())
@@ -212,13 +210,13 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testClearFlightPartnerRefs() {
+  void clearFlightPartnerRefs() {
     tweety.getFlightPartnerRefs().clear();
     assertThat(tweety.getFlightPartnerRefs()).isEmpty();
   }
 
   @Test
-  public void testAddFlightPartnerRefElementsByHelper() {
+  void addFlightPartnerRefElementsByHelper() {
     assertThat(tweety.getFlightPartnerRefElements())
       .isNotEmpty()
       .hasSize(4);
@@ -238,7 +236,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testFlightPartnerRefElementsByTextContent() {
+  void flightPartnerRefElementsByTextContent() {
     Collection<FlightPartnerRef> flightPartnerRefElements = tweety.getFlightPartnerRefElements();
     Collection<String> textContents = new ArrayList<String>();
     for (FlightPartnerRef flightPartnerRefElement : flightPartnerRefElements) {
@@ -253,7 +251,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateFlightPartnerRefElementsByTextContent() {
+  void updateFlightPartnerRefElementsByTextContent() {
     List<FlightPartnerRef> flightPartnerRefs = new ArrayList<FlightPartnerRef>(tweety.getFlightPartnerRefElements());
 
     flightPartnerRefs.get(0).setTextContent(timmy.getId());
@@ -265,7 +263,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateFlightPartnerRefElementsByRemoveElements() {
+  void updateFlightPartnerRefElementsByRemoveElements() {
     List<FlightPartnerRef> flightPartnerRefs = new ArrayList<FlightPartnerRef>(tweety.getFlightPartnerRefElements());
     tweety.getFlightPartnerRefElements().remove(flightPartnerRefs.get(1));
     tweety.getFlightPartnerRefElements().remove(flightPartnerRefs.get(3));
@@ -275,7 +273,7 @@ public class FlyingAnimalTest extends TestModelTest {
   }
 
   @Test
-  public void testClearFlightPartnerRefElements() {
+  void clearFlightPartnerRefElements() {
     tweety.getFlightPartnerRefElements().clear();
     assertThat(tweety.getFlightPartnerRefElements()).isEmpty();
 

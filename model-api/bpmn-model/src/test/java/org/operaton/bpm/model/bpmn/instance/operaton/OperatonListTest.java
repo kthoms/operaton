@@ -17,13 +17,13 @@
 package org.operaton.bpm.model.bpmn.instance.operaton;
 
 import static org.operaton.bpm.model.bpmn.impl.BpmnModelConstants.OPERATON_NS;
-import static org.junit.Assert.fail;
 
 import java.util.Collection;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.bpmn.instance.BpmnModelElementInstanceTest;
-import org.junit.Ignore;
-import org.junit.Test;
 
 public class OperatonListTest extends BpmnModelElementInstanceTest {
 
@@ -39,10 +39,10 @@ public class OperatonListTest extends BpmnModelElementInstanceTest {
     return null;
   }
 
-  @Ignore("Test ignored. CAM-9441: Bug fix needed")
+  @Disabled("Test ignored. CAM-9441: Bug fix needed")
   @Test
-  public void testListValueChildAssignment() {
-    try {
+  void listValueChildAssignment() {
+    Assertions.assertDoesNotThrow(() -> {
       OperatonList listElement = modelInstance.newInstance(OperatonList.class);
 
       OperatonValue valueElement = modelInstance.newInstance(OperatonValue.class);
@@ -50,8 +50,6 @@ public class OperatonListTest extends BpmnModelElementInstanceTest {
 
       listElement.addChildElement(valueElement);
 
-    } catch (Exception e) {
-      fail("OperatonValue should be accepted as a child element of OperatonList. Error: " + e.getMessage());
-    }
+    }, "OperatonValue should be accepted as a child element of OperatonList. Error: ");
   }
 }

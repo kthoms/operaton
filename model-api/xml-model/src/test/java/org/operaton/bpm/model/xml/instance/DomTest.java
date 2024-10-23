@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.instance;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
 import org.operaton.bpm.model.xml.testmodel.Gender;
@@ -23,8 +24,6 @@ import org.operaton.bpm.model.xml.testmodel.TestModelParser;
 import org.operaton.bpm.model.xml.testmodel.TestModelTest;
 import org.operaton.bpm.model.xml.testmodel.instance.Animals;
 import org.operaton.bpm.model.xml.testmodel.instance.Description;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,7 +31,6 @@ import java.util.Collection;
 import static javax.xml.XMLConstants.XMLNS_ATTRIBUTE_NS_URI;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.operaton.bpm.model.xml.testmodel.TestModelConstants.MODEL_NAMESPACE;
-import static org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author Sebastian Menski
@@ -73,14 +71,14 @@ public class DomTest extends TestModelTest {
     return new Object[]{"created", modelInstance, modelParser};
   }
 
-  @Before
-  public void copyModelInstance() {
+  @BeforeEach
+  void copyModelInstance() {
     modelInstance = cloneModelInstance();
     document = modelInstance.getDocument();
   }
 
   @Test
-  public void testRegisterNamespaces() {
+  void registerNamespaces() {
     document.registerNamespace("test", TEST_NS);
     String prefix = document.registerNamespace(UNKNOWN_NS);
     assertThat(prefix).isEqualTo("ns0");
@@ -93,7 +91,7 @@ public class DomTest extends TestModelTest {
   }
 
   @Test
-  public void testGenerateNamespacePrefixes() {
+  void generateNamespacePrefixes() {
     // occupy ns0 and ns2
     document.registerNamespace("ns0", UNKNOWN_NS + 0);
     document.registerNamespace("ns2", UNKNOWN_NS + 2);
@@ -116,7 +114,7 @@ public class DomTest extends TestModelTest {
   }
 
   @Test
-  public void testDuplicateNamespaces() {
+  void duplicateNamespaces() {
     document.registerNamespace("test", TEST_NS);
     String prefix = document.registerNamespace(TEST_NS);
     assertThat(prefix).isEqualTo("test");
@@ -134,7 +132,7 @@ public class DomTest extends TestModelTest {
   }
 
   @Test
-  public void testKnownPrefix() {
+  void knownPrefix() {
     document.registerNamespace(CAMUNDA_NS);
     document.registerNamespace(FOX_NS);
 
@@ -146,7 +144,7 @@ public class DomTest extends TestModelTest {
   }
 
   @Test
-  public void testAlreadyUsedPrefix() {
+  void alreadyUsedPrefix() {
     document.registerNamespace("operaton", TEST_NS);
     document.registerNamespace(CAMUNDA_NS);
 
@@ -158,7 +156,7 @@ public class DomTest extends TestModelTest {
   }
 
   @Test
-  public void testAddElements() {
+  void addElements() {
     DomElement element = document.createElement(MODEL_NAMESPACE, "bird");
     element.setAttribute(MODEL_NAMESPACE, "gender", Gender.Unknown.toString());
     document.getRootElement().appendChild(element);
@@ -187,7 +185,7 @@ public class DomTest extends TestModelTest {
   }
 
   @Test
-  public void testAddAttributes() {
+  void addAttributes() {
     DomElement element = document.createElement(MODEL_NAMESPACE, "bird");
     element.setAttribute(MODEL_NAMESPACE, "gender", Gender.Unknown.toString());
     document.getRootElement().appendChild(element);
@@ -217,7 +215,7 @@ public class DomTest extends TestModelTest {
   }
 
   @Test
-  public void testCData() {
+  void cData() {
     Animals animals = (Animals) modelInstance.getDocumentElement();
     assertThat(animals.getDescription().getTextContent())
       .isEqualTo("CDATA <test>");

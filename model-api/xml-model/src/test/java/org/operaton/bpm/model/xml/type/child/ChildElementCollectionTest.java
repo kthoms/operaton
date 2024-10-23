@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.type.child;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.UnsupportedModelOperationException;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
@@ -26,16 +27,13 @@ import org.operaton.bpm.model.xml.testmodel.TestModelParser;
 import org.operaton.bpm.model.xml.testmodel.TestModelTest;
 import org.operaton.bpm.model.xml.testmodel.instance.*;
 import org.operaton.bpm.model.xml.type.ModelElementType;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.operaton.bpm.model.xml.test.assertions.ModelAssertions.assertThat;
-import static org.junit.Assert.fail;
-import static org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author Sebastian Menski
@@ -80,8 +78,8 @@ public class ChildElementCollectionTest extends TestModelTest {
     return new Object[]{"created", modelInstance, modelParser};
   }
 
-  @Before
-  public void copyModelInstance() {
+  @BeforeEach
+  void copyModelInstance() {
     modelInstance = cloneModelInstance();
 
     tweety = modelInstance.getModelElementById("tweety");
@@ -95,7 +93,7 @@ public class ChildElementCollectionTest extends TestModelTest {
   }
 
   @Test
-  public void testImmutable() {
+  void immutable() {
     assertThat(flightInstructorChild).isMutable();
     assertThat(flightPartnerRefCollection).isMutable();
 
@@ -111,25 +109,25 @@ public class ChildElementCollectionTest extends TestModelTest {
   }
 
   @Test
-  public void testMinOccurs() {
+  void minOccurs() {
     assertThat(flightInstructorChild).isOptional();
     assertThat(flightPartnerRefCollection).isOptional();
   }
 
   @Test
-  public void testMaxOccurs() {
+  void maxOccurs() {
     assertThat(flightInstructorChild).occursMaximal(1);
     assertThat(flightPartnerRefCollection).isUnbounded();
   }
 
   @Test
-  public void testChildElementType() {
+  void childElementType() {
     assertThat(flightInstructorChild).containsType(FlightInstructor.class);
     assertThat(flightPartnerRefCollection).containsType(FlightPartnerRef.class);
   }
 
   @Test
-  public void testParentElementType() {
+  void parentElementType() {
     ModelElementType flyingAnimalType = modelInstance.getModel().getType(FlyingAnimal.class);
 
     assertThat(flightInstructorChild).hasParentElementType(flyingAnimalType);
@@ -137,7 +135,7 @@ public class ChildElementCollectionTest extends TestModelTest {
   }
 
   @Test
-  public void testGetChildElements() {
+  void getChildElements() {
     assertThat(flightInstructorChild).hasSize(tweety, 1);
     assertThat(flightPartnerRefCollection).hasSize(tweety, 2);
 
@@ -150,7 +148,7 @@ public class ChildElementCollectionTest extends TestModelTest {
   }
 
   @Test
-  public void testRemoveChildElements() {
+  void removeChildElements() {
     assertThat(flightInstructorChild).isNotEmpty(tweety);
     assertThat(flightPartnerRefCollection).isNotEmpty(tweety);
 
@@ -162,7 +160,7 @@ public class ChildElementCollectionTest extends TestModelTest {
   }
 
   @Test
-  public void testChildElementsCollection() {
+  void childElementsCollection() {
     Collection<FlightPartnerRef> flightPartnerRefs = flightPartnerRefCollection.get(tweety);
 
     Iterator<FlightPartnerRef> iterator = flightPartnerRefs.iterator();

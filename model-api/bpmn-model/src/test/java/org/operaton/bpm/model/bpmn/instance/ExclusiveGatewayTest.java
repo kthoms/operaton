@@ -16,7 +16,7 @@
  */
 package org.operaton.bpm.model.bpmn.instance;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,7 +35,7 @@ public class ExclusiveGatewayTest extends AbstractGatewayTest<ExclusiveGateway> 
   }
 
   @Test
-  public void getDefault() {
+  void getDefault() {
     assertThat(gateway.getDefault().getId()).isEqualTo("flow");
   }
 

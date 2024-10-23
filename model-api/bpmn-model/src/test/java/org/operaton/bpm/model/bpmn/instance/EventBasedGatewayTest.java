@@ -16,8 +16,8 @@
  */
 package org.operaton.bpm.model.bpmn.instance;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.bpmn.EventBasedGatewayType;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,17 +35,17 @@ public class EventBasedGatewayTest extends AbstractGatewayTest<EventBasedGateway
   }
 
   @Test
-  public void getInstantiate() {
+  void getInstantiate() {
     assertThat(gateway.isInstantiate()).isTrue();
   }
 
   @Test
-  public void getEventGatewayType() {
+  void getEventGatewayType() {
     assertThat(gateway.getEventGatewayType()).isEqualTo(EventBasedGatewayType.Parallel);
   }
 
   @Test
-  public void shouldFailSetAsyncAfterToEventBasedGateway() {
+  void shouldFailSetAsyncAfterToEventBasedGateway() {
     // fetching should fail
     try {
       gateway.isOperatonAsyncAfter();

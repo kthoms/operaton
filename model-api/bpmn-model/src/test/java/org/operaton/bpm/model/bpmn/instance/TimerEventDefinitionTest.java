@@ -16,7 +16,7 @@
  */
 package org.operaton.bpm.model.bpmn.instance;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,7 +35,7 @@ public class TimerEventDefinitionTest extends AbstractEventDefinitionTest {
   }
 
   @Test
-  public void getElementDefinition() {
+  void getElementDefinition() {
     List<TimerEventDefinition> eventDefinitions = eventDefinitionQuery.filterByType(TimerEventDefinition.class).list();
     assertThat(eventDefinitions).hasSize(3);
     for (TimerEventDefinition eventDefinition : eventDefinitions) {

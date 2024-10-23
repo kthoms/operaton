@@ -16,11 +16,12 @@
  */
 package org.operaton.bpm.model.xml.test;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.operaton.bpm.model.xml.test.assertions.ModelAssertions.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.Collection;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.Model;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.impl.type.ModelElementTypeImpl;
@@ -30,7 +31,6 @@ import org.operaton.bpm.model.xml.test.assertions.AttributeAssert;
 import org.operaton.bpm.model.xml.test.assertions.ChildElementAssert;
 import org.operaton.bpm.model.xml.test.assertions.ModelElementTypeAssert;
 import org.operaton.bpm.model.xml.type.ModelElementType;
-import org.junit.Test;
 import org.w3c.dom.DOMException;
 
 public abstract class AbstractModelElementInstanceTest {
@@ -178,7 +178,7 @@ public abstract class AbstractModelElementInstanceTest {
   }
 
   @Test
-  public void testType() {
+  public void type() {
     assertThatType().isPartOfModel(model);
 
     TypeAssumption assumption = getTypeAssumption();
@@ -219,7 +219,7 @@ public abstract class AbstractModelElementInstanceTest {
   }
 
   @Test
-  public void testChildElements() {
+  public void childElements() {
     Collection<ChildElementAssumption> childElementAssumptions = getChildElementAssumptions();
     if (childElementAssumptions == null) {
       assertThatType().hasNoChildElements();
@@ -239,7 +239,7 @@ public abstract class AbstractModelElementInstanceTest {
   }
 
   @Test
-  public void testAttributes() {
+  public void attributes() {
     Collection<AttributeAssumption> attributesAssumptions = getAttributesAssumptions();
     if (attributesAssumptions == null) {
       assertThatType().hasNoAttributes();

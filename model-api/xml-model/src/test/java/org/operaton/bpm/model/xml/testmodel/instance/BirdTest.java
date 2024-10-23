@@ -15,15 +15,14 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.testmodel.instance;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
 import org.operaton.bpm.model.xml.impl.util.StringUtil;
 import org.operaton.bpm.model.xml.testmodel.Gender;
 import org.operaton.bpm.model.xml.testmodel.TestModelParser;
 import org.operaton.bpm.model.xml.testmodel.TestModelTest;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +31,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.operaton.bpm.model.xml.testmodel.TestModelConstants.MODEL_NAMESPACE;
-import static org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author Sebastian Menski
@@ -100,8 +98,8 @@ public class BirdTest extends TestModelTest {
     return new Object[]{"created", modelInstance, modelParser};
   }
 
-  @Before
-  public void copyModelInstance() {
+  @BeforeEach
+  void copyModelInstance() {
     modelInstance = cloneModelInstance();
     tweety = modelInstance.getModelElementById("tweety");
     hedwig = modelInstance.getModelElementById("hedwig");
@@ -112,7 +110,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testAddEggsByHelper() {
+  void addEggsByHelper() {
     assertThat(tweety.getEggs())
       .isNotEmpty()
       .hasSize(3)
@@ -129,7 +127,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateEggsByIdByHelper() {
+  void updateEggsByIdByHelper() {
     egg1.setId("new-" + egg1.getId());
     egg2.setId("new-" + egg2.getId());
     assertThat(tweety.getEggs())
@@ -138,7 +136,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateEggsByIdByAttributeName() {
+  void updateEggsByIdByAttributeName() {
     egg1.setAttributeValue("id", "new-" + egg1.getId(), true);
     egg2.setAttributeValue("id", "new-" + egg2.getId(), true);
     assertThat(tweety.getEggs())
@@ -147,7 +145,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateEggsByReplaceElements() {
+  void updateEggsByReplaceElements() {
     Egg egg4 = createEgg(modelInstance, "egg4");
     Egg egg5 = createEgg(modelInstance, "egg5");
     egg1.replaceWithElement(egg4);
@@ -158,7 +156,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateEggsByRemoveElement() {
+  void updateEggsByRemoveElement() {
     tweety.getEggs().remove(egg1);
     assertThat(tweety.getEggs())
       .hasSize(2)
@@ -166,51 +164,51 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testClearEggs() {
+  void clearEggs() {
     tweety.getEggs().clear();
     assertThat(tweety.getEggs())
       .isEmpty();
   }
 
   @Test
-  public void testSetSpouseRefByHelper() {
+  void setSpouseRefByHelper() {
     tweety.setSpouse(timmy);
     assertThat(tweety.getSpouse()).isEqualTo(timmy);
   }
 
   @Test
-  public void testUpdateSpouseByIdHelper() {
+  void updateSpouseByIdHelper() {
     hedwig.setId("new-" + hedwig.getId());
     assertThat(tweety.getSpouse()).isEqualTo(hedwig);
   }
 
   @Test
-  public void testUpdateSpouseByIdByAttributeName() {
+  void updateSpouseByIdByAttributeName() {
     hedwig.setAttributeValue("id", "new-" + hedwig.getId(), true);
     assertThat(tweety.getSpouse()).isEqualTo(hedwig);
   }
 
   @Test
-  public void testUpdateSpouseByReplaceElement() {
+  void updateSpouseByReplaceElement() {
     hedwig.replaceWithElement(timmy);
     assertThat(tweety.getSpouse()).isEqualTo(timmy);
   }
 
   @Test
-  public void testUpdateSpouseByRemoveElement() {
+  void updateSpouseByRemoveElement() {
     Animals animals = (Animals) modelInstance.getDocumentElement();
     animals.getAnimals().remove(hedwig);
     assertThat(tweety.getSpouse()).isNull();
   }
 
   @Test
-  public void testClearSpouse() {
+  void clearSpouse() {
     tweety.removeSpouse();
     assertThat(tweety.getSpouse()).isNull();
   }
 
   @Test
-  public void testSetSpouseRefsByHelper() {
+  void setSpouseRefsByHelper() {
     SpouseRef spouseRef = modelInstance.newInstance(SpouseRef.class);
     spouseRef.setTextContent(timmy.getId());
     tweety.getSpouseRef().replaceWithElement(spouseRef);
@@ -218,27 +216,27 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testSpouseRefsByTextContent() {
+  void spouseRefsByTextContent() {
     SpouseRef spouseRef = tweety.getSpouseRef();
     assertThat(spouseRef.getTextContent()).isEqualTo(hedwig.getId());
   }
 
   @Test
-  public void testUpdateSpouseRefsByTextContent() {
+  void updateSpouseRefsByTextContent() {
     SpouseRef spouseRef = tweety.getSpouseRef();
     spouseRef.setTextContent(timmy.getId());
     assertThat(tweety.getSpouse()).isEqualTo(timmy);
   }
 
   @Test
-  public void testUpdateSpouseRefsByTextContentWithNamespace() {
+  void updateSpouseRefsByTextContentWithNamespace() {
     SpouseRef spouseRef = tweety.getSpouseRef();
     spouseRef.setTextContent("tns:" + timmy.getId());
     assertThat(tweety.getSpouse()).isEqualTo(timmy);
   }
 
   @Test
-  public void testGetMother() {
+  void getMother() {
     Animal mother = egg1.getMother();
     assertThat(mother).isEqualTo(tweety);
 
@@ -247,31 +245,31 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testSetMotherRefByHelper() {
+  void setMotherRefByHelper() {
     egg1.setMother(timmy);
     assertThat(egg1.getMother()).isEqualTo(timmy);
   }
 
   @Test
-  public void testUpdateMotherByIdHelper() {
+  void updateMotherByIdHelper() {
     tweety.setId("new-" + tweety.getId());
     assertThat(egg1.getMother()).isEqualTo(tweety);
   }
 
   @Test
-  public void testUpdateMotherByIdByAttributeName() {
+  void updateMotherByIdByAttributeName() {
     tweety.setAttributeValue("id", "new-" + tweety.getId(), true);
     assertThat(egg1.getMother()).isEqualTo(tweety);
   }
 
   @Test
-  public void testUpdateMotherByReplaceElement() {
+  void updateMotherByReplaceElement() {
     tweety.replaceWithElement(timmy);
     assertThat(egg1.getMother()).isEqualTo(timmy);
   }
 
   @Test
-  public void testUpdateMotherByRemoveElement() {
+  void updateMotherByRemoveElement() {
     egg1.setMother(hedwig);
     Animals animals = (Animals) modelInstance.getDocumentElement();
     animals.getAnimals().remove(hedwig);
@@ -279,13 +277,13 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testClearMother() {
+  void clearMother() {
     egg1.removeMother();
     assertThat(egg1.getMother()).isNull();
   }
 
   @Test
-  public void testSetMotherRefsByHelper() {
+  void setMotherRefsByHelper() {
     Mother mother = modelInstance.newInstance(Mother.class);
     mother.setHref("#" + timmy.getId());
     egg1.getMotherRef().replaceWithElement(mother);
@@ -293,20 +291,20 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testMotherRefsByTextContent() {
+  void motherRefsByTextContent() {
     Mother mother = egg1.getMotherRef();
     assertThat(mother.getHref()).isEqualTo("#" + tweety.getId());
   }
 
   @Test
-  public void testUpdateMotherRefsByTextContent() {
+  void updateMotherRefsByTextContent() {
     Mother mother = egg1.getMotherRef();
     mother.setHref("#" + timmy.getId());
     assertThat(egg1.getMother()).isEqualTo(timmy);
   }
 
   @Test
-  public void testGetGuards() {
+  void getGuards() {
     Collection<Animal> guards = egg1.getGuardians();
     assertThat(guards).isNotEmpty().hasSize(2);
     assertThat(guards).contains(hedwig, timmy);
@@ -317,7 +315,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testAddGuardianRefsByHelper() {
+  void addGuardianRefsByHelper() {
     assertThat(egg1.getGuardianRefs())
       .isNotEmpty()
       .hasSize(2);
@@ -333,7 +331,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testGuardianRefsByTextContent() {
+  void guardianRefsByTextContent() {
     Collection<Guardian> guardianRefs = egg1.getGuardianRefs();
     Collection<String> hrefs = new ArrayList<String>();
     for (Guardian guardianRef : guardianRefs) {
@@ -348,7 +346,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateGuardianRefsByTextContent() {
+  void updateGuardianRefsByTextContent() {
     List<Guardian> guardianRefs = new ArrayList<Guardian>(egg1.getGuardianRefs());
 
     guardianRefs.get(0).setHref("#" + tweety.getId());
@@ -359,7 +357,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateGuardianRefsByRemoveElements() {
+  void updateGuardianRefsByRemoveElements() {
     List<Guardian> guardianRefs = new ArrayList<Guardian>(egg1.getGuardianRefs());
     egg1.getGuardianRefs().remove(guardianRefs.get(1));
     assertThat(egg1.getGuardians())
@@ -368,7 +366,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testClearGuardianRefs() {
+  void clearGuardianRefs() {
     egg1.getGuardianRefs().clear();
     assertThat(egg1.getGuardianRefs()).isEmpty();
 
@@ -380,7 +378,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testGetGuardedEggs() {
+  void getGuardedEggs() {
     Collection<Egg> guardedEggs = hedwig.getGuardedEggs();
     assertThat(guardedEggs)
       .isNotEmpty()
@@ -395,7 +393,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testAddGuardedEggRefsByHelper() {
+  void addGuardedEggRefsByHelper() {
     assertThat(hedwig.getGuardedEggRefs())
       .isNotEmpty()
       .hasSize(2);
@@ -411,7 +409,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testGuardedEggRefsByTextContent() {
+  void guardedEggRefsByTextContent() {
     Collection<GuardEgg> guardianRefs = timmy.getGuardedEggRefs();
     Collection<String> textContents = new ArrayList<String>();
     for (GuardEgg guardianRef : guardianRefs) {
@@ -426,7 +424,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateGuardedEggRefsByTextContent() {
+  void updateGuardedEggRefsByTextContent() {
     List<GuardEgg> guardianRefs = new ArrayList<GuardEgg>(hedwig.getGuardedEggRefs());
 
     guardianRefs.get(0).setTextContent(egg1.getId() + " " + egg3.getId());
@@ -437,7 +435,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testUpdateGuardedEggRefsByRemoveElements() {
+  void updateGuardedEggRefsByRemoveElements() {
     List<GuardEgg> guardianRefs = new ArrayList<GuardEgg>(timmy.getGuardedEggRefs());
     timmy.getGuardedEggRefs().remove(guardianRefs.get(0));
     assertThat(timmy.getGuardedEggs())
@@ -446,7 +444,7 @@ public class BirdTest extends TestModelTest {
   }
 
   @Test
-  public void testClearGuardedEggRefs() {
+  void clearGuardedEggRefs() {
     timmy.getGuardedEggRefs().clear();
     assertThat(timmy.getGuardedEggRefs()).isEmpty();
 

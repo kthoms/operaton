@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.type.reference;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.UnsupportedModelOperationException;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
@@ -27,15 +28,12 @@ import org.operaton.bpm.model.xml.testmodel.TestModelTest;
 import org.operaton.bpm.model.xml.testmodel.instance.*;
 import org.operaton.bpm.model.xml.type.ModelElementType;
 import org.operaton.bpm.model.xml.type.attribute.Attribute;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.operaton.bpm.model.xml.test.assertions.ModelAssertions.assertThat;
-import static org.junit.Assert.fail;
-import static org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author Sebastian Menski
@@ -84,9 +82,9 @@ public class ReferenceTest extends TestModelTest {
     return new Object[]{"created", modelInstance, modelParser};
   }
 
-  @Before
+  @BeforeEach
   @SuppressWarnings("unchecked")
-  public void copyModelInstance() {
+  void copyModelInstance() {
     modelInstance = cloneModelInstance();
 
     tweety = modelInstance.getModelElementById("tweety");
@@ -111,14 +109,14 @@ public class ReferenceTest extends TestModelTest {
   }
 
   @Test
-  public void testReferenceIdentifier() {
+  void referenceIdentifier() {
     assertThat(fatherReference).hasIdentifier(tweety, daffy.getId());
     assertThat(motherReference).hasIdentifier(tweety, daisy.getId());
     assertThat(flightPartnerRefsColl).hasIdentifier(tweety, daffy.getId());
   }
 
   @Test
-  public void testReferenceTargetElement() {
+  void referenceTargetElement() {
     assertThat(fatherReference).hasTargetElement(tweety, daffy);
     assertThat(motherReference).hasTargetElement(tweety, daisy);
     assertThat(flightPartnerRefsColl).hasTargetElement(tweety, daffy);
@@ -133,7 +131,7 @@ public class ReferenceTest extends TestModelTest {
   }
 
   @Test
-  public void testReferenceTargetAttribute() {
+  void referenceTargetAttribute() {
     Attribute<?> idAttribute = animalType.getAttribute("id");
     assertThat(idAttribute).hasIncomingReferences(fatherReference, motherReference);
 
@@ -143,7 +141,7 @@ public class ReferenceTest extends TestModelTest {
   }
 
   @Test
-  public void testReferenceSourceAttribute() {
+  void referenceSourceAttribute() {
     Attribute<?> fatherAttribute = animalType.getAttribute("father");
     Attribute<?> motherAttribute = animalType.getAttribute("mother");
 
@@ -152,7 +150,7 @@ public class ReferenceTest extends TestModelTest {
   }
 
   @Test
-  public void testRemoveReference() {
+  void removeReference() {
     fatherReference.referencedElementRemoved(daffy, daffy.getId());
 
     assertThat(fatherReference).hasNoTargetElement(tweety);
@@ -164,7 +162,7 @@ public class ReferenceTest extends TestModelTest {
   }
 
   @Test
-  public void testTargetElementsCollection() {
+  void targetElementsCollection() {
     Collection<FlyingAnimal> referenceTargetElements = flightPartnerRefsColl.getReferenceTargetElements(tweety);
     Collection<FlyingAnimal> flightPartners = Arrays.asList(new FlyingAnimal[]{birdo, daffy, daisy, plucky});
 

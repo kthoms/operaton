@@ -16,11 +16,11 @@
  */
 package org.operaton.bpm.model.bpmn.instance;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.bpmn.Bpmn;
 import org.operaton.bpm.model.bpmn.BpmnModelInstance;
 import org.operaton.bpm.model.bpmn.impl.instance.Incoming;
 import org.operaton.bpm.model.bpmn.impl.instance.Outgoing;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,7 +54,7 @@ public class FlowNodeTest extends BpmnModelElementInstanceTest {
   }
 
   @Test
-  public void testUpdateIncomingOutgoingChildElements() {
+  void updateIncomingOutgoingChildElements() {
     BpmnModelInstance modelInstance = Bpmn.createProcess()
       .startEvent()
       .userTask("test")
@@ -79,7 +79,7 @@ public class FlowNodeTest extends BpmnModelElementInstanceTest {
   }
 
   @Test
-    public void testOperatonAsyncBefore() {
+  void operatonAsyncBefore() {
     Task task = modelInstance.newInstance(Task.class);
     assertThat(task.isOperatonAsyncBefore()).isFalse();
 
@@ -88,7 +88,7 @@ public class FlowNodeTest extends BpmnModelElementInstanceTest {
   }
 
   @Test
-  public void testOperatonAsyncAfter() {
+  void operatonAsyncAfter() {
     Task task = modelInstance.newInstance(Task.class);
     assertThat(task.isOperatonAsyncAfter()).isFalse();
 
@@ -97,7 +97,7 @@ public class FlowNodeTest extends BpmnModelElementInstanceTest {
   }
 
   @Test
-  public void testOperatonAsyncAfterAndBefore() {
+  void operatonAsyncAfterAndBefore() {
     Task task = modelInstance.newInstance(Task.class);
 
     assertThat(task.isOperatonAsyncAfter()).isFalse();
@@ -120,7 +120,7 @@ public class FlowNodeTest extends BpmnModelElementInstanceTest {
   }
 
   @Test
-  public void testOperatonExclusive() {
+  void operatonExclusive() {
     Task task = modelInstance.newInstance(Task.class);
 
     assertThat(task.isOperatonExclusive()).isTrue();
@@ -131,7 +131,7 @@ public class FlowNodeTest extends BpmnModelElementInstanceTest {
   }
 
   @Test
-  public void testOperatonJobPriority() {
+  void operatonJobPriority() {
     Task task = modelInstance.newInstance(Task.class);
     assertThat(task.getOperatonJobPriority()).isNull();
 

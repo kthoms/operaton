@@ -16,11 +16,11 @@
  */
 package org.operaton.bpm.model.bpmn;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.bpmn.instance.*;
 import org.operaton.bpm.model.xml.Model;
 import org.operaton.bpm.model.xml.impl.util.ModelUtil;
 import org.operaton.bpm.model.xml.type.ModelElementType;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,10 +28,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ModelTest {
+class ModelTest {
 
   @Test
-  public void testCreateEmptyModel() {
+  void createEmptyModel() {
     BpmnModelInstance bpmnModelInstance = Bpmn.createEmptyModel();
 
     Definitions definitions = bpmnModelInstance.getDefinitions();
@@ -45,7 +45,7 @@ public class ModelTest {
   }
 
   @Test
-  public void testBaseTypeCalculation() {
+  void baseTypeCalculation() {
     BpmnModelInstance bpmnModelInstance = Bpmn.createEmptyModel();
     Model model = bpmnModelInstance.getModel();
     Collection<ModelElementType> allBaseTypes = ModelUtil.calculateAllBaseTypes(model.getType(StartEvent.class));
@@ -59,7 +59,7 @@ public class ModelTest {
   }
 
   @Test
-  public void testExtendingTypeCalculation() {
+  void extendingTypeCalculation() {
     BpmnModelInstance bpmnModelInstance = Bpmn.createEmptyModel();
     Model model = bpmnModelInstance.getModel();
     List<ModelElementType> baseInstanceTypes = new ArrayList<ModelElementType>();

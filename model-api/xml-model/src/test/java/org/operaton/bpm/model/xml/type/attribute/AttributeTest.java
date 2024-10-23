@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.type.attribute;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
 import org.operaton.bpm.model.xml.impl.type.attribute.AttributeImpl;
@@ -27,14 +28,11 @@ import org.operaton.bpm.model.xml.testmodel.instance.AnimalTest;
 import org.operaton.bpm.model.xml.testmodel.instance.Animals;
 import org.operaton.bpm.model.xml.testmodel.instance.Bird;
 import org.operaton.bpm.model.xml.type.ModelElementType;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collection;
 
 import static org.operaton.bpm.model.xml.test.assertions.ModelAssertions.assertThat;
-import static org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author Sebastian Menski
@@ -68,9 +66,9 @@ public class AttributeTest extends TestModelTest {
     return new Object[]{"created", modelInstance, modelParser};
   }
 
-  @Before
+  @BeforeEach
   @SuppressWarnings("unchecked")
-  public void copyModelInstance() {
+  void copyModelInstance() {
     modelInstance = cloneModelInstance();
 
     tweety = modelInstance.getModelElementById("tweety");
@@ -82,7 +80,7 @@ public class AttributeTest extends TestModelTest {
   }
 
   @Test
-  public void testOwningElementType() {
+  void owningElementType() {
     ModelElementType animalType = modelInstance.getModel().getType(Animal.class);
 
     assertThat(idAttribute).hasOwningElementType(animalType);
@@ -91,21 +89,21 @@ public class AttributeTest extends TestModelTest {
   }
 
   @Test
-  public void testSetAttributeValue() {
+  void setAttributeValue() {
     String identifier = "new-" + tweety.getId();
     idAttribute.setValue(tweety, identifier);
     assertThat(idAttribute).hasValue(tweety, identifier);
   }
 
   @Test
-  public void testSetAttributeValueWithoutUpdateReference() {
+  void setAttributeValueWithoutUpdateReference() {
     String identifier = "new-" + tweety.getId();
     idAttribute.setValue(tweety, identifier, false);
     assertThat(idAttribute).hasValue(tweety, identifier);
   }
 
   @Test
-  public void testSetDefaultValue() {
+  void setDefaultValue() {
     String defaultName = "default-name";
     assertThat(tweety.getName()).isNull();
     assertThat(nameAttribute).hasNoDefaultValue();
@@ -124,7 +122,7 @@ public class AttributeTest extends TestModelTest {
   }
 
   @Test
-  public void testRequired() {
+  void required() {
     tweety.removeAttribute("name");
     assertThat(nameAttribute).isOptional();
 
@@ -135,7 +133,7 @@ public class AttributeTest extends TestModelTest {
   }
 
   @Test
-  public void testSetNamespaceUri() {
+  void setNamespaceUri() {
     String testNamespace = "http://operaton.org/test";
 
     ((AttributeImpl<String>) idAttribute).setNamespaceUri(testNamespace);
@@ -146,21 +144,21 @@ public class AttributeTest extends TestModelTest {
   }
 
   @Test
-  public void testIdAttribute() {
+  void idAttribute() {
     assertThat(idAttribute).isIdAttribute();
     assertThat(nameAttribute).isNotIdAttribute();
     assertThat(fatherAttribute).isNotIdAttribute();
   }
 
   @Test
-  public void testAttributeName() {
+  void attributeName() {
     assertThat(idAttribute).hasAttributeName("id");
     assertThat(nameAttribute).hasAttributeName("name");
     assertThat(fatherAttribute).hasAttributeName("father");
   }
 
   @Test
-  public void testRemoveAttribute() {
+  void removeAttribute() {
     tweety.setName("test");
     assertThat(tweety.getName()).isNotNull();
     assertThat(nameAttribute).hasValue(tweety);
@@ -171,14 +169,14 @@ public class AttributeTest extends TestModelTest {
   }
 
   @Test
-  public void testIncomingReferences() {
+  void incomingReferences() {
     assertThat(idAttribute).hasIncomingReferences();
     assertThat(nameAttribute).hasNoIncomingReferences();
     assertThat(fatherAttribute).hasNoIncomingReferences();
   }
 
   @Test
-  public void testOutgoingReferences() {
+  void outgoingReferences() {
     assertThat(idAttribute).hasNoOutgoingReferences();
     assertThat(nameAttribute).hasNoOutgoingReferences();
     assertThat(fatherAttribute).hasOutgoingReferences();
