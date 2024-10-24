@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.instance;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
@@ -25,8 +26,7 @@ import org.operaton.bpm.model.xml.testmodel.TestModelTest;
 import org.operaton.bpm.model.xml.testmodel.instance.Animals;
 import org.operaton.bpm.model.xml.testmodel.instance.Description;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.stream.Stream;
 
 import static javax.xml.XMLConstants.XMLNS_ATTRIBUTE_NS_URI;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,11 +49,10 @@ public class DomTest extends TestModelTest {
     super(testName, testModelInstance, modelParser);
   }
 
-  @Parameters(name="Model {0}")
-  public static Collection<Object[]> models() {
-    return Arrays.asList(
-      createModel(),
-      parseModel(DomTest.class)
+  public static Stream<Object[]> models() {
+    return Stream.of(
+            createModel(),
+            parseModel(DomTest.class)
     );
   }
 

@@ -16,20 +16,20 @@
  */
 package org.operaton.bpm.model.xml.testmodel;
 
-import org.operaton.bpm.model.xml.ModelInstance;
-import org.operaton.bpm.model.xml.impl.ModelInstanceImpl;
-import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
-import org.operaton.bpm.model.xml.testmodel.instance.*;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.operaton.bpm.model.xml.ModelInstance;
+import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
+import org.operaton.bpm.model.xml.testmodel.instance.Animal;
+import org.operaton.bpm.model.xml.testmodel.instance.Animals;
+import org.operaton.bpm.model.xml.testmodel.instance.Bird;
+import org.operaton.bpm.model.xml.testmodel.instance.Egg;
+import org.operaton.bpm.model.xml.testmodel.instance.RelationshipDefinition;
 
 import java.io.InputStream;
 
 /**
  * @author Sebastian Menski
  */
-@RunWith(Parameterized.class)
 public abstract class TestModelTest {
 
   protected final String testName;

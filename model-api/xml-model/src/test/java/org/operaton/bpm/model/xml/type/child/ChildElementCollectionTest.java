@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 package org.operaton.bpm.model.xml.type.child;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
@@ -25,7 +26,11 @@ import org.operaton.bpm.model.xml.impl.type.child.ChildElementImpl;
 import org.operaton.bpm.model.xml.testmodel.Gender;
 import org.operaton.bpm.model.xml.testmodel.TestModelParser;
 import org.operaton.bpm.model.xml.testmodel.TestModelTest;
-import org.operaton.bpm.model.xml.testmodel.instance.*;
+import org.operaton.bpm.model.xml.testmodel.instance.Animals;
+import org.operaton.bpm.model.xml.testmodel.instance.Bird;
+import org.operaton.bpm.model.xml.testmodel.instance.FlightInstructor;
+import org.operaton.bpm.model.xml.testmodel.instance.FlightPartnerRef;
+import org.operaton.bpm.model.xml.testmodel.instance.FlyingAnimal;
 import org.operaton.bpm.model.xml.type.ModelElementType;
 
 import java.util.Arrays;
@@ -52,7 +57,7 @@ public class ChildElementCollectionTest extends TestModelTest {
     super(testName, testModelInstance, modelParser);
   }
 
-  @Parameters(name="Model {0}")
+  // @Parameters(name="Model {0}")
   public static Collection<Object[]> models() {
     Object[][] models = {createModel(), parseModel(ChildElementCollectionTest.class)};
     return Arrays.asList(models);

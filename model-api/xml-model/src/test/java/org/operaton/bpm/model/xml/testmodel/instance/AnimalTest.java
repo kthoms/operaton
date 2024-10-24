@@ -16,24 +16,23 @@
  */
 package org.operaton.bpm.model.xml.testmodel.instance;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.operaton.bpm.model.xml.testmodel.TestModelConstants.MODEL_NAMESPACE;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.model.xml.ModelInstance;
 import org.operaton.bpm.model.xml.ModelValidationException;
 import org.operaton.bpm.model.xml.impl.parser.AbstractModelParser;
 import org.operaton.bpm.model.xml.testmodel.Gender;
 import org.operaton.bpm.model.xml.testmodel.TestModelParser;
 import org.operaton.bpm.model.xml.testmodel.TestModelTest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.runners.Parameterized.Parameters;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.operaton.bpm.model.xml.testmodel.TestModelConstants.MODEL_NAMESPACE;
 
 /**
  * @author Sebastian Menski
@@ -59,7 +58,7 @@ public class AnimalTest extends TestModelTest {
   }
 
 
-  @Parameters(name="Model {0}")
+  // @Parameters(name="Model {0}")
   public static Collection<Object[]> models() {
     Object[][] models = {createModel(), parseModel(AnimalTest.class)};
     return Arrays.asList(models);
