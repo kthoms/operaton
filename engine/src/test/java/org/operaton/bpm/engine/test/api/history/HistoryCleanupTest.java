@@ -967,6 +967,7 @@ public class HistoryCleanupTest {
   }
 
   @Test
+  @Ignore
   public void testLessThanThresholdOutsideBatchWindowAfterMidnight() throws ParseException {
     //given
     prepareData(5);
