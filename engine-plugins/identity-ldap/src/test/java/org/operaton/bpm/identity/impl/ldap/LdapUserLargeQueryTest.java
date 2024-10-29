@@ -19,7 +19,8 @@ package org.operaton.bpm.identity.impl.ldap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.ProcessEngineConfiguration;
 import org.operaton.bpm.engine.identity.User;
@@ -27,10 +28,8 @@ import org.operaton.bpm.engine.identity.UserQuery;
 import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 public class LdapUserLargeQueryTest {
 
@@ -43,15 +42,15 @@ public class LdapUserLargeQueryTest {
   IdentityService identityService;
   LdapTestEnvironment ldapTestEnvironment;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     processEngineConfiguration = engineRule.getProcessEngineConfiguration();
     identityService = engineRule.getIdentityService();
     ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
   }
 
   @Test
-  public void testAllUsersQuery() {
+  void allUsersQuery() {
     List<User> listUsers = identityService.createUserQuery().list();
 
     // In this group, we expect more than a page size
@@ -59,7 +58,7 @@ public class LdapUserLargeQueryTest {
   }
 
   @Test
-  public void testPagesAllUsersQuery() {
+  void pagesAllUsersQuery() {
     List<User> listUsers = identityService.createUserQuery().list();
 
     assertThat(listUsers).hasSize(ldapTestEnvironment.getTotalNumberOfUsersCreated());
@@ -76,7 +75,7 @@ public class LdapUserLargeQueryTest {
   }
 
   @Test
-  public void testQueryPaging() {
+  void queryPaging() {
     UserQuery query = identityService.createUserQuery();
 
     assertThat(query.listPage(0, Integer.MAX_VALUE)).hasSize(92);

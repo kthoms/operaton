@@ -15,23 +15,17 @@
  * limitations under the License.
  */
 package org.operaton.spin.plugin.variables;
-
+import static org.junit.jupiter.api.Assertions.*;
 import static org.operaton.bpm.engine.variable.Variables.objectValue;
 import static org.operaton.bpm.engine.variable.Variables.serializedObjectValue;
 import static org.operaton.spin.plugin.variables.TypedValueAssert.assertObjectValueDeserializedNull;
 import static org.operaton.spin.plugin.variables.TypedValueAssert.assertObjectValueSerializedNull;
 import static org.operaton.spin.plugin.variables.TypedValueAssert.assertUntypedNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.ProcessEngineException;
 import org.operaton.bpm.engine.RuntimeService;
 import org.operaton.bpm.engine.impl.interceptor.Command;
@@ -52,9 +46,7 @@ import org.operaton.bpm.model.bpmn.Bpmn;
 import org.operaton.bpm.model.bpmn.BpmnModelInstance;
 import org.operaton.spin.DataFormats;
 import org.json.JSONException;
-import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 public class JsonSerializationTest {
@@ -74,15 +66,15 @@ public class JsonSerializationTest {
 
   protected String originalSerializationFormat;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     runtimeService = engineRule.getRuntimeService();
   }
 
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSerializationAsJson() throws JSONException {
+  void serializationAsJson() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     JsonSerializable bean = new JsonSerializable("a String", 42, true);
@@ -110,7 +102,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testListSerializationAsJson() throws JSONException {
+  void listSerializationAsJson() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     List<JsonSerializable> beans = new ArrayList<>();
@@ -137,7 +129,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testFailingSerialization() {
+  void failingSerialization() {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     FailingSerializationBean failingBean = new FailingSerializationBean("a String", 42, true);
@@ -152,7 +144,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testFailingDeserialization() {
+  void failingDeserialization() {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     FailingDeserializationBean failingBean = new FailingDeserializationBean("a String", 42, true);
@@ -209,7 +201,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testFailForNonExistingSerializationFormat() {
+  void failForNonExistingSerializationFormat() {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     JsonSerializable jsonSerializable = new JsonSerializable();
@@ -225,7 +217,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testVariableValueCaching() {
+  void variableValueCaching() {
     final ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     engineRule.getProcessEngineConfiguration().getCommandExecutorTxRequired().execute(new Command<Void>() {
@@ -251,7 +243,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testGetSerializedVariableValue() throws JSONException {
+  void getSerializedVariableValue() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     JsonSerializable bean = new JsonSerializable("a String", 42, true);
@@ -265,7 +257,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetSerializedVariableValue() throws JSONException {
+  void setSerializedVariableValue() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
     JsonSerializable bean = new JsonSerializable("a String", 42, true);
     String beanAsJson = bean.toExpectedJsonString();
@@ -289,7 +281,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetSerializedVariableValueNoTypeName() throws JSONException {
+  void setSerializedVariableValueNoTypeName() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
     JsonSerializable bean = new JsonSerializable("a String", 42, true);
     String beanAsJson = bean.toExpectedJsonString();
@@ -309,7 +301,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetSerializedVariableValueMismatchingTypeName() throws JSONException {
+  void setSerializedVariableValueMismatchingTypeName() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
     JsonSerializable bean = new JsonSerializable("a String", 42, true);
     String beanAsJson = bean.toExpectedJsonString();
@@ -345,7 +337,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetSerializedVariableValueNull() throws JSONException {
+  void setSerializedVariableValueNull() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     SerializedObjectValueBuilder serializedValue = serializedObjectValue()
@@ -369,7 +361,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetSerializedVariableValueNullNoTypeName() throws JSONException {
+  void setSerializedVariableValueNullNoTypeName() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     SerializedObjectValueBuilder serializedValue = serializedObjectValue()
@@ -392,7 +384,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetJavaOjectNullDeserialized() throws Exception {
+  void setJavaOjectNullDeserialized() throws Exception {
 
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
@@ -413,7 +405,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetJavaOjectNullSerialized() throws Exception {
+  void setJavaOjectNullSerialized() throws Exception {
 
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
@@ -436,7 +428,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetJavaOjectNullSerializedObjectTypeName() throws Exception {
+  void setJavaOjectNullSerializedObjectTypeName() throws Exception {
 
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
@@ -472,7 +464,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetUntypedNullForExistingVariable() throws Exception {
+  void setUntypedNullForExistingVariable() throws Exception {
 
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
@@ -498,7 +490,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSetTypedNullForExistingVariable() throws Exception {
+  void setTypedNullForExistingVariable() throws Exception {
 
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
@@ -523,7 +515,7 @@ public class JsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testRemoveVariable() throws JSONException {
+  void removeVariable() throws JSONException {
     // given a serialized json variable
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
     JsonSerializable bean = new JsonSerializable("a String", 42, true);
@@ -549,7 +541,7 @@ public class JsonSerializationTest {
    */
   @Test
   @Deployment(resources = SERVICE_TASK_PROCESS)
-  public void testImplicitlyUpdateEmptyList() {
+  void implicitlyUpdateEmptyList() {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("serviceTaskProcess",
         Variables.createVariables()
           .putValueTyped("listVar",
@@ -569,7 +561,7 @@ public class JsonSerializationTest {
   }
 
   @Test
-  public void testTransientJsonValue() {
+  void transientJsonValue() {
     // given
     BpmnModelInstance modelInstance = Bpmn.createExecutableProcess("foo")
         .startEvent()

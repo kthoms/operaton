@@ -18,7 +18,7 @@ package org.operaton.spin.plugin.variables;
 
 import static org.operaton.bpm.engine.variable.Variables.objectValue;
 import static org.hamcrest.CoreMatchers.isA;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -35,7 +35,7 @@ import org.operaton.spin.DataFormats;
 import org.operaton.spin.json.SpinJsonException;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 /**
@@ -73,11 +73,8 @@ public class JsonSerializationWithValidationOnMultipleEnginesTest {
   @Rule
   public ProcessEngineRule engineRuleNegative = new ProvidedProcessEngineRule(bootstrapRuleNegative);
 
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
-
   @Test
-  public void shouldUsePositiveValidator() {
+  void shouldUsePositiveValidator() {
     // given
     engineRulePositive.manageDeployment(engineRulePositive.getRepositoryService().createDeployment()
         .addModelInstance("foo.bpmn", getOneTaskModel())
@@ -97,7 +94,7 @@ public class JsonSerializationWithValidationOnMultipleEnginesTest {
   }
 
   @Test
-  public void shouldUseNegativeValidator() {
+  void shouldUseNegativeValidator() {
     // given
     engineRuleNegative.manageDeployment(engineRuleNegative.getRepositoryService().createDeployment()
         .addModelInstance("foo.bpmn", getOneTaskModel())

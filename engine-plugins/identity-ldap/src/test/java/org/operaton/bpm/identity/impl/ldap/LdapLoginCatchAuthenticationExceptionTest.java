@@ -17,14 +17,13 @@
 package org.operaton.bpm.identity.impl.ldap;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 public class LdapLoginCatchAuthenticationExceptionTest {
 
@@ -36,13 +35,13 @@ public class LdapLoginCatchAuthenticationExceptionTest {
 
   IdentityService identityService;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     identityService = engineRule.getIdentityService();
   }
 
   @Test
-  public void shouldThrowExceptionOnFailedLogin() {
+  void shouldThrowExceptionOnFailedLogin() {
     // given config passwordCheckCatchAuthenticationException=false
 
     // when

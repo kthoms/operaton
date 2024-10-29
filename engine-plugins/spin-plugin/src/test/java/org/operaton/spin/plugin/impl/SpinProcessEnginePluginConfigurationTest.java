@@ -19,12 +19,11 @@ package org.operaton.spin.plugin.impl;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.impl.cfg.ProcessEnginePlugin;
 import org.operaton.bpm.engine.test.util.ProcessEngineBootstrapRule;
 import org.operaton.bpm.engine.test.util.ProvidedProcessEngineRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 public class SpinProcessEnginePluginConfigurationTest {
 
@@ -36,7 +35,7 @@ public class SpinProcessEnginePluginConfigurationTest {
   public ProvidedProcessEngineRule engineRule = new ProvidedProcessEngineRule(bootstrapRule);
 
   @Test
-  public void shouldSetCustomSpinPluginProperties() {
+  void shouldSetCustomSpinPluginProperties() {
 
     // when
     List<ProcessEnginePlugin> pluginList =

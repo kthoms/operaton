@@ -22,7 +22,8 @@ import static org.operaton.bpm.engine.authorization.Resources.GROUP;
 import static org.operaton.bpm.engine.authorization.Resources.USER;
 import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testGroupPaging;
 import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testUserPaging;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.AuthorizationService;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.ProcessEngineConfiguration;
@@ -33,10 +34,8 @@ import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestUtilities;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 /**
  * @author Roman Smirnov
@@ -54,8 +53,8 @@ public class LdapDisableAuthorizationCheckTest {
   AuthorizationService authorizationService;
   LdapTestEnvironment ldapTestEnvironment;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     processEngineConfiguration = engineRule.getProcessEngineConfiguration();
     identityService = engineRule.getIdentityService();
     authorizationService = engineRule.getAuthorizationService();
@@ -63,12 +62,12 @@ public class LdapDisableAuthorizationCheckTest {
   }
 
   @Test
-  public void testUserQueryPagination() {
+  void userQueryPagination() {
     LdapTestUtilities.testUserPaging(identityService, ldapTestEnvironment);
   }
 
   @Test
-  public void testUserQueryPaginationWithAuthenticatedUserWithoutAuthorizations() {
+  void userQueryPaginationWithAuthenticatedUserWithoutAuthorizations() {
     try {
       processEngineConfiguration.setAuthorizationEnabled(true);
 
@@ -82,7 +81,7 @@ public class LdapDisableAuthorizationCheckTest {
   }
 
   @Test
-  public void testUserQueryPaginationWithAuthenticatedUserWithAuthorizations() {
+  void userQueryPaginationWithAuthenticatedUserWithAuthorizations() {
     createGrantAuthorization(USER, "roman", "oscar", READ);
     createGrantAuthorization(USER, "daniel", "oscar", READ);
     createGrantAuthorization(USER, "monster", "oscar", READ);
@@ -106,12 +105,12 @@ public class LdapDisableAuthorizationCheckTest {
   }
 
   @Test
-  public void testGroupQueryPagination() {
+  void groupQueryPagination() {
     testGroupPaging(identityService);
   }
 
   @Test
-  public void testGroupQueryPaginationWithAuthenticatedUserWithoutAuthorizations() {
+  void groupQueryPaginationWithAuthenticatedUserWithoutAuthorizations() {
     try {
       processEngineConfiguration.setAuthorizationEnabled(true);
 
@@ -125,7 +124,7 @@ public class LdapDisableAuthorizationCheckTest {
   }
 
   @Test
-  public void testGroupQueryPaginationWithAuthenticatedUserWithAuthorizations() {
+  void groupQueryPaginationWithAuthenticatedUserWithAuthorizations() {
     createGrantAuthorization(GROUP, "management", "oscar", READ);
     createGrantAuthorization(GROUP, "consulting", "oscar", READ);
     createGrantAuthorization(GROUP, "external", "oscar", READ);

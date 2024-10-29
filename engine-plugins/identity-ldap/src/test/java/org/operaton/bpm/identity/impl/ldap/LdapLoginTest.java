@@ -17,14 +17,13 @@
 package org.operaton.bpm.identity.impl.ldap;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 /**
  * @author Daniel Meyer
@@ -39,36 +38,36 @@ public class LdapLoginTest {
 
   IdentityService identityService;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     identityService = engineRule.getIdentityService();
   }
 
   @Test
-  public void testLdapLoginSuccess() {
+  void ldapLoginSuccess() {
     assertThat(identityService.checkPassword("roman", "roman")).isTrue();
   }
 
   @Test
-  public void testLdapLoginCapitalization() {
+  void ldapLoginCapitalization() {
     assertThat(identityService.checkPassword("Roman", "roman")).isTrue();
   }
 
   @Test
-  public void testLdapLoginFailure() {
+  void ldapLoginFailure() {
     assertThat(identityService.checkPassword("roman", "ro")).isFalse();
     assertThat(identityService.checkPassword("r", "roman")).isFalse();
   }
 
   @Test
-  public void testLdapLoginNullValues() {
+  void ldapLoginNullValues() {
     assertThat(identityService.checkPassword(null, "roman")).isFalse();
     assertThat(identityService.checkPassword("roman", null)).isFalse();
     assertThat(identityService.checkPassword(null, null)).isFalse();
   }
 
   @Test
-  public void testLdapLoginEmptyPassword() {
+  void ldapLoginEmptyPassword() {
     assertThat(identityService.checkPassword("roman", "")).isTrue();
   }
 

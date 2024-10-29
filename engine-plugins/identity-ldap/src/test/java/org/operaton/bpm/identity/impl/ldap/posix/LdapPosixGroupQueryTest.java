@@ -19,17 +19,16 @@ package org.operaton.bpm.identity.impl.ldap.posix;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.User;
 import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 
 public class LdapPosixGroupQueryTest {
@@ -42,14 +41,14 @@ public class LdapPosixGroupQueryTest {
   IdentityService identityService;
   LdapTestEnvironment ldapTestEnvironment;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     identityService = engineRule.getIdentityService();
     ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
   }
 
   @Test
-  public void shouldFindGroupFilterByGroupIdWithoutMembers() {
+  void shouldFindGroupFilterByGroupIdWithoutMembers() {
     // given
 
     // when
@@ -61,7 +60,7 @@ public class LdapPosixGroupQueryTest {
   }
 
   @Test
-  public void shouldFindGroupFilterByGroupIdWithMembers() {
+  void shouldFindGroupFilterByGroupIdWithMembers() {
     // given
 
     // when
@@ -73,7 +72,7 @@ public class LdapPosixGroupQueryTest {
   }
 
   @Test
-  public void shouldFindUserFilterByMemberOfGroupWithoutMember() {
+  void shouldFindUserFilterByMemberOfGroupWithoutMember() {
     // given
 
     // when
@@ -84,7 +83,7 @@ public class LdapPosixGroupQueryTest {
   }
 
   @Test
-  public void shouldFindUserFilterByMemberOfGroupWithMember() {
+  void shouldFindUserFilterByMemberOfGroupWithMember() {
     // given
 
     // when

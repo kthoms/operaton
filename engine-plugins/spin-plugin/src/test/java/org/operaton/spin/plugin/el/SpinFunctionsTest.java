@@ -16,9 +16,12 @@
  */
 package org.operaton.spin.plugin.el;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.delegate.Expression;
 import org.operaton.bpm.engine.impl.test.PluggableProcessEngineTestCase;
 import org.operaton.bpm.engine.repository.Deployment;
@@ -35,7 +38,7 @@ import org.operaton.spin.xml.SpinXmlElement;
  * @author Daniel Meyer
  *
  */
-public class SpinFunctionsTest extends PluggableProcessEngineTestCase {
+class SpinFunctionsTest extends PluggableProcessEngineTestCase {
 
   String xmlString = "<elementName attrName=\"attrValue\" />";
   String jsonString = "{\"foo\": \"bar\"}";
@@ -52,42 +55,48 @@ public class SpinFunctionsTest extends PluggableProcessEngineTestCase {
       .execute(commandContext -> compiledExpression.getValue(varScope));
   }
 
-  public void testSpin_S_Available() {
+  @Test
+  void spinSAvailable() {
 
     SpinXmlElement spinXmlEl = executeExpression("${ S('" + xmlString + "') }");
     assertNotNull(spinXmlEl);
     assertEquals("elementName", spinXmlEl.name());
   }
 
-  public void testSpin_XML_Available() {
+  @Test
+  void spinXMLAvailable() {
 
     SpinXmlElement spinXmlEl = executeExpression("${ XML('" + xmlString + "') }");
     assertNotNull(spinXmlEl);
     assertEquals("elementName", spinXmlEl.name());
   }
 
-  public void testSpin_JSON_Available() {
+  @Test
+  void spinJSONAvailable() {
 
     SpinJsonNode spinJsonEl = executeExpression("${ JSON('" + jsonString + "') }");
     assertNotNull(spinJsonEl);
     assertEquals("bar", spinJsonEl.prop("foo").stringValue());
   }
 
-  public void testSpin_XPath_Available() {
+  @Test
+  void spinXPathAvailable() {
 
     String elName = executeExpression("${ S('" + xmlString + "').xPath('/elementName').element().name() }");
     assertNotNull(elName);
     assertEquals("elementName", elName);
   }
 
-  public void testSpin_JsonPath_Available() {
+  @Test
+  void spinJsonPathAvailable() {
 
     String property = executeExpression("${ S('" + jsonString + "').jsonPath('$.foo').stringValue() }");
     assertNotNull(property);
     assertEquals("bar", property);
   }
 
-  public void testSpinAvailableInBpmn() {
+  @Test
+  void spinAvailableInBpmn() {
 
     BpmnModelInstance bpmnModelInstance = Bpmn.createExecutableProcess("testProcess")
       .startEvent()

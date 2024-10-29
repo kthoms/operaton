@@ -19,16 +19,15 @@ package org.operaton.bpm.identity.impl.ldap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.RepositoryService;
 import org.operaton.bpm.engine.repository.ProcessDefinition;
 import org.operaton.bpm.engine.test.Deployment;
 import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 @Deployment
 public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
@@ -40,13 +39,13 @@ public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
 
   RepositoryService repositoryService;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     repositoryService = engineRule.getRepositoryService();
   }
 
   @Test
-  public void test_shouldFindAllProcessesForCandidateUser() {
+  void should_find_all_processes_for_candidate_user() {
     // given
 
     // when
@@ -59,7 +58,7 @@ public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
   }
 
   @Test
-  public void test_shouldFindNoProcessesForCandidateUser() {
+  void should_find_no_processes_for_candidate_user() {
     // given
 
     // when
@@ -69,7 +68,7 @@ public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
   }
 
   @Test
-  public void test_shouldFindAllProcessesForUserInCandidateGroup() {
+  void should_find_all_processes_for_user_in_candidate_group() {
     // given
 
     // when
@@ -81,7 +80,7 @@ public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
   }
 
   @Test
-  public void test_shouldFindAllProcessesForCandidateUserInCandidateGroup() {
+  void should_find_all_processes_for_candidate_user_in_candidate_group() {
     // given
 
     // when
@@ -94,7 +93,7 @@ public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
   }
 
   @Test
-  public void test_shouldFindNoDuplicateProcessesForCandidateUserInCandidateGroup() {
+  void should_find_no_duplicate_processes_for_candidate_user_in_candidate_group() {
     // given
 
     // when

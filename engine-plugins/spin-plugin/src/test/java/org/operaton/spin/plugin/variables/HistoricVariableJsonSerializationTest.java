@@ -15,12 +15,10 @@
  * limitations under the License.
  */
 package org.operaton.spin.plugin.variables;
-
+import static org.junit.jupiter.api.Assertions.*;
 import static org.operaton.bpm.engine.variable.Variables.objectValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.HistoryService;
 import org.operaton.bpm.engine.ProcessEngineConfiguration;
 import org.operaton.bpm.engine.RuntimeService;
@@ -35,9 +33,7 @@ import org.operaton.bpm.engine.variable.type.ValueType;
 import org.operaton.bpm.engine.variable.value.ObjectValue;
 import org.operaton.spin.DataFormats;
 import org.json.JSONException;
-import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 public class HistoricVariableJsonSerializationTest {
@@ -53,8 +49,8 @@ public class HistoricVariableJsonSerializationTest {
   protected ProcessEngineConfigurationImpl processEngineConfiguration;
   protected RuntimeService runtimeService;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     historyService = engineRule.getHistoryService();
     processEngineConfiguration = engineRule.getProcessEngineConfiguration();
     runtimeService = engineRule.getRuntimeService();
@@ -62,7 +58,7 @@ public class HistoricVariableJsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSelectHistoricVariableInstances() throws JSONException {
+  void selectHistoricVariableInstances() throws JSONException {
     if (processEngineConfiguration.getHistoryLevel().getId() >=
         HistoryLevel.HISTORY_LEVEL_AUDIT.getId()) {
       ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
@@ -86,7 +82,7 @@ public class HistoricVariableJsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSelectHistoricSerializedValues() throws JSONException {
+  void selectHistoricSerializedValues() throws JSONException {
     if (processEngineConfiguration.getHistoryLevel().getId() >=
         HistoryLevel.HISTORY_LEVEL_AUDIT.getId()) {
 
@@ -109,7 +105,7 @@ public class HistoricVariableJsonSerializationTest {
 
   @Test
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSelectHistoricSerializedValuesUpdate() throws JSONException {
+  void selectHistoricSerializedValuesUpdate() throws JSONException {
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 
     JsonSerializable bean = new JsonSerializable("a String", 42, false);

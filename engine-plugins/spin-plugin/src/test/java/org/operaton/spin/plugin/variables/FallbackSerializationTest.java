@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 package org.operaton.spin.plugin.variables;
-
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.ProcessEngineException;
 import org.operaton.bpm.engine.impl.test.PluggableProcessEngineTestCase;
 import org.operaton.bpm.engine.impl.variable.serializer.VariableSerializerFactory;
@@ -24,18 +24,21 @@ import org.operaton.bpm.engine.test.Deployment;
 import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.bpm.engine.variable.value.ObjectValue;
 import org.operaton.bpm.engine.variable.value.TypedValue;
-import org.junit.Test;
+
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Thorben Lindhauer
  *
  */
-public class FallbackSerializationTest extends PluggableProcessEngineTestCase {
+class FallbackSerializationTest extends PluggableProcessEngineTestCase {
 
   protected static final String ONE_TASK_PROCESS = "org/operaton/spin/plugin/oneTaskProcess.bpmn20.xml";
 
   @Deployment(resources = ONE_TASK_PROCESS)
-  public void testSerializationOfUnknownFormat() {
+  @Test
+  void serializationOfUnknownFormat() {
     // given
     ProcessInstance instance = runtimeService.startProcessInstanceByKey("oneTaskProcess");
 

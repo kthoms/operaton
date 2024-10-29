@@ -16,8 +16,11 @@
  */
 package org.operaton.spin.plugin.variables;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.Collections;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.impl.test.ResourceProcessEngineTestCase;
 import org.operaton.bpm.engine.runtime.ProcessInstance;
 import org.operaton.bpm.engine.test.Deployment;
@@ -40,16 +43,18 @@ public class DmnBusinessRuleTaskResultMappingTest extends ResourceProcessEngineT
     super("org/operaton/spin/plugin/json.operaton.cfg.xml");
   }
 
-  @Deployment(resources = {STORE_DECISION_RESULT_BPMN, TEST_DECISION })
-  public void testStoreDecisionResult() {
+  @Deployment(resources = {STORE_DECISION_RESULT_BPMN, TEST_DECISION})
+  @Test
+  void storeDecisionResult() {
     ProcessInstance processInstance = startTestProcess("multiple entries");
 
     //deserialization is not working for this type of object -> deserializeValue parameter is false
     assertNotNull(runtimeService.getVariableTyped(processInstance.getId(), "result", false));
   }
 
-  @Deployment(resources = {CUSTOM_MAPPING_BPMN, TEST_DECISION })
-  public void testCustomOutputMapping() {
+  @Deployment(resources = {CUSTOM_MAPPING_BPMN, TEST_DECISION})
+  @Test
+  void customOutputMapping() {
     ProcessInstance processInstance = startTestProcess("multiple entries");
 
     assertEquals("foo", runtimeService.getVariable(processInstance.getId(), "result1"));
@@ -59,16 +64,18 @@ public class DmnBusinessRuleTaskResultMappingTest extends ResourceProcessEngineT
     assertEquals(Variables.stringValue("bar"), runtimeService.getVariableTyped(processInstance.getId(), "result2"));
   }
 
-  @Deployment(resources = { SINGLE_ENTRY_BPMN, TEST_DECISION})
-  public void testSingleEntryMapping() {
+  @Deployment(resources = {SINGLE_ENTRY_BPMN, TEST_DECISION})
+  @Test
+  void singleEntryMapping() {
     ProcessInstance processInstance = startTestProcess("single entry");
 
     assertEquals("foo", runtimeService.getVariable(processInstance.getId(), "result"));
     assertEquals(Variables.stringValue("foo"), runtimeService.getVariableTyped(processInstance.getId(), "result"));
   }
 
-  @Deployment(resources = { DEFAULT_MAPPING_BPMN, TEST_DECISION })
-  public void testTransientDecisionResult() {
+  @Deployment(resources = {DEFAULT_MAPPING_BPMN, TEST_DECISION})
+  @Test
+  void transientDecisionResult() {
     // when a decision is evaluated and the result is stored in a transient variable "decisionResult"
     ProcessInstance processInstance = startTestProcess("single entry");
 

@@ -16,8 +16,12 @@
  */
 package org.operaton.spin.plugin.variables;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.history.HistoricDecisionInputInstance;
 import org.operaton.bpm.engine.history.HistoricDecisionInstance;
 import org.operaton.bpm.engine.history.HistoricDecisionOutputInstance;
@@ -28,10 +32,11 @@ import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.bpm.engine.variable.value.ObjectValue;
 import org.operaton.spin.DataFormats;
 
-public class HistoricDecisionInstanceSerializationTest extends PluggableProcessEngineTestCase {
+class HistoricDecisionInstanceSerializationTest extends PluggableProcessEngineTestCase {
 
   @Deployment(resources = {"org/operaton/spin/plugin/DecisionSingleOutput.dmn11.xml"})
-  public void testListJsonProperty() {
+  @Test
+  void listJsonProperty() {
     JsonListSerializable<String> list = new JsonListSerializable<String>();
     list.addElement("foo");
 

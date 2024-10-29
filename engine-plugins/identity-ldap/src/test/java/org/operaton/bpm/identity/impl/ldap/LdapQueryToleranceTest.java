@@ -19,7 +19,8 @@ package org.operaton.bpm.identity.impl.ldap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.engine.ProcessEngine;
 import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.User;
@@ -27,10 +28,8 @@ import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
 import org.operaton.commons.testing.ProcessEngineLoggingRule;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
-import org.junit.Test;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -52,14 +51,14 @@ public class LdapQueryToleranceTest {
   ProcessEngine processEngine;
   LdapTestEnvironment ldapTestEnvironment;
 
-  @Before
-  public void setup() {
+  @BeforeEach
+  void setup() {
     processEngine = engineRule.getProcessEngine();
     ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
   }
 
   @Test
-  public void testNotReturnGroupsWithNullId() {
+  void notReturnGroupsWithNullId() {
     // given
     // LdapTestEnvironment creates six roles (groupOfNames) by default;
     // these won't return a group id, because they do not have the group id attribute
@@ -79,7 +78,7 @@ public class LdapQueryToleranceTest {
   }
 
   @Test
-  public void testNotReturnUsersWithNullId() {
+  void notReturnUsersWithNullId() {
     // given
     // LdapTestEnvironment creates 12 users by default;
     // these won't return a group id, because they do not have the group id attribute
