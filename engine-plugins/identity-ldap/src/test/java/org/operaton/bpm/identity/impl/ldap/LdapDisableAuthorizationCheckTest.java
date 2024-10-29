@@ -16,14 +16,11 @@
  */
 package org.operaton.bpm.identity.impl.ldap;
 
-import static org.operaton.bpm.engine.authorization.Authorization.AUTH_TYPE_GRANT;
-import static org.operaton.bpm.engine.authorization.Permissions.READ;
-import static org.operaton.bpm.engine.authorization.Resources.GROUP;
-import static org.operaton.bpm.engine.authorization.Resources.USER;
-import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testGroupPaging;
-import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testUserPaging;
+import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.operaton.bpm.engine.AuthorizationService;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.ProcessEngineConfiguration;
@@ -34,13 +31,19 @@ import org.operaton.bpm.engine.test.ProcessEngineRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestUtilities;
-import org.junit.ClassRule;
-import org.junit.Rule;
+
+import static org.operaton.bpm.engine.authorization.Authorization.AUTH_TYPE_GRANT;
+import static org.operaton.bpm.engine.authorization.Permissions.READ;
+import static org.operaton.bpm.engine.authorization.Resources.GROUP;
+import static org.operaton.bpm.engine.authorization.Resources.USER;
+import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testGroupPaging;
+import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testUserPaging;
 
 /**
  * @author Roman Smirnov
  *
  */
+@ExtendWith(LdapTestEnvironmentRule.class)
 public class LdapDisableAuthorizationCheckTest {
 
   @ClassRule

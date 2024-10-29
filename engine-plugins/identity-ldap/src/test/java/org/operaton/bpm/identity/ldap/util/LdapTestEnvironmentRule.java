@@ -16,20 +16,22 @@
  */
 package org.operaton.bpm.identity.ldap.util;
 
-import org.junit.rules.ExternalResource;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 
-public class LdapTestEnvironmentRule extends ExternalResource {
+public class LdapTestEnvironmentRule implements BeforeEachCallback, AfterEachCallback {
 
-  LdapTestEnvironment ldapTestEnvironment;
+  private LdapTestEnvironment ldapTestEnvironment;
 
-  int additionalNumberOfUsers = 0;
-  int additionnalNumberOfGroups = 0;
-  int additionalNumberOfRoles = 0;
-  boolean posix = false;
+  private int additionalNumberOfUsers = 0;
+  private int additionnalNumberOfGroups = 0;
+  private int additionalNumberOfRoles = 0;
+  private boolean posix = false;
 
   @Override
-  protected void before() throws Exception {
-    if(posix) {
+  public void beforeEach(ExtensionContext context) throws Exception {
+    if (posix) {
       setupPosix();
     } else {
       setupLdap();
@@ -37,7 +39,7 @@ public class LdapTestEnvironmentRule extends ExternalResource {
   }
 
   @Override
-  protected void after() {
+  public void afterEach(ExtensionContext context) throws Exception {
     if (ldapTestEnvironment != null) {
       ldapTestEnvironment.shutdown();
       ldapTestEnvironment = null;
@@ -49,7 +51,7 @@ public class LdapTestEnvironmentRule extends ExternalResource {
     ldapTestEnvironment.init(additionalNumberOfUsers, additionnalNumberOfGroups, additionalNumberOfRoles);
   }
 
-  public void setupPosix() throws Exception {
+  private void setupPosix() throws Exception {
     ldapTestEnvironment = new LdapPosixTestEnvironment();
     ldapTestEnvironment.init();
   }
@@ -77,4 +79,5 @@ public class LdapTestEnvironmentRule extends ExternalResource {
   public LdapTestEnvironment getLdapTestEnvironment() {
     return ldapTestEnvironment;
   }
+
 }
