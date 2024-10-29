@@ -148,7 +148,9 @@
             <redirectTestOutputToFile>true</redirectTestOutputToFile>
             <forkCount>3</forkCount>
             <reuseForks>true</reuseForks>
+            <!--
             <workingDirectory>${project.build.directory}/surefire/workdir-${surefire.forkNumber}</workingDirectory>
+            -->
           </configuration>
         </plugin>
         <plugin>
