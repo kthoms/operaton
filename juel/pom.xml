@@ -29,7 +29,6 @@
       <groupId>jakarta.el</groupId>
       <artifactId>jakarta.el-api</artifactId>
       <version>${version.jakarta.el}</version>
-      <optional>true</optional>
     </dependency>
   </dependencies>
 
@@ -68,7 +67,7 @@
               <relocations>
                 <relocation>
                   <pattern>jakarta.el</pattern>
-                  <shadedPattern>org.operaton.bpm.impl.juel.jakarta.el</shadedPattern>
+                  <shadedPattern>jakarta.el</shadedPattern>
                 </relocation>
               </relocations>
             </configuration>
