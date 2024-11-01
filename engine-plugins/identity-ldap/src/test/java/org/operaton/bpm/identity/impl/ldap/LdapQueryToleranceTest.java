@@ -41,19 +41,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapQueryToleranceTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension();
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("invalid-id-attributes.cfg.xml");
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("invalid-id-attributes.cfg.xml");
   @RegisterExtension
-  static ProcessEngineLoggingExtension loggingRule = new ProcessEngineLoggingExtension().level(Level.ERROR).watch("org.operaton.bpm.identity.impl.ldap");
+  static ProcessEngineLoggingExtension loggingExtension = new ProcessEngineLoggingExtension().level(Level.ERROR).watch("org.operaton.bpm.identity.impl.ldap");
 
   ProcessEngine processEngine;
   LdapTestEnvironment ldapTestEnvironment;
 
   @BeforeEach
   void setup() {
-    processEngine = engineRule.getProcessEngine();
-    ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
+    processEngine = engineExtension.getProcessEngine();
+    ldapTestEnvironment = ldapExtension.getLdapTestEnvironment();
   }
 
   @Test
@@ -72,7 +72,7 @@ public class LdapQueryToleranceTest {
     // groups with id null were not returned
     assertThat(groups).hasSize(0);
     assertThat(count).isEqualTo(0);
-    List<ILoggingEvent> filteredLog = loggingRule.getFilteredLog("LDAP-00004 LDAP group query returned a group with id null.");
+    List<ILoggingEvent> filteredLog = loggingExtension.getFilteredLog("LDAP-00004 LDAP group query returned a group with id null.");
     assertThat(filteredLog).hasSize(12); // 2 queries * 6 roles (groupOfNames)
   }
 
@@ -92,7 +92,7 @@ public class LdapQueryToleranceTest {
     // groups with id null were not returned
     assertThat(users).hasSize(0);
     assertThat(count).isEqualTo(0);
-    List<ILoggingEvent> filteredLog = loggingRule.getFilteredLog("LDAP-00004 LDAP user query returned a user with id null.");
+    List<ILoggingEvent> filteredLog = loggingExtension.getFilteredLog("LDAP-00004 LDAP user query returned a user with id null.");
     assertThat(filteredLog).hasSize(24); // 2 queries * 12 users
   }
 }

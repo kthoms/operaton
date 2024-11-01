@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapEnableSortControlSupportTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension();
 
   @RegisterExtension
   static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("operaton.ldap.enable.sort.control.support.cfg.xml");
@@ -51,7 +51,7 @@ public class LdapEnableSortControlSupportTest {
   @BeforeEach
   void setup() {
     identityService = engineExtension.getIdentityService();
-    ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
+    ldapTestEnvironment = ldapExtension.getLdapTestEnvironment();
   }
 
   /**

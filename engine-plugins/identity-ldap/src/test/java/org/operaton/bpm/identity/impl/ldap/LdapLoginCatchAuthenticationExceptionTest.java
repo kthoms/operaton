@@ -28,16 +28,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class LdapLoginCatchAuthenticationExceptionTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension();
 
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.disable.catch.authentication.exception.cfg.xml");
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("operaton.ldap.disable.catch.authentication.exception.cfg.xml");
 
   IdentityService identityService;
 
   @BeforeEach
   void setup() {
-    identityService = engineRule.getIdentityService();
+    identityService = engineExtension.getIdentityService();
   }
 
   @Test

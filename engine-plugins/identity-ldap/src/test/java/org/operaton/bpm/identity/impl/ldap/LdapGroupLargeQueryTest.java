@@ -33,18 +33,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapGroupLargeQueryTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension().additionalNumberOfUsers(5).additionnalNumberOfGroups(5).additionalNumberOfRoles(80); // the TestEnvironment creates groups for roles. Attention, stay under 80, there is a limitation in the query on 100
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension().additionalNumberOfUsers(5).additionnalNumberOfGroups(5).additionalNumberOfRoles(80); // the TestEnvironment creates groups for roles. Attention, stay under 80, there is a limitation in the query on 100
 
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.pages.cfg.xml"); // pageSize = 3 in this configuration
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("operaton.ldap.pages.cfg.xml"); // pageSize = 3 in this configuration
 
   IdentityService identityService;
   LdapTestEnvironment ldapTestEnvironment;
 
   @BeforeEach
   void setup() {
-    identityService = engineRule.getIdentityService();
-    ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
+    identityService = engineExtension.getIdentityService();
+    ldapTestEnvironment = ldapExtension.getLdapTestEnvironment();
   }
 
   @Test

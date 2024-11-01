@@ -46,9 +46,9 @@ import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testUserPagi
 public class LdapDisableAuthorizationCheckTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension();
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.disable.authorization.check.cfg.xml");
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("operaton.ldap.disable.authorization.check.cfg.xml");
 
   ProcessEngineConfiguration processEngineConfiguration;
   IdentityService identityService;
@@ -57,10 +57,10 @@ public class LdapDisableAuthorizationCheckTest {
 
   @BeforeEach
   void setup() {
-    processEngineConfiguration = engineRule.getProcessEngineConfiguration();
-    identityService = engineRule.getIdentityService();
-    authorizationService = engineRule.getAuthorizationService();
-    ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
+    processEngineConfiguration = engineExtension.getProcessEngineConfiguration();
+    identityService = engineExtension.getIdentityService();
+    authorizationService = engineExtension.getAuthorizationService();
+    ldapTestEnvironment = ldapExtension.getLdapTestEnvironment();
   }
 
   @Test

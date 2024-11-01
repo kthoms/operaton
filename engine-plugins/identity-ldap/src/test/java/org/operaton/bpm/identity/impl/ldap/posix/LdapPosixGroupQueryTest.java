@@ -34,17 +34,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapPosixGroupQueryTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension().posix(true);
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension().posix(true);
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("posix.operaton.cfg.xml");
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("posix.operaton.cfg.xml");
 
   IdentityService identityService;
   LdapTestEnvironment ldapTestEnvironment;
 
   @BeforeEach
   void setup() {
-    identityService = engineRule.getIdentityService();
-    ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
+    identityService = engineExtension.getIdentityService();
+    ldapTestEnvironment = ldapExtension.getLdapTestEnvironment();
   }
 
   @Test

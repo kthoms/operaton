@@ -33,15 +33,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
 
   @RegisterExtension
-  public static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
+  public static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension();
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension();
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension();
 
   RepositoryService repositoryService;
 
   @BeforeEach
   void setup() {
-    repositoryService = engineRule.getRepositoryService();
+    repositoryService = engineExtension.getRepositoryService();
   }
 
   @Test

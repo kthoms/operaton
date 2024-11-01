@@ -34,9 +34,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapUserLargeQueryTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension().additionalNumberOfUsers(80).additionnalNumberOfGroups(5).additionalNumberOfRoles(5); // Attention, stay under 80, there is a limitation in the query on 100
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension().additionalNumberOfUsers(80).additionnalNumberOfGroups(5).additionalNumberOfRoles(5); // Attention, stay under 80, there is a limitation in the query on 100
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.pages.cfg.xml"); // pageSize = 3 in this configuration
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("operaton.ldap.pages.cfg.xml"); // pageSize = 3 in this configuration
 
   ProcessEngineConfiguration processEngineConfiguration;
   IdentityService identityService;
@@ -44,9 +44,9 @@ public class LdapUserLargeQueryTest {
 
   @BeforeEach
   void setup() {
-    processEngineConfiguration = engineRule.getProcessEngineConfiguration();
-    identityService = engineRule.getIdentityService();
-    ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
+    processEngineConfiguration = engineExtension.getProcessEngineConfiguration();
+    identityService = engineExtension.getIdentityService();
+    ldapTestEnvironment = ldapExtension.getLdapTestEnvironment();
   }
 
   @Test

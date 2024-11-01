@@ -45,9 +45,9 @@ import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testGroupPag
 public class LdapGroupQueryTest {
 
   @RegisterExtension
-  public static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
+  public static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension();
   @RegisterExtension
-  public static ProcessEngineExtension engineRule = new ProcessEngineExtension();
+  public static ProcessEngineExtension engineExtension = new ProcessEngineExtension();
 
   ProcessEngineConfiguration processEngineConfiguration;
   IdentityService identityService;
@@ -56,10 +56,10 @@ public class LdapGroupQueryTest {
 
   @BeforeEach
   void setup() {
-    processEngineConfiguration = engineRule.getProcessEngineConfiguration();
-    identityService = engineRule.getIdentityService();
-    authorizationService = engineRule.getAuthorizationService();
-    ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
+    processEngineConfiguration = engineExtension.getProcessEngineConfiguration();
+    identityService = engineExtension.getIdentityService();
+    authorizationService = engineExtension.getAuthorizationService();
+    ldapTestEnvironment = ldapExtension.getLdapTestEnvironment();
   }
 
   @Test

@@ -32,15 +32,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapLoginTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
+  static LdapTestEnvironmentExtension ldapExtension = new LdapTestEnvironmentExtension();
   @RegisterExtension
-  static ProcessEngineExtension engineRule = new ProcessEngineExtension();
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension();
 
   IdentityService identityService;
 
   @BeforeEach
   void setup() {
-    identityService = engineRule.getIdentityService();
+    identityService = engineExtension.getIdentityService();
   }
 
   @Test
