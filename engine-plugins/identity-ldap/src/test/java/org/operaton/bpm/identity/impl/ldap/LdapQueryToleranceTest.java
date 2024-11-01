@@ -16,23 +16,23 @@
  */
 package org.operaton.bpm.identity.impl.ldap;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.engine.ProcessEngine;
 import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.User;
-import org.operaton.bpm.engine.test.ProcessEngineRule;
+import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
 import org.operaton.commons.testing.ProcessEngineLoggingRule;
-import org.junit.ClassRule;
-import org.junit.Rule;
 
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.spi.ILoggingEvent;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**
@@ -41,10 +41,10 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
  */
 public class LdapQueryToleranceTest {
 
-  @ClassRule
-  public static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
-  @Rule
-  public ProcessEngineRule engineRule = new ProcessEngineRule("invalid-id-attributes.cfg.xml");
+  @RegisterExtension
+  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  @RegisterExtension
+  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("invalid-id-attributes.cfg.xml");
   @Rule
   public ProcessEngineLoggingRule loggingRule = new ProcessEngineLoggingRule().level(Level.ERROR).watch("org.operaton.bpm.identity.impl.ldap");
 

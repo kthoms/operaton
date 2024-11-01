@@ -16,18 +16,17 @@
  */
 package org.operaton.bpm.identity.impl.ldap;
 
-import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.engine.AuthorizationService;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.ProcessEngineConfiguration;
 import org.operaton.bpm.engine.authorization.Authorization;
 import org.operaton.bpm.engine.authorization.Permission;
 import org.operaton.bpm.engine.authorization.Resource;
-import org.operaton.bpm.engine.test.ProcessEngineRule;
+import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
 import org.operaton.bpm.identity.ldap.util.LdapTestUtilities;
@@ -46,10 +45,10 @@ import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testUserPagi
 @ExtendWith(LdapTestEnvironmentRule.class)
 public class LdapDisableAuthorizationCheckTest {
 
-  @ClassRule
-  public static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
-  @Rule
-  public ProcessEngineRule engineRule = new ProcessEngineRule("operaton.ldap.disable.authorization.check.cfg.xml");
+  @RegisterExtension
+  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  @RegisterExtension
+  static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.disable.authorization.check.cfg.xml");
 
   ProcessEngineConfiguration processEngineConfiguration;
   IdentityService identityService;

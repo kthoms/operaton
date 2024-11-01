@@ -16,21 +16,21 @@
  */
 package org.operaton.bpm.identity.impl.ldap;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
+import org.operaton.bpm.engine.IdentityService;
+import org.operaton.bpm.engine.identity.Group;
+import org.operaton.bpm.engine.identity.User;
+import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.operaton.bpm.engine.IdentityService;
-import org.operaton.bpm.engine.identity.Group;
-import org.operaton.bpm.engine.identity.User;
-import org.operaton.bpm.engine.test.ProcessEngineRule;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
-import org.junit.ClassRule;
-import org.junit.Rule;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Represents a test case where the sortControlSupport property is enabled.
@@ -39,18 +39,18 @@ import org.junit.Rule;
  */
 public class LdapEnableSortControlSupportTest {
 
-  @ClassRule
-  public static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  @RegisterExtension
+  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
 
-  @Rule
-  public ProcessEngineRule engineRule = new ProcessEngineRule("operaton.ldap.enable.sort.control.support.cfg.xml");
+  @RegisterExtension
+  static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("operaton.ldap.enable.sort.control.support.cfg.xml");
 
   IdentityService identityService;
   LdapTestEnvironment ldapTestEnvironment;
 
   @BeforeEach
   void setup() {
-    identityService = engineRule.getIdentityService();
+    identityService = engineExtension.getIdentityService();
     ldapTestEnvironment = ldapRule.getLdapTestEnvironment();
   }
 

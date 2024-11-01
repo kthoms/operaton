@@ -16,26 +16,26 @@
  */
 package org.operaton.bpm.identity.impl.ldap;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.engine.RepositoryService;
 import org.operaton.bpm.engine.repository.ProcessDefinition;
 import org.operaton.bpm.engine.test.Deployment;
-import org.operaton.bpm.engine.test.ProcessEngineRule;
+import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
-import org.junit.ClassRule;
-import org.junit.Rule;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Deployment
 public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
 
-  @ClassRule
+  @RegisterExtension
   public static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
-  @Rule
-  public ProcessEngineRule engineRule = new ProcessEngineRule();
+  @RegisterExtension
+  static ProcessEngineExtension engineRule = new ProcessEngineExtension();
 
   RepositoryService repositoryService;
 
