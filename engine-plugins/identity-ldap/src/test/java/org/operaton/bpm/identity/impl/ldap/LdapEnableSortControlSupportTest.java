@@ -24,7 +24,7 @@ import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.User;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 
 import java.util.Comparator;
 import java.util.List;
@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapEnableSortControlSupportTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
 
   @RegisterExtension
   static ProcessEngineExtension engineExtension = new ProcessEngineExtension().configurationResource("operaton.ldap.enable.sort.control.support.cfg.xml");

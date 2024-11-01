@@ -24,7 +24,7 @@ import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.User;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapPosixGroupQueryTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule().posix(true);
+  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension().posix(true);
   @RegisterExtension
   static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("posix.operaton.cfg.xml");
 

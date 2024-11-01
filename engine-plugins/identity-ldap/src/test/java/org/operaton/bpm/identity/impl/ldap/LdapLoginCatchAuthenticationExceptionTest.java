@@ -21,14 +21,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.engine.IdentityService;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LdapLoginCatchAuthenticationExceptionTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
 
   @RegisterExtension
   static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.disable.catch.authentication.exception.cfg.xml");

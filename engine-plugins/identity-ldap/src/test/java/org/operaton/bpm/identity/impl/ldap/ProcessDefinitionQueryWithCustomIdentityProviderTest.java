@@ -23,7 +23,7 @@ import org.operaton.bpm.engine.RepositoryService;
 import org.operaton.bpm.engine.repository.ProcessDefinition;
 import org.operaton.bpm.engine.test.Deployment;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProcessDefinitionQueryWithCustomIdentityProviderTest {
 
   @RegisterExtension
-  public static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  public static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
   @RegisterExtension
   static ProcessEngineExtension engineRule = new ProcessEngineExtension();
 

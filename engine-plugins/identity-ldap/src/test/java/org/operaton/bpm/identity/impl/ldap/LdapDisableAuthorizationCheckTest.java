@@ -28,7 +28,7 @@ import org.operaton.bpm.engine.authorization.Permission;
 import org.operaton.bpm.engine.authorization.Resource;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestUtilities;
 
 import static org.operaton.bpm.engine.authorization.Authorization.AUTH_TYPE_GRANT;
@@ -42,11 +42,11 @@ import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testUserPagi
  * @author Roman Smirnov
  *
  */
-@ExtendWith(LdapTestEnvironmentRule.class)
+@ExtendWith(LdapTestEnvironmentExtension.class)
 public class LdapDisableAuthorizationCheckTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
   @RegisterExtension
   static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.disable.authorization.check.cfg.xml");
 

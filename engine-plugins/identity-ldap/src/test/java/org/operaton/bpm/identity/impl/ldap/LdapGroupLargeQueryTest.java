@@ -24,7 +24,7 @@ import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.GroupQuery;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LdapGroupLargeQueryTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule().additionalNumberOfUsers(5).additionnalNumberOfGroups(5).additionalNumberOfRoles(80); // the TestEnvironment creates groups for roles. Attention, stay under 80, there is a limitation in the query on 100
+  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension().additionalNumberOfUsers(5).additionnalNumberOfGroups(5).additionalNumberOfRoles(80); // the TestEnvironment creates groups for roles. Attention, stay under 80, there is a limitation in the query on 100
 
   @RegisterExtension
   static ProcessEngineExtension engineRule = new ProcessEngineExtension().configurationResource("operaton.ldap.pages.cfg.xml"); // pageSize = 3 in this configuration

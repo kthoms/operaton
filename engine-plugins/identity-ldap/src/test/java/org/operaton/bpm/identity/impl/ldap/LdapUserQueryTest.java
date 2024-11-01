@@ -30,7 +30,7 @@ import org.operaton.bpm.engine.identity.User;
 import org.operaton.bpm.engine.identity.UserQuery;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 
 import java.util.HashSet;
 import java.util.List;
@@ -46,7 +46,7 @@ import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.*;
 public class LdapUserQueryTest {
 
   @RegisterExtension
-  static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
   @RegisterExtension
   static ProcessEngineExtension engineRule = new ProcessEngineExtension();
 

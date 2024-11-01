@@ -20,7 +20,7 @@ import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-public class LdapTestEnvironmentRule implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
+public class LdapTestEnvironmentExtension implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
   private LdapTestEnvironment ldapTestEnvironment;
 
@@ -56,22 +56,22 @@ public class LdapTestEnvironmentRule implements BeforeTestExecutionCallback, Aft
     ldapTestEnvironment.init();
   }
 
-  public LdapTestEnvironmentRule additionalNumberOfUsers(int additionalNumberOfUsers) {
+  public LdapTestEnvironmentExtension additionalNumberOfUsers(int additionalNumberOfUsers) {
     this.additionalNumberOfUsers = additionalNumberOfUsers;
     return this;
   }
 
-  public LdapTestEnvironmentRule additionnalNumberOfGroups(int additionnalNumberOfGroups) {
+  public LdapTestEnvironmentExtension additionnalNumberOfGroups(int additionnalNumberOfGroups) {
     this.additionnalNumberOfGroups = additionnalNumberOfGroups;
     return this;
   }
 
-  public LdapTestEnvironmentRule additionalNumberOfRoles(int additionalNumberOfRoles) {
+  public LdapTestEnvironmentExtension additionalNumberOfRoles(int additionalNumberOfRoles) {
     this.additionalNumberOfRoles = additionalNumberOfRoles;
     return this;
   }
 
-  public LdapTestEnvironmentRule posix(boolean posix) {
+  public LdapTestEnvironmentExtension posix(boolean posix) {
     this.posix = posix;
     return this;
   }

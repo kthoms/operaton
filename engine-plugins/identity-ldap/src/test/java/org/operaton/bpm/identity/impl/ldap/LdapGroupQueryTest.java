@@ -29,7 +29,7 @@ import org.operaton.bpm.engine.identity.Group;
 import org.operaton.bpm.engine.identity.GroupQuery;
 import org.operaton.bpm.engine.test.junit5.ProcessEngineExtension;
 import org.operaton.bpm.identity.ldap.util.LdapTestEnvironment;
-import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentRule;
+import org.operaton.bpm.identity.ldap.util.LdapTestEnvironmentExtension;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,7 +45,7 @@ import static org.operaton.bpm.identity.ldap.util.LdapTestUtilities.testGroupPag
 public class LdapGroupQueryTest {
 
   @RegisterExtension
-  public static LdapTestEnvironmentRule ldapRule = new LdapTestEnvironmentRule();
+  public static LdapTestEnvironmentExtension ldapRule = new LdapTestEnvironmentExtension();
   @RegisterExtension
   public static ProcessEngineExtension engineRule = new ProcessEngineExtension();
 
