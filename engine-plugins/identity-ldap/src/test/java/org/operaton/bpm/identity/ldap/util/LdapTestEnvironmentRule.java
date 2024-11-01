@@ -16,11 +16,11 @@
  */
 package org.operaton.bpm.identity.ldap.util;
 
-import org.junit.jupiter.api.extension.AfterEachCallback;
-import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
+import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-public class LdapTestEnvironmentRule implements BeforeEachCallback, AfterEachCallback {
+public class LdapTestEnvironmentRule implements BeforeTestExecutionCallback, AfterTestExecutionCallback {
 
   private LdapTestEnvironment ldapTestEnvironment;
 
@@ -30,7 +30,7 @@ public class LdapTestEnvironmentRule implements BeforeEachCallback, AfterEachCal
   private boolean posix = false;
 
   @Override
-  public void beforeEach(ExtensionContext context) throws Exception {
+  public void beforeTestExecution(ExtensionContext context) throws Exception {
     if (posix) {
       setupPosix();
     } else {
@@ -39,7 +39,7 @@ public class LdapTestEnvironmentRule implements BeforeEachCallback, AfterEachCal
   }
 
   @Override
-  public void afterEach(ExtensionContext context) throws Exception {
+  public void afterTestExecution(ExtensionContext context) throws Exception {
     if (ldapTestEnvironment != null) {
       ldapTestEnvironment.shutdown();
       ldapTestEnvironment = null;
