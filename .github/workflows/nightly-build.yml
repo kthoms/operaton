@@ -33,9 +33,8 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Run Maven verify with nightly profile
-        run: ./mvnw verify -Pdistro,distro-ce,distro-run,distro-serverless,distro-starter,distro-tomcat,distro-webjar,distro-wildfly,reports
-
+      - name: Create project reports
+        run: ./mvnw --fail-never versions:plugin-updates-aggregate-report versions:property-updates-aggregate-report dependency:analyze-report cyclonedx:makeAggregateBom
       - name: Archive Reports
         if: always()
         # see https://github.com/actions/upload-artifact/blob/main/README.md
@@ -45,6 +44,6 @@ jobs:
           if-no-files-found: ignore
           path: |
             **/target/bom.xml
-            **/target/surefire-reports
             **/target/site
             **/target/reports
+            !**/target/site/jacoco*
