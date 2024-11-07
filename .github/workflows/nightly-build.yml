@@ -34,7 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Run Maven verify with nightly profile
-        run: mvn verify -Dreports=true
+        run: ./mvnw verify -Pdistro,distro-ce,distro-run,distro-serverless,distro-starter,distro-tomcat,distro-webjar,distro-wildfly,reports
 
       - name: Archive Reports
         if: always()
