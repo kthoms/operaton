@@ -34,11 +34,17 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
 
       - name: Run Maven verify with nightly profile
-        run: mvn verify -Pnightly
+        run: mvn verify -Dreports=true
 
-      - name: Archive CycloneDX BOM
+      - name: Archive Reports
         if: always()
-        uses: actions/upload-artifact@v2
+        # see https://github.com/actions/upload-artifact/blob/main/README.md
+        uses: actions/upload-artifact@v4
         with:
-          name: cyclonedx-bom
-          path: target/bom.xml  # Adjust this path if the output location is different
+          name: reports
+          if-no-files-found: ignore
+          path: |
+            **/target/bom.xml
+            **/target/surefire-reports
+            **/target/site
+            **/target/reports

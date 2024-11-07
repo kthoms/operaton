@@ -566,13 +566,15 @@
     </profile>
 
     <profile>
-      <id>nightly</id>
+      <id>reports</id>
+      <activation>
+        <property>
+          <name>reports</name>
+          <value>true</value>
+        </property>
+      </activation>
       <build>
         <plugins>
-          <plugin>
-            <groupId>com.mycila</groupId>
-            <artifactId>license-maven-plugin</artifactId>
-          </plugin>
           <plugin>
             <groupId>org.cyclonedx</groupId>
             <artifactId>cyclonedx-maven-plugin</artifactId>
