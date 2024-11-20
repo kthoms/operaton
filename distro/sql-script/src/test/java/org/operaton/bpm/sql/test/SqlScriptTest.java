@@ -49,10 +49,10 @@ import liquibase.snapshot.SnapshotControl;
 import liquibase.snapshot.SnapshotGeneratorFactory;
 import liquibase.structure.DatabaseObject;
 import liquibase.structure.core.UniqueConstraint;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.commons.utils.IoUtil;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 public class SqlScriptTest {
 
@@ -76,7 +76,7 @@ public class SqlScriptTest {
   protected Liquibase liquibase;
   protected DiffGeneratorFactory databaseDiffer;
 
-  @Before
+  @BeforeEach
   public void setup() throws Exception {
     InputStream is = getClass().getClassLoader().getResourceAsStream("properties-from-pom.properties");
     properties = new Properties();
@@ -91,7 +91,7 @@ public class SqlScriptTest {
     cleanUpDatabaseTables();
   }
 
-  @After
+  @AfterEach
   public void tearDown() throws Exception {
     cleanUpDatabaseTables();
     liquibase.close();

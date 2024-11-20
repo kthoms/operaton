@@ -15,12 +15,11 @@
  * limitations under the License.
  */
 package org.operaton.bpm.container.impl.jboss.util;
-
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.container.impl.jboss.extension.BpmPlatformExtension;
 import org.jboss.as.controller.SimpleMapAttributeDefinition;
 import org.jboss.as.controller.descriptions.StandardResourceDescriptionResolver;
 import org.jboss.dmr.ModelNode;
-import org.junit.Test;
 
 import java.util.ResourceBundle;
 
