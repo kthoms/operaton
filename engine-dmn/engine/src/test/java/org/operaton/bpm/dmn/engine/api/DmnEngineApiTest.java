@@ -26,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnDecision;
 import org.operaton.bpm.dmn.engine.DmnDecisionLogic;
 import org.operaton.bpm.dmn.engine.DmnDecisionRequirementsGraph;
@@ -43,7 +44,6 @@ import org.operaton.bpm.engine.variable.context.VariableContext;
 import org.operaton.bpm.model.dmn.Dmn;
 import org.operaton.bpm.model.dmn.DmnModelInstance;
 import org.operaton.commons.utils.IoUtil;
-import org.junit.Test;
 
 /**
  * Simple api test making sure the api methods are there and accept the right parameters

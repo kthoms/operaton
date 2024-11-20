@@ -22,7 +22,9 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnEngine;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.delegate.DmnDecisionTableEvaluationEvent;
@@ -30,9 +32,6 @@ import org.operaton.bpm.dmn.engine.spi.DmnEngineMetricCollector;
 import org.operaton.bpm.dmn.engine.test.DecisionResource;
 import org.operaton.bpm.dmn.engine.test.DmnEngineTest;
 import org.operaton.bpm.engine.variable.VariableMap;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 public class DmnEngineMetricCollectorTest extends DmnEngineTest {
 
@@ -42,18 +41,18 @@ public class DmnEngineMetricCollectorTest extends DmnEngineTest {
 
   protected DmnEngineMetricCollector metricCollector;
 
-  @Before
+  @BeforeEach
   public void getEngineMetricCollector() {
     metricCollector = dmnEngine.getConfiguration().getEngineMetricCollector();
   }
 
-  @Before
+  @BeforeEach
   public void setTestVariables() {
     variables.putValue("status", "bronze");
     variables.putValue("sum", 100);
   }
 
-  @After
+  @AfterEach
   public void clearEngineMetrics() {
     metricCollector.clearExecutedDecisionElements();
   }

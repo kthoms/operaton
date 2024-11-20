@@ -17,12 +17,13 @@
 package org.operaton.bpm.dmn.engine.feel;
 
 import java.util.Date;
+
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.test.DecisionResource;
 import org.operaton.bpm.dmn.feel.impl.FeelException;
 import org.operaton.bpm.dmn.feel.impl.juel.FeelEngineFactoryImpl;
-import org.junit.Test;
 
 public class JuelFeelBehaviorTest extends FeelBehavior {
 
@@ -45,14 +46,13 @@ public class JuelFeelBehaviorTest extends FeelBehavior {
   @Test
   @DecisionResource(resource = "context_function.dmn")
   public void shouldFailOnInternalContextFunctions() {
-    // given
-    getVariables().putValue("myDate", new Date());
+    assertThrows(FeelException.class, () -> {
+      // given
+      getVariables().putValue("myDate", new Date());
 
-    // then
-    thrown.expect(FeelException.class);
-
-    // when
-    evaluateDecision().getSingleEntry();
+      // when
+      evaluateDecision().getSingleEntry();
+    });
   }
 
 }

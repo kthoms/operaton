@@ -21,7 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnDecision;
 import org.operaton.bpm.dmn.engine.DmnDecisionRequirementsGraph;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
@@ -39,8 +40,6 @@ import org.operaton.bpm.model.dmn.instance.Input;
 import org.operaton.bpm.model.dmn.instance.Output;
 import org.operaton.bpm.model.dmn.instance.Rule;
 import org.operaton.commons.utils.IoUtil;
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  *
@@ -60,7 +59,7 @@ public class DmnTransformListenerTest extends DmnEngineTest {
     return new TestDmnTransformListenerConfiguration();
   }
 
-  @Before
+  @BeforeEach
   public void initListener() {
     TestDmnTransformListenerConfiguration configuration = (TestDmnTransformListenerConfiguration) dmnEngine.getConfiguration();
     listener = configuration.testDmnTransformListener;

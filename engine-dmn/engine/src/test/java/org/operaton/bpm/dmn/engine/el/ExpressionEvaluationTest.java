@@ -18,11 +18,11 @@ package org.operaton.bpm.dmn.engine.el;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnDecisionResult;
 import org.operaton.bpm.dmn.engine.test.DecisionResource;
 import org.operaton.bpm.dmn.engine.test.DmnEngineTest;
 import org.operaton.bpm.engine.variable.Variables;
-import org.junit.Test;
 
 public class ExpressionEvaluationTest extends DmnEngineTest {
 

@@ -20,7 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Map;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnDecisionTableResult;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
@@ -33,9 +35,6 @@ import org.operaton.bpm.dmn.engine.test.DmnEngineTest;
 import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.bpm.model.dmn.BuiltinAggregator;
 import org.operaton.bpm.model.dmn.HitPolicy;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class DmnDecisionTableEvaluationListenerTest extends DmnEngineTest {
 
@@ -50,12 +49,12 @@ public class DmnDecisionTableEvaluationListenerTest extends DmnEngineTest {
       .enableFeelLegacyBehavior(true);
   }
 
-  @BeforeClass
+  @BeforeAll
   public static void initHitPolicyHandlerRegistry() {
     hitPolicyHandlerRegistry = new DefaultHitPolicyHandlerRegistry();
   }
 
-  @Before
+  @BeforeEach
   public void initListener() {
     TestDecisionTableEvaluationListenerConfiguration configuration = (TestDecisionTableEvaluationListenerConfiguration) dmnEngine.getConfiguration();
     listener = configuration.testDecisionTableListener;

@@ -16,8 +16,8 @@
  */
 package org.operaton.bpm.dmn.engine.delegate;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnDecisionTableResult;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
@@ -49,7 +49,7 @@ public class DmnDecisionEvaluationListenerTest extends DmnEngineTest {
     return new TestDecisionEvaluationListenerConfiguration();
   }
 
-  @Before
+  @BeforeEach
   public void initListener() {
     TestDecisionEvaluationListenerConfiguration configuration = (TestDecisionEvaluationListenerConfiguration) dmnEngine.getConfiguration();
     listener = configuration.testDecisionListener;

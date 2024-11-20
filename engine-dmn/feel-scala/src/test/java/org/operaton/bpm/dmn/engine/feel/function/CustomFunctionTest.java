@@ -16,9 +16,9 @@
  */
 package org.operaton.bpm.dmn.engine.feel.function;
 
-import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
 import org.operaton.bpm.dmn.engine.feel.function.helper.FunctionProvider;
@@ -34,36 +34,35 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CustomFunctionTest {
 
   protected FeelRule feelRule = FeelRule.buildWithFunctionProvider();
-  protected ExpectedException thrown = ExpectedException.none();
 
   @Rule
   public RuleChain ruleChain = RuleChain.outerRule(feelRule).around(thrown);
 
   protected FunctionProvider functionProvider;
 
-  @Before
+  @BeforeEach
   public void assign() {
     functionProvider = feelRule.getFunctionProvider();
   }
 
   @Test
   public void shouldThrowExceptionBothFunctionAndReturnValueSet() {
-    // given
-    CustomFunctionBuilder myFunctionBuilder = CustomFunction.create()
-      .setParams("x")
-      .setFunction(args -> "")
-      .setReturnValue("foo");
+    Throwable exception = assertThrows(FeelException.class, () -> {
+      // given
+      CustomFunctionBuilder myFunctionBuilder = CustomFunction.create()
+        .setParams("x")
+        .setFunction(args -> "")
+        .setReturnValue("foo");
 
-    // then
-    thrown.expect(FeelException.class);
-    thrown.expectMessage("Only set one return value or a function.");
-
-    // when
-    myFunctionBuilder.build();
+      // when
+      myFunctionBuilder.build();
+    });
+    assertTrue(exception.getMessage().contains("Only set one return value or a function."));
   }
 
   @Test

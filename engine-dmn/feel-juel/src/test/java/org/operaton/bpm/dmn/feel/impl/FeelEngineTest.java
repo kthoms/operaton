@@ -33,9 +33,9 @@ import org.operaton.bpm.dmn.feel.impl.juel.el.FeelFunctionMapper;
 import org.operaton.bpm.engine.variable.VariableMap;
 import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.bpm.engine.variable.value.DateValue;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FeelEngineTest {
 
@@ -45,12 +45,12 @@ public class FeelEngineTest {
 
   public VariableMap variables;
 
-  @BeforeClass
+  @BeforeAll
   public static void initFeelEngine() {
     feelEngine = new FeelEngineFactoryImpl().createInstance();
   }
 
-  @Before
+  @BeforeEach
   public void initVariables() {
     variables = Variables.createVariables();
   }

@@ -20,7 +20,7 @@ import static org.operaton.bpm.dmn.engine.test.asserts.DmnEngineTestAssertions.a
 
 import java.io.InputStream;
 import java.util.List;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.operaton.bpm.dmn.engine.DmnDecision;
 import org.operaton.bpm.dmn.engine.DmnDecisionResult;
 import org.operaton.bpm.dmn.engine.DmnDecisionTableResult;
@@ -30,7 +30,6 @@ import org.operaton.bpm.dmn.engine.test.asserts.DmnDecisionTableResultAssert;
 import org.operaton.bpm.engine.variable.VariableMap;
 import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.commons.utils.IoUtil;
-import org.junit.Before;
 import org.junit.Rule;
 
 public abstract class DmnEngineTest {
@@ -46,17 +45,17 @@ public abstract class DmnEngineTest {
     return null;
   }
 
-  @Before
+  @BeforeEach
   public void initDmnEngine() {
     dmnEngine = dmnEngineRule.getDmnEngine();
   }
 
-  @Before
+  @BeforeEach
   public void initDecision() {
     decision = dmnEngineRule.getDecision();
   }
 
-  @Before
+  @BeforeEach
   public void initVariables() {
     variables = Variables.createVariables();
   }

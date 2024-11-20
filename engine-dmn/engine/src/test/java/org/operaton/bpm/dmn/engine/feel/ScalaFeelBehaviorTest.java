@@ -19,13 +19,14 @@ package org.operaton.bpm.dmn.engine.feel;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Date;
+
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnDecisionResult;
 import org.operaton.bpm.dmn.engine.DmnDecisionResultEntries;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.test.DecisionResource;
 import org.operaton.bpm.dmn.feel.impl.scala.ScalaFeelEngineFactory;
-import org.junit.Test;
 
 public class ScalaFeelBehaviorTest extends FeelBehavior {
 

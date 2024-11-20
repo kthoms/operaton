@@ -20,7 +20,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnEngine;
 import org.operaton.bpm.dmn.engine.delegate.DmnDecisionEvaluationEvent;
 import org.operaton.bpm.dmn.engine.delegate.DmnDecisionEvaluationListener;
@@ -36,14 +37,12 @@ import org.operaton.bpm.dmn.engine.impl.transform.DefaultDmnTransformer;
 import org.operaton.bpm.dmn.feel.impl.FeelEngineFactory;
 import org.operaton.bpm.dmn.feel.impl.juel.FeelEngineFactoryImpl;
 import org.operaton.bpm.dmn.feel.impl.juel.FeelEngineImpl;
-import org.junit.Before;
-import org.junit.Test;
 
 public class DefaultDmnEngineConfigurationApiTest {
 
   protected DefaultDmnEngineConfiguration configuration;
 
-  @Before
+  @BeforeEach
   public void initConfiguration() {
     configuration = new DefaultDmnEngineConfiguration();
   }
