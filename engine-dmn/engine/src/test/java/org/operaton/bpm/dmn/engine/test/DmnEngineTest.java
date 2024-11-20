@@ -20,8 +20,8 @@ import static org.operaton.bpm.dmn.engine.test.asserts.DmnEngineTestAssertions.a
 
 import java.io.InputStream;
 import java.util.List;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.dmn.engine.DmnDecision;
 import org.operaton.bpm.dmn.engine.DmnDecisionResult;
 import org.operaton.bpm.dmn.engine.DmnDecisionTableResult;
@@ -34,7 +34,7 @@ import org.operaton.commons.utils.IoUtil;
 
 public abstract class DmnEngineTest {
 
-  @Rule
+  @RegisterExtension
   public DmnEngineTestExtension dmnEngineRule = new DmnEngineTestExtension(getDmnEngineConfiguration());
 
   public DmnEngine dmnEngine;

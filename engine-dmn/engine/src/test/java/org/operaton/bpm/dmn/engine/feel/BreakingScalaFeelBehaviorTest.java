@@ -17,9 +17,12 @@
 package org.operaton.bpm.dmn.engine.feel;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnDecisionResult;
 import org.operaton.bpm.dmn.engine.DmnEngine;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
@@ -30,8 +33,6 @@ import org.operaton.bpm.dmn.engine.test.DmnEngineTest;
 import org.operaton.bpm.dmn.feel.impl.FeelException;
 import org.operaton.bpm.dmn.feel.impl.scala.ScalaFeelEngineFactory;
 import org.operaton.bpm.engine.variable.Variables;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 
 public class BreakingScalaFeelBehaviorTest extends DmnEngineTest {
 

@@ -16,20 +16,18 @@
  */
 package org.operaton.bpm.dmn.engine.feel.function;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.RuleChain;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.dmn.engine.feel.helper.FeelExtension;
 import org.operaton.bpm.dmn.feel.impl.FeelException;
 
 public class ExternalFunctionTest {
 
+  @RegisterExtension
   protected FeelExtension feelExtension = FeelExtension.build();
-
-  @Rule
-  public RuleChain ruleChain = RuleChain.outerRule(feelExtension).around(thrown);
 
   @Test
   public void shouldFailWhenUsingExternalFunction() {

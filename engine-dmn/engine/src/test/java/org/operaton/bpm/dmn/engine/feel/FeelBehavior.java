@@ -16,20 +16,20 @@
  */
 package org.operaton.bpm.dmn.engine.feel;
 
-import org.operaton.bpm.dmn.engine.DmnEngineException;
-import org.operaton.bpm.dmn.engine.test.DecisionResource;
-import org.operaton.bpm.dmn.engine.test.DmnEngineTest;
-import org.operaton.bpm.engine.variable.Variables;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.operaton.bpm.dmn.engine.DmnEngineException;
+import org.operaton.bpm.dmn.engine.test.DecisionResource;
+import org.operaton.bpm.dmn.engine.test.DmnEngineTest;
+import org.operaton.bpm.engine.variable.Variables;
 
 public abstract class FeelBehavior extends DmnEngineTest {
 

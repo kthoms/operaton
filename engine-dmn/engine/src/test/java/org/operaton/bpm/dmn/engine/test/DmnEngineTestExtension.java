@@ -18,13 +18,13 @@ package org.operaton.bpm.dmn.engine.test;
 
 import java.io.InputStream;
 import java.util.List;
-import org.junit.runner.Description;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.operaton.bpm.dmn.engine.DmnDecision;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.commons.utils.IoUtil;
 
 /**
- * JUnit test rule for internal unit tests. Uses The
+ * JUnit 5 test extension for internal unit tests. Uses The
  * {@link DecisionResource} annotation to load decisions
  * before tests.
  */
@@ -47,20 +47,19 @@ public class DmnEngineTestExtension extends DmnEngineExtension {
   }
 
   @Override
-  protected void starting(Description description) {
-    super.starting(description);
-
-    decision = loadDecision(description);
+  public void beforeEach(ExtensionContext context) {
+    super.beforeEach(context);
+    decision = loadDecision(context);
   }
 
-  protected DmnDecision loadDecision(Description description) {
-    DecisionResource decisionResource = description.getAnnotation(DecisionResource.class);
+  protected DmnDecision loadDecision(ExtensionContext context) {
+    DecisionResource decisionResource = context.getRequiredTestClass().getAnnotation(DecisionResource.class);
 
     if(decisionResource != null) {
 
       String resourcePath = decisionResource.resource();
 
-      resourcePath = expandResourcePath(description, resourcePath);
+      resourcePath = expandResourcePath(context, resourcePath);
 
       InputStream inputStream = IoUtil.fileAsStream(resourcePath);
 
@@ -83,16 +82,16 @@ public class DmnEngineTestExtension extends DmnEngineExtension {
     }
   }
 
-  protected String expandResourcePath(Description description, String resourcePath) {
+  protected String expandResourcePath(ExtensionContext context, String resourcePath) {
     if (resourcePath.contains("/")) {
       // already expanded path
       return resourcePath;
     }
     else {
-      Class<?> testClass = description.getTestClass();
+      Class<?> testClass = context. getRequiredTestClass();
       if (resourcePath.isEmpty()) {
         // use test class and method name as resource file name
-        return testClass.getName().replace(".", "/") + "." + description.getMethodName() + "." + DMN_SUFFIX;
+        return testClass.getName().replace(".", "/") + "." + context.getRequiredTestMethod() + "." + DMN_SUFFIX;
       }
       else {
         // use test class location as resource location

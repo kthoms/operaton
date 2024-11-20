@@ -18,8 +18,8 @@ package org.operaton.bpm.dmn.engine.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.dmn.engine.DmnEngine;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngine;
@@ -27,14 +27,14 @@ import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
 
 public class DmnEngineExtensionTest {
 
-  @Rule
-  public DmnEngineExtension engineRule = new DmnEngineExtension();
+  @RegisterExtension
+  public DmnEngineExtension dmnEngineExtension = new DmnEngineExtension();
 
-  @Rule
-  public DmnEngineExtension nullEngineRule = new DmnEngineExtension(null);
+  @RegisterExtension
+  public DmnEngineExtension nullEngineExtension = new DmnEngineExtension(null);
 
-  @Rule
-  public DmnEngineExtension customEngineRule = new DmnEngineExtension(initConfiguration());
+  @RegisterExtension
+  public DmnEngineExtension customEngineExtension = new DmnEngineExtension(initConfiguration());
 
   public DmnEngineConfiguration customConfiguration;
 
@@ -45,7 +45,7 @@ public class DmnEngineExtensionTest {
 
   @Test
   public void shouldCreateDefaultDmnEngineWithoutConfiguration() {
-    DmnEngine dmnEngine = engineRule.getDmnEngine();
+    DmnEngine dmnEngine = dmnEngineExtension.getDmnEngine();
     assertThat(dmnEngine)
       .isInstanceOf(DefaultDmnEngine.class)
       .isNotNull();
@@ -53,7 +53,7 @@ public class DmnEngineExtensionTest {
 
   @Test
   public void shouldCreateDefaultDmnEngineWithNullConfiguration() {
-    DmnEngine dmnEngine = nullEngineRule.getDmnEngine();
+    DmnEngine dmnEngine = nullEngineExtension.getDmnEngine();
     assertThat(dmnEngine)
       .isInstanceOf(DefaultDmnEngine.class)
       .isNotNull();
@@ -61,7 +61,7 @@ public class DmnEngineExtensionTest {
 
   @Test
   public void shouldCreateEngineFromCustomConfiguration() {
-    DmnEngine dmnEngine = customEngineRule.getDmnEngine();
+    DmnEngine dmnEngine = customEngineExtension.getDmnEngine();
     assertThat(dmnEngine)
       .isNotNull();
 

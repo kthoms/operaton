@@ -16,8 +16,9 @@
  */
 package org.operaton.bpm.dmn.engine.feel;
 
-import java.util.Date;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Date;
 import org.junit.jupiter.api.Test;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;

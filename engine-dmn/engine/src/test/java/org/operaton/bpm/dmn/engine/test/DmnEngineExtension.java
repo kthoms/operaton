@@ -1,8 +1,8 @@
 /*
- * Copyright itemis AG and/or licensed to itemis AG
+ * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
  * under one or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information regarding copyright
- * ownership. itemis AG licenses this file to you under the Apache License,
+ * ownership. Camunda Services GmbH licenses this file to you under the Apache License,
  * Version 2.0; you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,7 +16,6 @@
  */
 package org.operaton.bpm.dmn.engine.test;
 
-import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.operaton.bpm.dmn.engine.DmnEngine;
@@ -55,10 +54,10 @@ import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
  * of {@link DmnEngineExtension}.
  * </p>
  */
-public class DmnEngineExtension implements BeforeAllCallback, BeforeEachCallback {
+public class DmnEngineExtension implements BeforeEachCallback {
 
   private final DmnEngineConfiguration configuration;
-  private DmnEngine dmnEngine;
+  protected DmnEngine dmnEngine;
 
   /**
    * Creates a {@link DmnEngine} with the default {@link DmnEngineConfiguration}.
@@ -86,13 +85,6 @@ public class DmnEngineExtension implements BeforeAllCallback, BeforeEachCallback
       dmnEngine = configuration.buildEngine();
     }
     return dmnEngine;
-  }
-
-  @Override
-  public void beforeAll(ExtensionContext context) {
-    if (dmnEngine == null) {
-      dmnEngine = configuration.buildEngine();
-    }
   }
 
   @Override

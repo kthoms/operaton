@@ -18,15 +18,15 @@ package org.operaton.bpm.dmn.engine.feel.helper;
 
 import java.util.Collections;
 import java.util.List;
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.operaton.bpm.dmn.engine.feel.function.helper.FunctionProvider;
 import org.operaton.bpm.dmn.feel.impl.scala.ScalaFeelEngine;
 import org.operaton.bpm.dmn.feel.impl.scala.function.FeelCustomFunctionProvider;
 import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.bpm.engine.variable.context.VariableContext;
 
-public class FeelExtension extends TestWatcher {
+public class FeelExtension implements AfterEachCallback {
 
   protected FunctionProvider functionProvider;
   protected ScalaFeelEngine feelEngine;
@@ -49,9 +49,7 @@ public class FeelExtension extends TestWatcher {
   }
 
   @Override
-  protected void finished(Description description) {
-    super.finished(description);
-
+  public void afterEach(ExtensionContext context) throws Exception {
     if (functionProvider != null) {
       functionProvider.clear();
     }
@@ -76,5 +74,4 @@ public class FeelExtension extends TestWatcher {
   public FunctionProvider getFunctionProvider() {
     return functionProvider;
   }
-
 }

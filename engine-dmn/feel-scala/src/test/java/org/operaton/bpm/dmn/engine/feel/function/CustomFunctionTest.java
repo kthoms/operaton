@@ -28,10 +28,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.RuleChain;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.operaton.bpm.dmn.engine.feel.function.helper.FunctionProvider;
 import org.operaton.bpm.dmn.engine.feel.function.helper.MyPojo;
 import org.operaton.bpm.dmn.engine.feel.helper.FeelExtension;
@@ -41,10 +40,8 @@ import org.operaton.bpm.dmn.feel.impl.scala.function.builder.CustomFunctionBuild
 
 public class CustomFunctionTest {
 
-  protected FeelExtension feelExtension = FeelExtension.buildWithFunctionProvider();
-
-  @Rule
-  public RuleChain ruleChain = RuleChain.outerRule(feelExtension).around(thrown);
+  @RegisterExtension
+  FeelExtension feelExtension = FeelExtension.buildWithFunctionProvider();
 
   protected FunctionProvider functionProvider;
 
