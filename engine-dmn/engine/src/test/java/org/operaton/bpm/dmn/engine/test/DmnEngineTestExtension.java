@@ -53,7 +53,7 @@ public class DmnEngineTestExtension extends DmnEngineExtension {
   }
 
   protected DmnDecision loadDecision(ExtensionContext context) {
-    DecisionResource decisionResource = context.getRequiredTestClass().getAnnotation(DecisionResource.class);
+    DecisionResource decisionResource = context.getRequiredTestMethod().getAnnotation(DecisionResource.class);
 
     if(decisionResource != null) {
 
