@@ -1,8 +1,8 @@
 /*
- * Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH
+ * Copyright itemis AG and/or licensed to itemis AG
  * under one or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information regarding copyright
- * ownership. Camunda licenses this file to you under the Apache License,
+ * ownership. itemis AG licenses this file to you under the Apache License,
  * Version 2.0; you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -16,71 +16,91 @@
  */
 package org.operaton.bpm.dmn.engine.test;
 
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
+import org.junit.jupiter.api.extension.BeforeAllCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.operaton.bpm.dmn.engine.DmnEngine;
 import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 
 /**
- * JUnit rule for {@link DmnEngine} initialization.
+ * JUnit 5 extension for {@link DmnEngine} initialization.
  * <p>
  * Usage:
  * </p>
  *
  * <pre>
- * public class YourDmnTest {
+ *   class YourDmnTest {
+ *     DmnEngine dmnEngine;
  *
- *   &#64;Rule
- *   public DmnEngineRule dmnEngineRule = new DmnEngineRule();
+ *     &#64;RegisterExtension
+ *     private static DmnEngineExtension dmnEngineExtension = new DmnEngineExtension();
  *
- *   ...
- * }
+ *     &#64;BeforeAll
+ *     static void init() {
+ *       dmnEngine = engine;
+ *     }
+ *
+ *     &#64;Test
+ *     void testDecision() {
+ *       assertThat(dmnEngine).isNotNull();
+ *       // your test logic here
+ *     }
+ *   }
  * </pre>
  *
  * <p>
- * The DMN engine will be made available to the test class
- * through the getters of the {@code dmnEngineRule} (see {@link #getDmnEngine()}).
- * The DMN engine will be initialized with the default DMN engine configuration.
- * To specify a different configuration, pass the configuration to the
- * {@link #DmnEngineExtension(DmnEngineConfiguration)} constructor.
+ * The DMN engine is provided to the test class via the DmnEngineExtension. The DMN engine
+ * is initialized with the default DMN engine configuration. To specify a custom
+ * configuration, provide a {@link DmnEngineConfiguration} via the constructor
+ * of {@link DmnEngineExtension}.
  * </p>
  */
-public class DmnEngineExtension extends TestWatcher {
+public class DmnEngineExtension implements BeforeAllCallback, BeforeEachCallback {
 
-  protected DmnEngine dmnEngine;
-  protected DmnEngineConfiguration dmnEngineConfiguration;
+  private final DmnEngineConfiguration configuration;
+  private DmnEngine dmnEngine;
 
   /**
-   * Creates a {@link DmnEngine} with the default {@link DmnEngineConfiguration}
+   * Creates a {@link DmnEngine} with the default {@link DmnEngineConfiguration}.
    */
   public DmnEngineExtension() {
-    this(null);
+    this(DmnEngineConfiguration.createDefaultDmnEngineConfiguration());
   }
 
   /**
-   * Creates a {@link DmnEngine} with the given {@link DmnEngineConfiguration}
+   * Creates a {@link DmnEngine} with the given {@link DmnEngineConfiguration}.
+   *
+   * @param configuration the custom DMN engine configuration
    */
-  public DmnEngineExtension(DmnEngineConfiguration dmnEngineConfiguration) {
-    if (dmnEngineConfiguration != null) {
-      this.dmnEngineConfiguration = dmnEngineConfiguration;
-    }
-    else {
-      this.dmnEngineConfiguration = DmnEngineConfiguration.createDefaultDmnEngineConfiguration();
-    }
+  public DmnEngineExtension(DmnEngineConfiguration configuration) {
+    this.configuration = configuration;
   }
 
   /**
-   * @return the {@link DmnEngine}
+   * Provides the {@link DmnEngine} instance.
+   *
+   * @return the initialized {@link DmnEngine}
    */
   public DmnEngine getDmnEngine() {
+    if (dmnEngine == null) {
+      dmnEngine = configuration.buildEngine();
+    }
     return dmnEngine;
   }
 
   @Override
-  protected void starting(Description description) {
+  public void beforeAll(ExtensionContext context) {
     if (dmnEngine == null) {
-      dmnEngine = dmnEngineConfiguration.buildEngine();
+      dmnEngine = configuration.buildEngine();
     }
   }
 
+  @Override
+  public void beforeEach(ExtensionContext context) {
+    // Ensures the engine is ready before each test
+    if (dmnEngine == null) {
+      dmnEngine = configuration.buildEngine();
+    }
+  }
 }
+
