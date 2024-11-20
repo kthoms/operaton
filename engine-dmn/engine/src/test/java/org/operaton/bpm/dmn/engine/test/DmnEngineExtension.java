@@ -16,11 +16,10 @@
  */
 package org.operaton.bpm.dmn.engine.test;
 
-import org.operaton.bpm.dmn.engine.DmnEngine;
-import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
-import org.operaton.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
+import org.operaton.bpm.dmn.engine.DmnEngine;
+import org.operaton.bpm.dmn.engine.DmnEngineConfiguration;
 
 /**
  * JUnit rule for {@link DmnEngine} initialization.
@@ -43,10 +42,10 @@ import org.junit.runner.Description;
  * through the getters of the {@code dmnEngineRule} (see {@link #getDmnEngine()}).
  * The DMN engine will be initialized with the default DMN engine configuration.
  * To specify a different configuration, pass the configuration to the
- * {@link #DmnEngineRule(DmnEngineConfiguration)} constructor.
+ * {@link #DmnEngineExtension(DmnEngineConfiguration)} constructor.
  * </p>
  */
-public class DmnEngineRule extends TestWatcher {
+public class DmnEngineExtension extends TestWatcher {
 
   protected DmnEngine dmnEngine;
   protected DmnEngineConfiguration dmnEngineConfiguration;
@@ -54,14 +53,14 @@ public class DmnEngineRule extends TestWatcher {
   /**
    * Creates a {@link DmnEngine} with the default {@link DmnEngineConfiguration}
    */
-  public DmnEngineRule() {
+  public DmnEngineExtension() {
     this(null);
   }
 
   /**
    * Creates a {@link DmnEngine} with the given {@link DmnEngineConfiguration}
    */
-  public DmnEngineRule(DmnEngineConfiguration dmnEngineConfiguration) {
+  public DmnEngineExtension(DmnEngineConfiguration dmnEngineConfiguration) {
     if (dmnEngineConfiguration != null) {
       this.dmnEngineConfiguration = dmnEngineConfiguration;
     }
