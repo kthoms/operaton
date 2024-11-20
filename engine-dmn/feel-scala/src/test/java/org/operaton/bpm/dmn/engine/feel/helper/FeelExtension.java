@@ -16,37 +16,36 @@
  */
 package org.operaton.bpm.dmn.engine.feel.helper;
 
+import java.util.Collections;
+import java.util.List;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.operaton.bpm.dmn.engine.feel.function.helper.FunctionProvider;
 import org.operaton.bpm.dmn.feel.impl.scala.ScalaFeelEngine;
 import org.operaton.bpm.dmn.feel.impl.scala.function.FeelCustomFunctionProvider;
 import org.operaton.bpm.engine.variable.Variables;
 import org.operaton.bpm.engine.variable.context.VariableContext;
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
 
-import java.util.Collections;
-import java.util.List;
-
-public class FeelRule extends TestWatcher {
+public class FeelExtension extends TestWatcher {
 
   protected FunctionProvider functionProvider;
   protected ScalaFeelEngine feelEngine;
 
-  protected FeelRule(FunctionProvider functionProvider) {
+  protected FeelExtension(FunctionProvider functionProvider) {
     this.functionProvider = functionProvider;
   }
 
-  protected FeelRule() {
+  protected FeelExtension() {
     feelEngine = new ScalaFeelEngine(null);
   }
 
-  public static FeelRule buildWithFunctionProvider() {
+  public static FeelExtension buildWithFunctionProvider() {
     FunctionProvider functionProvider = new FunctionProvider();
-    return new FeelRule(functionProvider);
+    return new FeelExtension(functionProvider);
   }
 
-  public static FeelRule build() {
-    return new FeelRule();
+  public static FeelExtension build() {
+    return new FeelExtension();
   }
 
   @Override

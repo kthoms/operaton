@@ -16,30 +16,27 @@
  */
 package org.operaton.bpm.dmn.engine.feel.function;
 
-import org.operaton.bpm.dmn.engine.feel.helper.FeelRule;
-import org.operaton.bpm.dmn.feel.impl.FeelException;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Rule;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.rules.RuleChain;
+import org.operaton.bpm.dmn.engine.feel.helper.FeelExtension;
+import org.operaton.bpm.dmn.feel.impl.FeelException;
 
 public class ExternalFunctionTest {
 
-  protected FeelRule feelRule = FeelRule.build();
+  protected FeelExtension feelExtension = FeelExtension.build();
 
   @Rule
-  public RuleChain ruleChain = RuleChain.outerRule(feelRule).around(thrown);
+  public RuleChain ruleChain = RuleChain.outerRule(feelExtension).around(thrown);
 
   @Test
   public void shouldFailWhenUsingExternalFunction() {
     Throwable exception = assertThrows(FeelException.class, () ->
 
       // when
-      feelRule.evaluateExpression("{ \n" +
+      feelExtension.evaluateExpression("{ \n" +
         "  foo: function(x, y) external { \n" +
         "    java: { \n" +
         "        class: \"java.lang.Math\", \n" +
