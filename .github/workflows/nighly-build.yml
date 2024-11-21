@@ -5,14 +5,15 @@ on:
   schedule:
     - cron: "0 3 * * *"     # Runs at 3:00 AM UTC daily
   workflow_dispatch:        # Allows manual trigger
-
+  push:
+    branches: ["build/201-nightly-build"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
+#dummy comment
 jobs:
-  build:
+  nightly_build:
     name: Nightly Build and Report Generation
     strategy:
       fail-fast: true
