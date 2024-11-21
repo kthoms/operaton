@@ -519,18 +519,6 @@
     </profile>
 
     <profile>
-      <id>license-header-check</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.mycila</groupId>
-            <artifactId>license-maven-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <profile>
       <id>openrewrite</id>
       <build>
         <plugins>
@@ -564,7 +552,80 @@
         </plugins>
       </build>
     </profile>
-
+    <profile>
+      <id>reporting</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>analyze-report</id>
+                <goals>
+                  <goal>analyze-report</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.mycila</groupId>
+            <artifactId>license-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>io.github.orhankupusoglu</groupId>
+            <artifactId>sloc-maven-plugin</artifactId>
+            <version>1.0.7</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>sloc</goal>
+                </goals>
+                <phase>verify</phase>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+            <version>2.18.0</version>
+            <executions>
+              <execution>
+                <id>dependency-updates</id>
+                <goals>
+                  <goal>display-dependency-updates</goal>
+                </goals>
+                <phase>verify</phase>
+                <configuration>
+                  <outputFile>${project.build.directory}/reports/dependency-updates.txt</outputFile>
+                </configuration>
+              </execution>
+              <execution>
+                <id>plugin-updates</id>
+                <goals>
+                  <goal>display-plugin-updates</goal>
+                </goals>
+                <phase>verify</phase>
+                <configuration>
+                  <outputFile>${project.build.directory}/reports/plugin-updates.txt</outputFile>
+                </configuration>
+              </execution>
+              <execution>
+                <id>property-updates</id>
+                <goals>
+                  <goal>display-property-updates</goal>
+                </goals>
+                <phase>verify</phase>
+                <configuration>
+                  <outputFile>${project.build.directory}/reports/property-updates.txt</outputFile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 
   <repositories>

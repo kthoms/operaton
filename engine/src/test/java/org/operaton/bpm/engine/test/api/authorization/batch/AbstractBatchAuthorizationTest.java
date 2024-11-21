@@ -18,6 +18,8 @@ package org.operaton.bpm.engine.test.api.authorization.batch;
 
 import static org.operaton.bpm.engine.test.api.runtime.migration.ModifiableBpmnModelInstance.modify;
 
+import org.junit.After;
+import org.junit.Before;
 import org.operaton.bpm.engine.ManagementService;
 import org.operaton.bpm.engine.RuntimeService;
 import org.operaton.bpm.engine.batch.Batch;
@@ -31,14 +33,12 @@ import org.operaton.bpm.engine.test.api.authorization.util.AuthorizationTestRule
 import org.operaton.bpm.engine.test.api.runtime.migration.models.ProcessModels;
 import org.operaton.bpm.engine.test.util.ProcessEngineTestRule;
 import org.operaton.bpm.engine.test.util.ProvidedProcessEngineRule;
-import org.junit.After;
-import org.junit.Before;
 
 /**
  * @author Askar Akhmerov
  */
 public abstract class AbstractBatchAuthorizationTest {
-  protected static final String TEST_REASON = "test reason";
+  protected static final String TEST_REASON = "test dummy reason";
 
   protected ProcessEngineRule engineRule = new ProvidedProcessEngineRule();
   protected AuthorizationTestRule authRule = new AuthorizationTestRule(engineRule);

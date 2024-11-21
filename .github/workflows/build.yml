@@ -3,9 +3,17 @@ name: build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+    paths-ignore:
+      - '.github/workflows/**'
+      - '**/*.md'
+      - '!.github/workflows/build.yml'
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+    paths-ignore:
+      - '.github/workflows/**'
+      - '**/*.md'
+      - '!.github/workflows/build.yml'
 
 permissions:
   contents: read
@@ -21,9 +29,7 @@ jobs:
     name: Build
     strategy:
       fail-fast: true
-      matrix:
-        os: [ubuntu-latest] # If needed multi-OS add macos-13, windows-latest
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
