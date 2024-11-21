@@ -4,16 +4,16 @@ name: build
 on:
   push:
     branches: ["main"]
-    paths:
-      - '.github/workflows/build.yml'
-      - '!**/*.md'
-      - '!.github/workflows/**'
+    paths-ignore:
+      - '.github/workflows/**'
+      - '**/*.md'
+      - '!.github/workflows/build.yml'
   pull_request:
     branches: ["main"]
-    paths:
-      - '.github/workflows/build.yml'
-      - '!**/*.md'
-      - '!.github/workflows/**'
+    paths-ignore:
+      - '.github/workflows/**'
+      - '**/*.md'
+      - '!.github/workflows/build.yml'
 
 permissions:
   contents: read
