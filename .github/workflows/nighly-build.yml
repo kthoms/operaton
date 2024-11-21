@@ -7,6 +7,10 @@ on:
   workflow_dispatch:        # Allows manual trigger
   push:
     branches: ["build/201-nightly-build"]
+    paths:
+      - '.github/workflows/nightly_build.yml'
+      - '!**/*.md'
+      - '!.github/workflows/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
