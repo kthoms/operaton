@@ -3,9 +3,19 @@ name: build
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+    paths:
+      - '.github/workflows/build.yml'
+    paths-ignore:
+      - '**/*.md'
+      - '.github/workflows/**'
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
+    paths:
+      - '.github/workflows/build.yml'
+    paths-ignore:
+      - '**/*.md'
+      - '.github/workflows/**'
 
 permissions:
   contents: read
