@@ -29,6 +29,7 @@
       <groupId>jakarta.el</groupId>
       <artifactId>jakarta.el-api</artifactId>
       <version>${version.jakarta.el}</version>
+      <scope>runtime</scope>
     </dependency>
   </dependencies>
 
