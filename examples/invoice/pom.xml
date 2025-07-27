@@ -33,6 +33,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <!-- module dependencies for deployment on JBoss/WildFly -->
+              <Dependencies>org.operaton.bpm.operaton-engine</Dependencies>
+            </manifestEntries>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>
