@@ -33,8 +33,10 @@ import org.operaton.bpm.application.ProcessApplication;
  *
  * <p><strong>NOTE:</strong> Only works with Servlet 3.0 or better.</p>
  *
+ * @deprecated Use {@link ServletProcessApplicationDeployer} instead
  */
 @HandlesTypes(ProcessApplication.class)
+@Deprecated(forRemoval = true, since = "1.0")
 public class JakartaServletProcessApplicationDeployer extends AbstractServletProcessApplicationDeployer implements ServletContainerInitializer {
 
   @Override

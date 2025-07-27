@@ -18,11 +18,6 @@ package org.operaton.bpm.application.impl;
 
 import org.operaton.bpm.application.AbstractProcessApplication;
 import org.operaton.bpm.engine.delegate.JavaDelegate;
-import org.operaton.bpm.engine.impl.util.ClassLoaderUtil;
-import org.operaton.bpm.engine.impl.util.JakartaClassLoaderUtil;
-
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import java.lang.ref.WeakReference;
 
@@ -91,44 +86,9 @@ import java.lang.ref.WeakReference;
  * the Process Application classloader.
  * </p>
  *
+ * @deprecated Use {@link ServletProcessApplication} instead
+ *
  */
-public class JakartaServletProcessApplication extends AbstractServletProcessApplication implements ServletContextListener {
-
-  protected ServletContext servletContext;
-
-  @Override
-  public void contextInitialized(ServletContextEvent sce) {
-    servletContext = sce.getServletContext();
-    servletContextPath = servletContext.getContextPath();
-    servletContextName = sce.getServletContext().getServletContextName();
-
-    processApplicationClassloader = initProcessApplicationClassloader(sce);
-
-    // perform lifecycle start
-    deploy();
-  }
-
-  protected ClassLoader initProcessApplicationClassloader(ServletContextEvent sce) {
-    if (getClass().equals(JakartaServletProcessApplication.class)) {
-      return JakartaClassLoaderUtil.getServletContextClassloader(sce);
-    } else {
-      return ClassLoaderUtil.getClassloader(getClass());
-    }
-  }
-
-  @Override
-  public void contextDestroyed(ServletContextEvent sce) {
-    // perform lifecycle stop
-    undeploy();
-
-    // clear the reference
-    if (reference != null) {
-      reference.clear();
-    }
-    reference = null;
-  }
-
-  public ServletContext getServletContext() {
-    return servletContext;
-  }
+@Deprecated(forRemoval = true, since = "1.0")
+public class JakartaServletProcessApplication extends ServletProcessApplication implements ServletContextListener {
 }

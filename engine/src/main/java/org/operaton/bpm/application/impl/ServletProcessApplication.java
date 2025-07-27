@@ -115,7 +115,7 @@ public class ServletProcessApplication extends AbstractServletProcessApplication
   }
 
   protected ClassLoader initProcessApplicationClassloader(ServletContextEvent sce) {
-    if (isServlet30ApiPresent(sce) && getClass().equals(ServletProcessApplication.class)) {
+    if (isServlet30ApiPresent(sce) && ServletProcessApplication.class.isAssignableFrom(getClass())) {
       return ClassLoaderUtil.getServletContextClassloader(sce);
     } else {
       return ClassLoaderUtil.getClassloader(getClass());
