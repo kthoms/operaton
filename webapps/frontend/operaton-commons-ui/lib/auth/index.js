@@ -186,6 +186,9 @@ ngModule
   // ensure AuthenticationService is bootstraped
   .run(['AuthenticationService', function() {}])
 
+  // initialize session timeout monitoring
+  .run(['SessionTimeoutService', function() {}])
+
   .directive('camIfLoggedIn', ifLoggedInDirective)
   .directive('camIfLoggedOut', ifLoggedOutDirective)
 

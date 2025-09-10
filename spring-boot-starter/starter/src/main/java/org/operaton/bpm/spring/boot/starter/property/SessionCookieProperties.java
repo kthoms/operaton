@@ -30,6 +30,18 @@ public class SessionCookieProperties {
   protected String sameSiteCookieOption;
   protected String sameSiteCookieValue;
   protected String cookieName;
+  
+  /**
+   * Session timeout in seconds. Default is 30 minutes (1800 seconds).
+   * Set to -1 to use container default. Set to 0 for sessions that never expire.
+   */
+  protected int timeoutInSeconds = 1800;
+  
+  /**
+   * Time in seconds before session expiry to show warning to user.
+   * Default is 5 minutes (300 seconds). Set to 0 to disable warnings.
+   */
+  protected int warningTimeInSeconds = 300;
 
   public boolean isEnableSecureCookie() {
     return enableSecureCookie;
@@ -71,6 +83,22 @@ public class SessionCookieProperties {
     this.cookieName = cookieName;
   }
 
+  public int getTimeoutInSeconds() {
+    return timeoutInSeconds;
+  }
+
+  public void setTimeoutInSeconds(int timeoutInSeconds) {
+    this.timeoutInSeconds = timeoutInSeconds;
+  }
+
+  public int getWarningTimeInSeconds() {
+    return warningTimeInSeconds;
+  }
+
+  public void setWarningTimeInSeconds(int warningTimeInSeconds) {
+    this.warningTimeInSeconds = warningTimeInSeconds;
+  }
+
   public Map<String, String> getInitParams() {
     Map<String, String> initParams = new HashMap<>();
 
@@ -94,6 +122,16 @@ public class SessionCookieProperties {
       initParams.put("cookieName", cookieName);
     }
 
+    // Add session timeout parameter
+    if (timeoutInSeconds != 1800) { // only add if different from default
+      initParams.put("sessionTimeoutInSeconds", String.valueOf(timeoutInSeconds));
+    }
+    
+    // Add session warning time parameter
+    if (warningTimeInSeconds != 300) { // only add if different from default
+      initParams.put("sessionWarningTimeInSeconds", String.valueOf(warningTimeInSeconds));
+    }
+
     return initParams;
   }
 
@@ -105,6 +143,8 @@ public class SessionCookieProperties {
       .add("sameSiteCookieOption='" + sameSiteCookieOption + '\'')
       .add("sameSiteCookieValue='" + sameSiteCookieValue + '\'')
       .add("cookieName='" + cookieName + '\'')
+      .add("timeoutInSeconds=" + timeoutInSeconds)
+      .add("warningTimeInSeconds=" + warningTimeInSeconds)
       .toString();
   }
 }

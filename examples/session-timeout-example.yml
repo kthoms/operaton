@@ -1,0 +1,53 @@
+# Example configuration for Operaton session timeout
+# This file shows how to configure session timeout settings for different environments
+
+# Development environment - longer sessions for convenience
+operaton:
+  webapp:
+    session-cookie:
+      timeout-in-seconds: 3600  # 1 hour
+      warning-time-in-seconds: 600  # 10 minutes warning
+
+---
+# Production environment - shorter sessions for security  
+spring:
+  profiles: production
+  
+operaton:
+  webapp:
+    session-cookie:
+      timeout-in-seconds: 1800  # 30 minutes
+      warning-time-in-seconds: 300  # 5 minutes warning
+
+---
+# High-security environment - very short sessions
+spring:
+  profiles: high-security
+  
+operaton:
+  webapp:
+    session-cookie:
+      timeout-in-seconds: 900   # 15 minutes
+      warning-time-in-seconds: 120  # 2 minutes warning
+
+---
+# Administrative tasks - extended sessions
+spring:
+  profiles: admin-tasks
+
+operaton:
+  webapp:
+    session-cookie:
+      timeout-in-seconds: 7200  # 2 hours
+      warning-time-in-seconds: 900  # 15 minutes warning
+
+---
+# Development with no timeout (for long debugging sessions)
+spring:
+  profiles: no-timeout
+
+operaton:
+  webapp:
+    session-cookie:
+      timeout-in-seconds: 0     # Never expire (0 = disabled)
+      warning-time-in-seconds: 0  # No warnings
