@@ -33,7 +33,8 @@ var angular = require('operaton-bpm-sdk-js/vendor/angular'),
   ifUnauthorizedForwardToWelcomeApp = require('./ifUnauthorizedForwardToWelcomeApp'),
   unfixDate = require('./unfixDate'),
   shouldDisplayAuthenticationError = require('./shouldDisplayAuthenticationError'),
-  canonicalAppName = require('./canocialAppName');
+  canonicalAppName = require('./canocialAppName'),
+  SessionTimeoutService = require('./SessionTimeoutService');
 
 var ngModule = angular.module('operaton.common.services', [
   // `ResourceResolver` relies on cam.commons.util for Notifications
@@ -57,6 +58,7 @@ ngModule.factory(
   'shouldDisplayAuthenticationError',
   shouldDisplayAuthenticationError
 );
+ngModule.factory('SessionTimeoutService', SessionTimeoutService);
 ngModule.provider('canonicalAppName', canonicalAppName);
 
 /**

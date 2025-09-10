@@ -35,18 +35,52 @@ import org.operaton.bpm.webapp.impl.security.filter.util.CookieConstants;
 public class SessionCookieFilter implements Filter {
 
   protected CookieConfigurator cookieConfigurator = new CookieConfigurator();
+  protected int sessionTimeoutInSeconds = -1; // -1 means use container default
+  protected int sessionWarningTimeInSeconds = 300; // 5 minutes default
 
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     cookieConfigurator.parseParams(filterConfig);
+    
+    // Parse session timeout configuration
+    String timeoutParam = filterConfig.getInitParameter("sessionTimeoutInSeconds");
+    if (timeoutParam != null && !timeoutParam.isEmpty()) {
+      try {
+        sessionTimeoutInSeconds = Integer.parseInt(timeoutParam);
+      } catch (NumberFormatException e) {
+        // Log warning but continue with default
+        System.err.println("Invalid sessionTimeoutInSeconds parameter: " + timeoutParam + ", using default");
+      }
+    }
+    
+    // Parse session warning time configuration
+    String warningParam = filterConfig.getInitParameter("sessionWarningTimeInSeconds");
+    if (warningParam != null && !warningParam.isEmpty()) {
+      try {
+        sessionWarningTimeInSeconds = Integer.parseInt(warningParam);
+      } catch (NumberFormatException e) {
+        // Log warning but continue with default
+        System.err.println("Invalid sessionWarningTimeInSeconds parameter: " + warningParam + ", using default");
+      }
+    }
   }
 
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
       throws IOException, ServletException {
     if ((servletRequest instanceof HttpServletRequest httpServletRequest) && (servletResponse instanceof HttpServletResponse httpServletResponse)) {
-      // create a session if none exists yet
-      httpServletRequest.getSession();
+      // create a session if none exists yet and configure timeout
+      var session = httpServletRequest.getSession();
+      
+      // Set session timeout if configured
+      if (sessionTimeoutInSeconds >= 0) {
+        if (sessionTimeoutInSeconds == 0) {
+          session.setMaxInactiveInterval(-1); // Never expire
+        } else {
+          session.setMaxInactiveInterval(sessionTimeoutInSeconds);
+        }
+      }
+      
       // execute filter chain with a response wrapper that handles sameSite attributes
       filterChain.doFilter(httpServletRequest, new SameSiteResponseProxy(httpServletResponse));
     }

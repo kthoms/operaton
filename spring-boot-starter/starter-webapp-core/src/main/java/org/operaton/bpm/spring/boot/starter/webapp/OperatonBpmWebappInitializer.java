@@ -79,13 +79,15 @@ class OperatonBpmWebappInitializer implements ServletContextInitializer {
 
     servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
 
+    // Configure session timeout
+    WebappProperty webapp = properties.getWebapp();
+    configureSessionTimeout(servletContext, webapp);
+
     servletContext.addListener(new CockpitContainerBootstrap());
     servletContext.addListener(new AdminContainerBootstrap());
     servletContext.addListener(new TasklistContainerBootstrap());
     servletContext.addListener(new WelcomeContainerBootstrap());
     servletContext.addListener(new HttpSessionMutexListener());
-
-    WebappProperty webapp = properties.getWebapp();
     String applicationPath = webapp.getApplicationPath();
 
     ServletContextUtil.setAppPath(applicationPath, servletContext);
@@ -152,6 +154,28 @@ class OperatonBpmWebappInitializer implements ServletContextInitializer {
     } else {
       return ""; // Empty string disables TTL
 
+    }
+  }
+
+  protected void configureSessionTimeout(ServletContext servletContext, WebappProperty webapp) {
+    int timeoutInSeconds = webapp.getSessionCookie().getTimeoutInSeconds();
+    if (timeoutInSeconds >= 0) {
+      // Convert seconds to minutes for servlet API (which expects minutes)
+      int timeoutInMinutes = timeoutInSeconds / 60;
+      if (timeoutInSeconds == 0) {
+        timeoutInMinutes = -1; // 0 seconds means never expire, use -1 for servlet API
+      }
+      servletContext.getSessionCookieConfig().setMaxAge(timeoutInSeconds);
+      
+      // Also set session timeout using servlet context if available  
+      if (timeoutInMinutes > 0 || timeoutInMinutes == -1) {
+        try {
+          servletContext.setSessionTimeout(timeoutInMinutes);
+          log.info("Session timeout set to {} minutes ({} seconds)", timeoutInMinutes, timeoutInSeconds);
+        } catch (Exception e) {
+          log.warn("Could not set session timeout via ServletContext: {}", e.getMessage());
+        }
+      }
     }
   }
 
