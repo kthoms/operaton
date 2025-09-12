@@ -51,8 +51,8 @@ public abstract class AbstractMetricsIntervalTest {
   protected static final String REPORTER_ID = "REPORTER_ID";
   protected static final int DEFAULT_INTERVAL = 15;
   protected static final int DEFAULT_INTERVAL_MILLIS = 15 * 60 * 1000;
-  protected static final int MIN_OCCURENCE = 1;
-  protected static final int MAX_OCCURENCE = 250;
+  protected static final int MIN_OCCURRENCE = 1;
+  protected static final int MAX_OCCURRENCE = 250;
 
   protected RuntimeService runtimeService;
   protected ProcessEngineConfigurationImpl processEngineConfiguration;
@@ -90,9 +90,9 @@ public abstract class AbstractMetricsIntervalTest {
 
   protected void reportMetrics() {
     for (String metricName : metricsRegistry.getDbMeters().keySet()) {
-      //mark random occurence
-      long occurence = rand.nextInt((MAX_OCCURENCE - MIN_OCCURENCE) + 1) + MIN_OCCURENCE;
-      metricsRegistry.markOccurrence(metricName, occurence);
+      //mark random occurrence
+      long occurrence = rand.nextInt((MAX_OCCURRENCE - MIN_OCCURRENCE) + 1) + MIN_OCCURRENCE;
+      metricsRegistry.markOccurrence(metricName, occurrence);
     }
     //report logged metrics
     processEngineConfiguration.getDbMetricsReporter().reportNow();

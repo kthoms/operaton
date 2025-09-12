@@ -86,7 +86,7 @@ public class GenerateMetricsTask implements Runnable {
     for (int i = 0; i < ITERATION_PER_EXECUTION; i++) {
       ClockUtil.setCurrentTime(new Date(startTime));
       for (String metricName : metricNames) {
-        //mark occurence
+        //mark occurrence
         metricsRegistry.markOccurrence(metricName, 1);
       }
       processEngineConfiguration.getDbMetricsReporter().reportNow();
