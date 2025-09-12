@@ -96,7 +96,7 @@ class TaskAssignmentExtensionsTest {
     var deploymentBuilder = repositoryService.createDeployment().addClasspathResource(resource);
     try {
       deploymentBuilder.deploy();
-      fail("Invalid BPMN 2.0 process should not parse, but it gets parsed sucessfully");
+      fail("Invalid BPMN 2.0 process should not parse, but it gets parsed successfully");
     } catch (ProcessEngineException e) {
       // Exception is to be expected
     }

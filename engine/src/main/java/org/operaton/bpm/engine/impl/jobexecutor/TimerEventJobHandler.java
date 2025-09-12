@@ -36,7 +36,7 @@ public abstract class TimerEventJobHandler implements JobHandler<TimerJobConfigu
 
     if (configParts.length > 3) {
       throw new ProcessEngineException("Illegal timer job handler configuration: '" + canonicalString
-          + "': exprecting a one, two or three part configuration seperated by '" + JOB_HANDLER_CONFIG_PROPERTY_DELIMITER + "'.");
+          + "': expecting a one, two or three part configuration separated by '" + JOB_HANDLER_CONFIG_PROPERTY_DELIMITER + "'.");
     }
 
     TimerJobConfiguration configuration = new TimerJobConfiguration();

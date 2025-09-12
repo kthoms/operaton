@@ -68,7 +68,7 @@ public class SpringPAExpressionResolvingTest extends AbstractFoxPlatformIntegrat
   @Deployment(name="clientDeployment")
   public static WebArchive clientDeployment() {
 
-    // the test is deployed as a seperate deployment
+    // the test is deployed as a separate deployment
 
     WebArchive deployment = ShrinkWrap.create(WebArchive.class, "client.war")
             .addAsWebInfResource("org/operaton/bpm/integrationtest/beans.xml", "beans.xml")

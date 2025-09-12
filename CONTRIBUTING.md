@@ -89,8 +89,8 @@ A pull request can be submitted as follows:
 
 1. [Fork the Operaton repository](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) you are contributing to
 1. Commit and push your changes to a branch in your fork
-1. [Submit a Pull Request to the Operaton repository](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork). As the *base* branch (the one that you contribute to), select `master`. This should also be the default in the Github UI.
-1. In the pull request description, reference the github issue that your pull request addresses.
+1. [Submit a Pull Request to the Operaton repository](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork). As the *base* branch (the one that you contribute to), select `main`. This should also be the default in the GitHub UI.
+1. In the pull request description, reference the GitHub issue that your pull request addresses.
 
 # Contribution checklist
 
@@ -130,7 +130,7 @@ feat(engine): Support BPEL
 related to #123
 ```
 
-Have a look at the [commit history](https://github.com/operaton/operaton/commits/master) for real-life examples. 
+Have a look at the [commit history](https://github.com/operaton/operaton/commits/main) for real-life examples. 
 
 
 ## \<type\>
@@ -147,7 +147,7 @@ One of the following:
  
 ## \<scope\>
 
-The scope is the module that is changed by the commit. E.g. `engine` in the case of https://github.com/operaton/operaton/tree/master/engine.
+The scope is the module that is changed by the commit. E.g. `engine` in the case of https://github.com/operaton/operaton/tree/main/engine.
 
 Candidates:
 * engine

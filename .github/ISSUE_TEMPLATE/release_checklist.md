@@ -63,7 +63,7 @@ _For each_ distribution perform these manual test steps:
     - [ ] Browser opens http://localhost:8080/operaton-welcome/index.html
     - [ ] ` ps -ef |grep catalina` shows Tomcat process is running
     - [ ] Server successfully started
-    - [ ] `grep "ENGINE-08048" -r --include=catalina.out` shows `Operaton sucessfully started at 'Apache Tomcat/<TOMCAT_VERSION>`
+    - [ ] `grep "ENGINE-08048" -r --include=catalina.out` shows `Operaton successfully started at 'Apache Tomcat/<TOMCAT_VERSION>`
     - [ ] `grep "ENGINE-08050" -r --include=catalina.out` shows `InvoiceProcessApplication successfully deployed`
 - [ ] Manual Webapp tests checked
 

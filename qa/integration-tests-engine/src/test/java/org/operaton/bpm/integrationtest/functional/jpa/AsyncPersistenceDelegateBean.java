@@ -39,7 +39,7 @@ public class AsyncPersistenceDelegateBean implements JavaDelegate {
   public void execute(DelegateExecution execution) throws Exception {
 
     // we assert that the entity manager does not contain the entity
-    // this means that we obtain a seperate entity manager since
+    // this means that we obtain a separate entity manager since
     // we are invoked in a new transaction
 
     assertThat(em.contains(entity)).isFalse();

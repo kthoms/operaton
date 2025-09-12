@@ -94,7 +94,7 @@ public class JobExecutorRequestContextTest extends AbstractFoxPlatformIntegratio
 
     // verifies that if the same @RequestScoped Bean is invoked
     // in the context of two subsequent exclusive jobs, we have
-    // seperate requests for each job, eben if the jobs are executed
+    // separate requests for each job, even if the jobs are executed
     // subsequently by the same thread.
 
     ProcessInstance pi = runtimeService.startProcessInstanceByKey("testScopingExclusiveJobs");
@@ -102,7 +102,7 @@ public class JobExecutorRequestContextTest extends AbstractFoxPlatformIntegratio
     waitForJobExecutorToProcessAllJobs();
 
     Object variable = runtimeService.getVariable(pi.getId(), "invocationCounter");
-    // -> seperate requests
+    // -> separate requests
     Assertions.assertEquals(1, variable);
 
     Task task = taskService.createTaskQuery()

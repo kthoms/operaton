@@ -23,7 +23,7 @@ var userExpLangHelp = 'E.g.: `${ currentUser() }`';
 var commaSeparatedExps =
   'List of values separated by comma or an expression which evaluates to a list. E.g.: `operaton-admin, accounting` or `${ currentUserGroups() }`';
 var commaSeparatedValues =
-  'List of values seperated by comma. E.g.: `keyC, keyA, keyB`';
+  'List of values separated by comma. E.g.: `keyC, keyA, keyB`';
 
 // yyyy-MM-dd'T'HH:mm:ss
 var dateRegex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(|\.[0-9]{0,4})$/;

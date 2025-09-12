@@ -48,7 +48,7 @@ On Windows, run
 mvnw
 ```
 
-Alternatively, you can use the your own Maven installation (minimal version: 3.9.0) Wrapper and execute
+Alternatively, you can use your own Maven installation (minimal version: 3.9.0) and execute
 ```shell
 mvn
 ```
@@ -59,7 +59,7 @@ For a faster build you can add `-DskipTests` to skip test execution and `-Dskip.
 
 Get the latest release from the [Releases page](https://github.com/operaton/operaton/releases).
 
-To get the latest stable build visit the [Early Access release page]([https://github.com/operaton/operaton/actions/workflows/nighly-build.yml?query=branch%3Amain+event%3Aschedule+is%3Asuccess++](https://github.com/operaton/operaton/releases/tag/early-access)), click on _Assets_ and download the desired package.
+To get the latest stable build visit the [Early Access release page](https://github.com/operaton/operaton/releases/tag/early-access), click on _Assets_ and download the desired package.
 
 ## About Operaton
 
