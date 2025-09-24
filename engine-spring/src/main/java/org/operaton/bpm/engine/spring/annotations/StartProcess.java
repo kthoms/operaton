@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 
 /**
  * this annotation instructs the component model to start an Activiti business process on
- * sucessful invocation of a method that's annotated with it.
+ * successful invocation of a method that's annotated with it.
  *
  * @author Josh Long
  * @since 1.0

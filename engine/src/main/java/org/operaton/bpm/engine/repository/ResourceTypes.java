@@ -24,7 +24,7 @@ public enum ResourceTypes implements ResourceType {
 
   HISTORY("HISTORY", 3);
 
-  // implmentation //////////////////////////
+  // implementation //////////////////////////
 
   private final String name;
   private final Integer id;

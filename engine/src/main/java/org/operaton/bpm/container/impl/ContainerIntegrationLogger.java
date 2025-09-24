@@ -344,7 +344,7 @@ public class ContainerIntegrationLogger extends ProcessEngineLogger {
   public void operatonBpmPlatformSuccessfullyStarted(String serverInfo) {
     logInfo(
         "048",
-        "Operaton sucessfully started at '{}'.", serverInfo);
+        "Operaton successfully started at '{}'.", serverInfo);
   }
 
   public void operatonBpmPlatformStopped(String serverInfo) {
