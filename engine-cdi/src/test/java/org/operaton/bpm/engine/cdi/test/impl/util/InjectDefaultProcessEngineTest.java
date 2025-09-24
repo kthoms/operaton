@@ -16,11 +16,11 @@
  */
 package org.operaton.bpm.engine.cdi.test.impl.util;
 
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.operaton.bpm.BpmPlatform;
 import org.operaton.bpm.container.RuntimeContainerDelegate;
@@ -35,13 +35,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author Christopher Zell <christopher.zell@camunda.com>
  */
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class InjectDefaultProcessEngineTest extends CdiProcessEngineTestCase {
 
   protected ProcessEngine defaultProcessEngine;
   protected ProcessEngine processEngine;
 
-  @Before
+  @BeforeEach
   public void init() {
     processEngine = TestHelper.getProcessEngine("activiti.cfg.xml");
     defaultProcessEngine = BpmPlatform.getProcessEngineService().getDefaultProcessEngine();
@@ -53,7 +53,7 @@ public class InjectDefaultProcessEngineTest extends CdiProcessEngineTestCase {
     RuntimeContainerDelegate.INSTANCE.get().registerProcessEngine(processEngine);
   }
 
-  @After
+  @AfterEach
   @Override
   public void tearDownCdiProcessEngineTestCase() {
     RuntimeContainerDelegate.INSTANCE.get().unregisterProcessEngine(processEngine);

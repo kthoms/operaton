@@ -16,9 +16,9 @@
  */
 package org.operaton.bpm.engine.cdi.test.api;
 
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.operaton.bpm.engine.cdi.BusinessProcess;
 import org.operaton.bpm.engine.cdi.test.CdiProcessEngineTestCase;
@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.fail;
 /**
  * @author Michael Scholz
  */
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class ProcessVariableMapTest extends CdiProcessEngineTestCase {
 
   private static final String VARNAME_1 = "aVariable";
