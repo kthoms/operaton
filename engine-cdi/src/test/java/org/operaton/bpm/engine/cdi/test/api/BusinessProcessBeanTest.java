@@ -18,9 +18,9 @@ package org.operaton.bpm.engine.cdi.test.api;
 
 import java.util.Collections;
 
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.operaton.bpm.engine.TaskService;
 import org.operaton.bpm.engine.cdi.BusinessProcess;
@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.fail;
 /**
  * @author Daniel Meyer
  */
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class BusinessProcessBeanTest extends CdiProcessEngineTestCase {
 
   /* General test asserting that the business process bean is functional */

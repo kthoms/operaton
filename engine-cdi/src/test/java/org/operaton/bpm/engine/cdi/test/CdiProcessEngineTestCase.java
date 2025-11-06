@@ -22,9 +22,9 @@ import jakarta.enterprise.inject.spi.BeanManager;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import org.operaton.bpm.BpmPlatform;
 import org.operaton.bpm.container.RuntimeContainerDelegate;
@@ -45,12 +45,12 @@ import org.operaton.bpm.engine.cdi.BusinessProcess;
 import org.operaton.bpm.engine.cdi.impl.util.ProgrammaticBeanLookup;
 import org.operaton.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.operaton.bpm.engine.impl.util.LogUtil;
-import org.operaton.bpm.engine.test.ProcessEngineRule;
+import org.operaton.bpm.engine.test.junit5.ProcessEngineTestExtension;
 
 /**
  * @author Daniel Meyer
  * When creating a new test class, extend it with this class and add a
- * @RunWith(Arquillian.class) annotation to the child class.
+ * @ExtendWith(ArquillianExtension.class) annotation to the child class.
  */
 public abstract class CdiProcessEngineTestCase {
 
@@ -68,8 +68,8 @@ public abstract class CdiProcessEngineTestCase {
       .addAsManifestResource("META-INF/beans.xml", "beans.xml");
   }
 
-  @Rule
-  public ProcessEngineRule processEngineRule = new ProcessEngineRule();
+  @RegisterExtension
+  public ProcessEngineTestExtension processEngineRule = new ProcessEngineTestExtension();
 
   protected BeanManager beanManager;
 
@@ -89,7 +89,7 @@ public abstract class CdiProcessEngineTestCase {
 
   protected ProcessEngineConfigurationImpl processEngineConfiguration;
 
-  @Before
+  @BeforeEach
   public void setUpCdiProcessEngineTestCase() {
 
     if(BpmPlatform.getProcessEngineService().getDefaultProcessEngine() == null) {
@@ -113,7 +113,7 @@ public abstract class CdiProcessEngineTestCase {
     decisionService = processEngine.getDecisionService();
   }
 
-  @After
+  @AfterEach
   public void tearDownCdiProcessEngineTestCase() {
     RuntimeContainerDelegate.INSTANCE.get().unregisterProcessEngine(processEngine);
     beanManager = null;

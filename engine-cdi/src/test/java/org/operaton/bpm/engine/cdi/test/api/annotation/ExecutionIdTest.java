@@ -20,9 +20,9 @@ import java.util.Set;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 
-import org.jboss.arquillian.junit.Arquillian;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.jboss.arquillian.junit5.ArquillianExtension;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.operaton.bpm.engine.cdi.BusinessProcess;
 import org.operaton.bpm.engine.cdi.annotation.ExecutionIdLiteral;
@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Daniel Meyer
  */
-@RunWith(Arquillian.class)
+@ExtendWith(ArquillianExtension.class)
 public class ExecutionIdTest extends CdiProcessEngineTestCase {
 
   @Test
