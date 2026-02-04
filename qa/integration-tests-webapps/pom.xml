@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm.qa</groupId>
     <artifactId>operaton-qa</artifactId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <artifactId>operaton-qa-integration-tests-webapps-root</artifactId>
   <packaging>pom</packaging>
@@ -48,9 +47,9 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modules>
-    <module>integration-tests</module>
-  </modules>
+  <subprojects>
+    <subproject>integration-tests</subproject>
+  </subprojects>
   <dependencies>
     <!-- set shrinkwrap artifacts -->
     <dependency>
@@ -129,15 +128,15 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>shared-engine</module>
-      </modules>
+      <subprojects>
+        <subproject>shared-engine</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>webapps-integration</id>
-      <modules>
-        <module>shared-engine</module>
-      </modules>
+      <subprojects>
+        <subproject>shared-engine</subproject>
+      </subprojects>
     </profile>
   </profiles>
 </project>

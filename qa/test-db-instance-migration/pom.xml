@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm.qa</groupId>
     <artifactId>operaton-qa</artifactId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <groupId>org.operaton.bpm.qa.upgrade</groupId>
   <artifactId>operaton-qa-db-instance-migration</artifactId>
@@ -18,32 +17,32 @@
     <skip-test-fixture>false</skip-test-fixture>
     <version.openjpa>2.4.3</version.openjpa>
   </properties>
-  <modules>
-    <module>test-fixture-72</module>
-    <module>test-fixture-73</module>
-    <module>test-fixture-74</module>
-    <module>test-fixture-75</module>
-    <module>test-fixture-76</module>
-    <module>test-fixture-77</module>
-    <module>test-fixture-78</module>
-    <module>test-fixture-79</module>
-    <module>test-fixture-710</module>
-    <module>test-fixture-711</module>
-    <module>test-fixture-712</module>
-    <module>test-fixture-713</module>
-    <module>test-fixture-714</module>
-    <module>test-fixture-715</module>
-    <module>test-fixture-716</module>
-    <module>test-fixture-717</module>
-    <module>test-fixture-718</module>
-    <module>test-fixture-719</module>
-    <module>test-fixture-720</module>
-    <module>test-fixture-721</module>
-    <module>test-fixture-722</module>
-    <module>test-fixture-723</module>
-    <module>test-fixture-724</module>
-    <module>test-migration</module>
-  </modules>
+  <subprojects>
+    <subproject>test-fixture-72</subproject>
+    <subproject>test-fixture-73</subproject>
+    <subproject>test-fixture-74</subproject>
+    <subproject>test-fixture-75</subproject>
+    <subproject>test-fixture-76</subproject>
+    <subproject>test-fixture-77</subproject>
+    <subproject>test-fixture-78</subproject>
+    <subproject>test-fixture-79</subproject>
+    <subproject>test-fixture-710</subproject>
+    <subproject>test-fixture-711</subproject>
+    <subproject>test-fixture-712</subproject>
+    <subproject>test-fixture-713</subproject>
+    <subproject>test-fixture-714</subproject>
+    <subproject>test-fixture-715</subproject>
+    <subproject>test-fixture-716</subproject>
+    <subproject>test-fixture-717</subproject>
+    <subproject>test-fixture-718</subproject>
+    <subproject>test-fixture-719</subproject>
+    <subproject>test-fixture-720</subproject>
+    <subproject>test-fixture-721</subproject>
+    <subproject>test-fixture-722</subproject>
+    <subproject>test-fixture-723</subproject>
+    <subproject>test-fixture-724</subproject>
+    <subproject>test-migration</subproject>
+  </subprojects>
   <profiles>
     <profile>
       <id>cfgJdbcBatchProcessingOff</id>

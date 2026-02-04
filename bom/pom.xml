@@ -1,21 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm</groupId>
     <artifactId>operaton-root</artifactId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <artifactId>operaton-bom-root</artifactId>
   <packaging>pom</packaging>
   <name>Operaton - BOM Root</name>
   <description>${project.name}</description>
-  <modules>
-    <module>operaton-only-bom</module>
-    <module>operaton-bom</module>
-    <module>internal-dependencies</module>
-    <module>commons</module>
-    <module>connect</module>
-    <module>spin</module>
-  </modules>
+  <subprojects>
+    <subproject>operaton-only-bom</subproject>
+    <subproject>operaton-bom</subproject>
+    <subproject>internal-dependencies</subproject>
+    <subproject>commons</subproject>
+    <subproject>connect</subproject>
+    <subproject>spin</subproject>
+  </subprojects>
 </project>

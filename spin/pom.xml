@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm</groupId>
     <artifactId>operaton-parent</artifactId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
     <relativePath>../parent</relativePath>
   </parent>
   <groupId>org.operaton.spin</groupId>
@@ -74,12 +73,12 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modules>
-    <module>core</module>
-    <module>dataformat-json-jackson</module>
-    <module>dataformat-xml-dom</module>
-    <module>dataformat-all</module>
-  </modules>
+  <subprojects>
+    <subproject>core</subproject>
+    <subproject>dataformat-json-jackson</subproject>
+    <subproject>dataformat-xml-dom</subproject>
+    <subproject>dataformat-all</subproject>
+  </subprojects>
   <dependencies>
     <dependency>
       <groupId>org.assertj</groupId>

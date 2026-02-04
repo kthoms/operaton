@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm</groupId>
     <artifactId>operaton-database-settings</artifactId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
     <relativePath>../../database</relativePath>
   </parent>
   <groupId>org.operaton.bpm.run</groupId>
@@ -34,23 +33,19 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>modules</module>
-        <module>modules/oauth2</module>
-        <module>modules/rest</module>
-        <module>modules/example</module>
-        <module>modules/webapps</module>
-        <module>core</module>
-        <module>assembly</module>
-        <module>distro</module>
-        <module>qa</module>
-      </modules>
+      <subprojects>
+        <subproject>modules</subproject>
+        <subproject>core</subproject>
+        <subproject>assembly</subproject>
+        <subproject>distro</subproject>
+        <subproject>qa</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>integration-test-operaton-run</id>
-      <modules>
-        <module>qa</module>
-      </modules>
+      <subprojects>
+        <subproject>qa</subproject>
+      </subprojects>
     </profile>
   </profiles>
 </project>

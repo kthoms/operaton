@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <artifactId>operaton-bpm-quarkus-parent</artifactId>
     <groupId>org.operaton.bpm.quarkus</groupId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <artifactId>operaton-bpm-quarkus-engine-parent</artifactId>
   <packaging>pom</packaging>
@@ -13,11 +12,11 @@
   <properties>
     <surefire.memArgs>-Xmx2048m</surefire.memArgs>
   </properties>
-  <modules>
-    <module>deployment</module>
-    <module>runtime</module>
-    <module>qa</module>
-  </modules>
+  <subprojects>
+    <subproject>deployment</subproject>
+    <subproject>runtime</subproject>
+    <subproject>qa</subproject>
+  </subprojects>
   <build>
     <plugins>
       <plugin>

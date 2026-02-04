@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm.run</groupId>
     <artifactId>operaton-bpm-run-root</artifactId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <artifactId>operaton-bpm-run-qa</artifactId>
   <packaging>pom</packaging>
@@ -33,19 +32,19 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>example-plugin</module>
-        <module>runtime</module>
-        <module>integration-tests</module>
-      </modules>
+      <subprojects>
+        <subproject>example-plugin</subproject>
+        <subproject>runtime</subproject>
+        <subproject>integration-tests</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>integration-test-operaton-run</id>
-      <modules>
-        <module>example-plugin</module>
-        <module>integration-tests</module>
-        <module>runtime</module>
-      </modules>
+      <subprojects>
+        <subproject>example-plugin</subproject>
+        <subproject>integration-tests</subproject>
+        <subproject>runtime</subproject>
+      </subprojects>
     </profile>
   </profiles>
 </project>
