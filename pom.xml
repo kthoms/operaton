@@ -60,7 +60,7 @@
                   </message>
                 </requireJavaVersion>
                 <requireMavenVersion>
-                  <version>3.9.0</version>
+                  <version>4.0.0</version>
                 </requireMavenVersion>
                 <requireMatchingCoordinates>
                   <groupIdPattern>org\.operaton(?:..*)</groupIdPattern>
