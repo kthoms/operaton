@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd" root="true">
+  <modelVersion>4.1.0</modelVersion>
   <groupId>org.operaton.bpm</groupId>
   <artifactId>operaton-root</artifactId>
   <packaging>pom</packaging>
@@ -484,136 +484,136 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
+      <subprojects>
         <!-- This profile is run in the CI as the first step (platform-ASSEMBLY); It must not activate
           any modules that have a dependency to the webapps. See also the referenced POMs,
           they usually define which modules are covered by the distro profile -->
-        <module>spring-boot-starter</module>
-        <module>quarkus-extension</module>
-        <module>qa</module>
-        <module>jakarta-ee/ejb-service</module>
-        <module>jakarta-ee/ejb-client</module>
-        <module>jakarta-ee/jobexecutor-ra</module>
-        <module>jakarta-ee/jobexecutor-rar</module>
-        <module>model-api</module>
-        <module>engine-dmn</module>
-        <module>connect</module>
-        <module>juel</module>
-        <module>spin</module>
-        <module>commons</module>
-        <module>freemarker-template-engine</module>
-        <module>test-utils/testcontainers</module>
-        <module>test-utils/junit5-extension</module>
-        <module>test-utils/assert</module>
-        <module>test-utils/archunit</module>
-        <module>engine</module>
-        <module>engine-cdi</module>
-        <module>engine-spring</module>
-        <module>engine-rest</module>
-        <module>webapps</module>
-        <module>examples</module>
-        <module>engine-plugins</module>
-        <module>distro/license-book</module>
-        <module>distro/jboss</module>
-        <module>distro/tomcat</module>
-        <module>distro/sql-script</module>
-        <module>clients/java</module>
-        <module>database</module>
-        <module>parent</module>
-        <module>bom</module>
-      </modules>
+        <subproject>spring-boot-starter</subproject>
+        <subproject>quarkus-extension</subproject>
+        <subproject>qa</subproject>
+        <subproject>jakarta-ee/ejb-service</subproject>
+        <subproject>jakarta-ee/ejb-client</subproject>
+        <subproject>jakarta-ee/jobexecutor-ra</subproject>
+        <subproject>jakarta-ee/jobexecutor-rar</subproject>
+        <subproject>model-api</subproject>
+        <subproject>engine-dmn</subproject>
+        <subproject>connect</subproject>
+        <subproject>juel</subproject>
+        <subproject>spin</subproject>
+        <subproject>commons</subproject>
+        <subproject>freemarker-template-engine</subproject>
+        <subproject>test-utils/testcontainers</subproject>
+        <subproject>test-utils/junit5-extension</subproject>
+        <subproject>test-utils/assert</subproject>
+        <subproject>test-utils/archunit</subproject>
+        <subproject>engine</subproject>
+        <subproject>engine-cdi</subproject>
+        <subproject>engine-spring</subproject>
+        <subproject>engine-rest</subproject>
+        <subproject>webapps</subproject>
+        <subproject>examples</subproject>
+        <subproject>engine-plugins</subproject>
+        <subproject>distro/license-book</subproject>
+        <subproject>distro/jboss</subproject>
+        <subproject>distro/tomcat</subproject>
+        <subproject>distro/sql-script</subproject>
+        <subproject>clients/java</subproject>
+        <subproject>database</subproject>
+        <subproject>parent</subproject>
+        <subproject>bom</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>distro-serverless</id>
-      <modules>
-        <module>qa</module>
-        <module>model-api</module>
-        <module>test-utils/archunit</module>
-        <module>test-utils/testcontainers</module>
-        <module>commons</module>
-        <module>juel</module>
-        <module>engine</module>
-        <module>engine-cdi</module>
-        <module>engine-dmn</module>
-        <module>engine-spring</module>
-        <module>engine-rest</module>
-        <module>webapps</module>
-        <module>examples</module>
-        <module>engine-plugins</module>
-        <module>distro/sql-script</module>
-        <module>database</module>
-        <module>parent</module>
-        <module>bom</module>
-      </modules>
+      <subprojects>
+        <subproject>qa</subproject>
+        <subproject>model-api</subproject>
+        <subproject>test-utils/archunit</subproject>
+        <subproject>test-utils/testcontainers</subproject>
+        <subproject>commons</subproject>
+        <subproject>juel</subproject>
+        <subproject>engine</subproject>
+        <subproject>engine-cdi</subproject>
+        <subproject>engine-dmn</subproject>
+        <subproject>engine-spring</subproject>
+        <subproject>engine-rest</subproject>
+        <subproject>webapps</subproject>
+        <subproject>examples</subproject>
+        <subproject>engine-plugins</subproject>
+        <subproject>distro/sql-script</subproject>
+        <subproject>database</subproject>
+        <subproject>parent</subproject>
+        <subproject>bom</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>distro-tomcat</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>distro/license-book</module>
-        <module>distro/tomcat</module>
-      </modules>
+      <subprojects>
+        <subproject>distro/license-book</subproject>
+        <subproject>distro/tomcat</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>distro-wildfly</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
-      <modules>
-        <module>jakarta-ee/ejb-client</module>
-        <module>distro/license-book</module>
-        <module>distro/wildfly</module>
-      </modules>
+      <subprojects>
+        <subproject>jakarta-ee/ejb-client</subproject>
+        <subproject>distro/license-book</subproject>
+        <subproject>distro/wildfly</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>distro-webjar</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>distro/webjar</module>
-      </modules>
+      <subprojects>
+        <subproject>distro/webjar</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>distro-run</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>distro/run</module>
-      </modules>
+      <subprojects>
+        <subproject>distro/run</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>distro-starter</id>
       <!-- This profile is run in the release CI for building the enterprise artifacts
           It can be removed if the distro job is merged with the assembly job and
           distro-ce is not used for building the spring boot starter -->
-      <modules>
-        <module>spring-boot-starter</module>
-      </modules>
+      <subprojects>
+        <subproject>spring-boot-starter</subproject>
+      </subprojects>
     </profile>
     <profile>
       <!-- profile for running process-engine unit tests in QA -->
       <id>check-engine</id>
-      <modules>
-        <module>engine</module>
-        <module>engine-cdi</module>
-        <module>engine-spring</module>
-        <module>engine-rest</module>
-        <module>database</module>
-        <module>parent</module>
-        <module>bom</module>
-      </modules>
+      <subprojects>
+        <subproject>engine</subproject>
+        <subproject>engine-cdi</subproject>
+        <subproject>engine-spring</subproject>
+        <subproject>engine-rest</subproject>
+        <subproject>database</subproject>
+        <subproject>parent</subproject>
+        <subproject>bom</subproject>
+      </subprojects>
     </profile>
     <profile>
       <!-- profile for running webapp unit tests in QA -->
       <id>check-webapps</id>
-      <modules>
-        <module>parent</module>
-        <module>bom</module>
-      </modules>
+      <subprojects>
+        <subproject>parent</subproject>
+        <subproject>bom</subproject>
+      </subprojects>
     </profile>
 
     <profile>
@@ -621,34 +621,34 @@
       <properties>
         <deploy.skip>false</deploy.skip>
       </properties>
-      <modules>
-        <module>spring-boot-starter</module>
-        <module>quarkus-extension</module>
-        <module>model-api</module>
-        <module>engine</module>
-        <module>engine-cdi</module>
-        <module>engine-spring</module>
-        <module>engine-rest</module>
-        <module>engine-dmn</module>
-        <module>connect</module>
-        <module>juel</module>
-        <module>spin</module>
-        <module>commons</module>
-        <module>freemarker-template-engine</module>
-        <module>jakarta-ee/ejb-client</module>
-        <module>webapps</module>
-        <module>engine-plugins</module>
-        <module>distro/webjar</module>
-        <module>distro/sql-script</module>
-        <module>clients/java</module>
-        <module>test-utils/junit5-extension</module>
-        <module>test-utils/archunit</module>
-        <module>test-utils/assert</module>
-        <module>test-utils/testcontainers</module>
-        <module>database</module>
-        <module>parent</module>
-        <module>bom</module>
-      </modules>
+      <subprojects>
+        <subproject>spring-boot-starter</subproject>
+        <subproject>quarkus-extension</subproject>
+        <subproject>model-api</subproject>
+        <subproject>engine</subproject>
+        <subproject>engine-cdi</subproject>
+        <subproject>engine-spring</subproject>
+        <subproject>engine-rest</subproject>
+        <subproject>engine-dmn</subproject>
+        <subproject>connect</subproject>
+        <subproject>juel</subproject>
+        <subproject>spin</subproject>
+        <subproject>commons</subproject>
+        <subproject>freemarker-template-engine</subproject>
+        <subproject>jakarta-ee/ejb-client</subproject>
+        <subproject>webapps</subproject>
+        <subproject>engine-plugins</subproject>
+        <subproject>distro/webjar</subproject>
+        <subproject>distro/sql-script</subproject>
+        <subproject>clients/java</subproject>
+        <subproject>test-utils/junit5-extension</subproject>
+        <subproject>test-utils/archunit</subproject>
+        <subproject>test-utils/assert</subproject>
+        <subproject>test-utils/testcontainers</subproject>
+        <subproject>database</subproject>
+        <subproject>parent</subproject>
+        <subproject>bom</subproject>
+      </subprojects>
       <build>
         <plugins>
           <plugin>

@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm.springboot.project</groupId>
     <artifactId>operaton-bpm-spring-boot-starter-root</artifactId>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <artifactId>operaton-bpm-spring-boot-starter-qa</artifactId>
   <packaging>pom</packaging>
@@ -32,13 +31,13 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>integration-test-simple</module>
-        <module>integration-test-request-scope</module>
-        <module>integration-test-plugins</module>
-        <module>integration-test-liquibase</module>
-        <module>integration-test-webapp</module>
-      </modules>
+      <subprojects>
+        <subproject>integration-test-simple</subproject>
+        <subproject>integration-test-request-scope</subproject>
+        <subproject>integration-test-plugins</subproject>
+        <subproject>integration-test-liquibase</subproject>
+        <subproject>integration-test-webapp</subproject>
+      </subprojects>
       <build>
         <pluginManagement>
           <plugins>
@@ -58,13 +57,13 @@
       <!-- This profile is run in the release CI for building the enterprise artifacts
           It can be removed if the webapp repo is merged to the platform and
           distro-ce is not used for building the spring boot starter -->
-      <modules>
-        <module>integration-test-simple</module>
-        <module>integration-test-request-scope</module>
-        <module>integration-test-plugins</module>
-        <module>integration-test-webapp</module>
-        <module>integration-test-liquibase</module>
-      </modules>
+      <subprojects>
+        <subproject>integration-test-simple</subproject>
+        <subproject>integration-test-request-scope</subproject>
+        <subproject>integration-test-plugins</subproject>
+        <subproject>integration-test-webapp</subproject>
+        <subproject>integration-test-liquibase</subproject>
+      </subprojects>
     </profile>
   </profiles>
 </project>

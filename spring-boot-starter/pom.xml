@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm</groupId>
     <artifactId>operaton-parent</artifactId>
     <relativePath>../parent</relativePath>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <groupId>org.operaton.bpm.springboot.project</groupId>
   <artifactId>operaton-bpm-spring-boot-starter-root</artifactId>
@@ -32,41 +31,41 @@
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>starter</module>
-        <module>starter-rest</module>
-        <module>starter-security</module>
-        <module>starter-test</module>
-        <module>starter-test-junit5</module>
-        <module>starter-client/spring</module>
-        <module>starter-client/spring-boot</module>
-        <module>starter-webapp-core</module>
-        <module>starter-webapp</module>
-        <module>starter-qa</module>
-      </modules>
+      <subprojects>
+        <subproject>starter</subproject>
+        <subproject>starter-rest</subproject>
+        <subproject>starter-security</subproject>
+        <subproject>starter-test</subproject>
+        <subproject>starter-test-junit5</subproject>
+        <subproject>starter-client/spring</subproject>
+        <subproject>starter-client/spring-boot</subproject>
+        <subproject>starter-webapp-core</subproject>
+        <subproject>starter-webapp</subproject>
+        <subproject>starter-qa</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>distro-starter</id>
       <!-- This profile is run in the release CI for building the enterprise artifacts
           It can be removed if the distro job is merged with the assembly and
           distro-ce is not used for building the spring boot starter -->
-      <modules>
-        <module>starter-webapp-core</module>
-        <module>starter-webapp</module>
-        <module>starter-qa</module>
-      </modules>
+      <subprojects>
+        <subproject>starter-webapp-core</subproject>
+        <subproject>starter-webapp</subproject>
+        <subproject>starter-qa</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>integration-test-spring-boot-starter</id>
-      <modules>
+      <subprojects>
         <!-- All modules that contain *IT.java test classes need to be listed here -->
-        <module>starter-qa</module>
-        <module>starter</module>
-        <module>starter-rest</module>
-        <module>starter-security</module>
-        <module>starter-client/spring-boot</module>
-        <module>starter-webapp-core</module>
-      </modules>
+        <subproject>starter-qa</subproject>
+        <subproject>starter</subproject>
+        <subproject>starter-rest</subproject>
+        <subproject>starter-security</subproject>
+        <subproject>starter-client/spring-boot</subproject>
+        <subproject>starter-webapp-core</subproject>
+      </subprojects>
       <build>
         <plugins>
           <plugin>

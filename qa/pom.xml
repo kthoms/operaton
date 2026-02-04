@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+  <modelVersion>4.1.0</modelVersion>
   <parent>
     <groupId>org.operaton.bpm</groupId>
     <artifactId>operaton-database-settings</artifactId>
     <relativePath>../database</relativePath>
-    <version>1.0.0-rc-1-SNAPSHOT</version>
   </parent>
   <groupId>org.operaton.bpm.qa</groupId>
   <artifactId>operaton-qa</artifactId>
@@ -50,73 +49,73 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <modules>
-    <module>ensure-clean-db-plugin</module>
-  </modules>
+  <subprojects>
+    <subproject>ensure-clean-db-plugin</subproject>
+  </subprojects>
   <profiles>
     <profile>
       <id>distro</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-      <modules>
-        <module>integration-tests-webapps</module>
-        <module>integration-tests-engine</module>
-        <module>performance-tests-engine</module>
-        <module>large-data-tests</module>
-      </modules>
+      <subprojects>
+        <subproject>integration-tests-webapps</subproject>
+        <subproject>integration-tests-engine</subproject>
+        <subproject>performance-tests-engine</subproject>
+        <subproject>large-data-tests</subproject>
+      </subprojects>
     </profile>
     <!-- Server profiles -->
     <profile>
       <id>wildfly</id>
-      <modules>
-        <module>wildfly-runtime</module>
-      </modules>
+      <subprojects>
+        <subproject>wildfly-runtime</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>wildfly-domain</id>
-      <modules>
-        <module>wildfly-runtime</module>
-      </modules>
+      <subprojects>
+        <subproject>wildfly-runtime</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>tomcat</id>
-      <modules>
-        <module>tomcat-runtime</module>
-      </modules>
+      <subprojects>
+        <subproject>tomcat-runtime</subproject>
+      </subprojects>
     </profile>
     <!-- Testsuite profiles -->
     <profile>
       <id>webapps-integration</id>
-      <modules>
-        <module>integration-tests-webapps</module>
-      </modules>
+      <subprojects>
+        <subproject>integration-tests-webapps</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>engine-integration</id>
-      <modules>
-        <module>integration-tests-engine</module>
-      </modules>
+      <subprojects>
+        <subproject>integration-tests-engine</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>instance-migration</id>
-      <modules>
-        <module>test-db-util</module>
-        <module>test-db-instance-migration</module>
-      </modules>
+      <subprojects>
+        <subproject>test-db-util</subproject>
+        <subproject>test-db-instance-migration</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>rolling-update</id>
-      <modules>
-        <module>test-db-util</module>
-        <module>test-db-rolling-update</module>
-      </modules>
+      <subprojects>
+        <subproject>test-db-util</subproject>
+        <subproject>test-db-rolling-update</subproject>
+      </subprojects>
     </profile>
     <profile>
       <id>old-engine</id>
-      <modules>
-        <module>test-old-engine</module>
-      </modules>
+      <subprojects>
+        <subproject>test-old-engine</subproject>
+      </subprojects>
     </profile>
   </profiles>
 </project>
