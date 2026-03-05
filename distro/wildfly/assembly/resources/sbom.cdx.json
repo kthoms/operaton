@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.7",
-  "serialNumber": "urn:uuid:eb1ac1d8-0578-460c-b04c-b1c1944f98fd",
+  "serialNumber": "urn:uuid:c8deb1ed-0840-4782-a995-c830ae1e0709",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-03-02T00:25:44Z",
+    "timestamp": "2026-03-05T00:29:27Z",
     "tools": {
       "components": [
         {
@@ -56,7 +56,7 @@
           },
           "group": "aquasecurity",
           "name": "trivy",
-          "version": "0.69.2"
+          "version": "0.69.3"
         }
       ]
     },
@@ -33290,7 +33290,7 @@
     },
     {
       "type": "application",
-      "bom-ref": "ac84d88c-68cd-4a46-a3a5-01709afeea27",
+      "bom-ref": "f93b6e92-9931-4f76-ae30-34af37003f72",
       "name": "package-lock.json",
       "properties": [
         {
@@ -34811,9 +34811,9 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/bpmn-js@18.12.0",
+      "bom-ref": "pkg:npm/bpmn-js@18.12.1",
       "name": "bpmn-js",
-      "version": "18.12.0",
+      "version": "18.12.1",
       "licenses": [
         {
           "license": {
@@ -34821,11 +34821,11 @@
           }
         }
       ],
-      "purl": "pkg:npm/bpmn-js@18.12.0",
+      "purl": "pkg:npm/bpmn-js@18.12.1",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "bpmn-js@18.12.0"
+          "value": "bpmn-js@18.12.1"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -36204,9 +36204,9 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:npm/fast-xml-parser@5.3.8",
-      "name": "fast-xml-parser",
-      "version": "5.3.8",
+      "bom-ref": "pkg:npm/fast-xml-builder@1.0.0",
+      "name": "fast-xml-builder",
+      "version": "1.0.0",
       "licenses": [
         {
           "license": {
@@ -36214,11 +36214,35 @@
           }
         }
       ],
-      "purl": "pkg:npm/fast-xml-parser@5.3.8",
+      "purl": "pkg:npm/fast-xml-builder@1.0.0",
       "properties": [
         {
           "name": "aquasecurity:trivy:PkgID",
-          "value": "fast-xml-parser@5.3.8"
+          "value": "fast-xml-builder@1.0.0"
+        },
+        {
+          "name": "aquasecurity:trivy:PkgType",
+          "value": "npm"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:npm/fast-xml-parser@5.4.2",
+      "name": "fast-xml-parser",
+      "version": "5.4.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:npm/fast-xml-parser@5.4.2",
+      "properties": [
+        {
+          "name": "aquasecurity:trivy:PkgID",
+          "value": "fast-xml-parser@5.4.2"
         },
         {
           "name": "aquasecurity:trivy:PkgType",
@@ -38228,7 +38252,7 @@
     },
     {
       "type": "application",
-      "bom-ref": "cd32a201-c701-4d06-a10c-dd391d6cae22",
+      "bom-ref": "63fcc620-d5d7-4f61-83db-a4e3516e0225",
       "name": "/repo/webapps/frontend",
       "properties": [
         {
@@ -42207,7 +42231,13 @@
       "dependsOn": []
     },
     {
-      "ref": "ac84d88c-68cd-4a46-a3a5-01709afeea27",
+      "ref": "63fcc620-d5d7-4f61-83db-a4e3516e0225",
+      "dependsOn": [
+        "f93b6e92-9931-4f76-ae30-34af37003f72"
+      ]
+    },
+    {
+      "ref": "f93b6e92-9931-4f76-ae30-34af37003f72",
       "dependsOn": [
         "pkg:npm/%40bpmn-io/dmn-migrate@0.7.1",
         "pkg:npm/%40bpmn-io/form-js@1.19.0",
@@ -42227,7 +42257,7 @@
         "pkg:npm/bootstrap-icons@1.13.1",
         "pkg:npm/bootstrap@4.6.2",
         "pkg:npm/bpmn-font@0.12.1",
-        "pkg:npm/bpmn-js@18.12.0",
+        "pkg:npm/bpmn-js@18.12.1",
         "pkg:npm/camunda-dmn-js@3.7.0",
         "pkg:npm/chart.js@4.5.1",
         "pkg:npm/clipboard@2.0.11",
@@ -42243,7 +42273,7 @@
         "pkg:npm/dom4@2.1.6",
         "pkg:npm/dompurify@3.3.1",
         "pkg:npm/events@3.3.0",
-        "pkg:npm/fast-xml-parser@5.3.8",
+        "pkg:npm/fast-xml-parser@5.4.2",
         "pkg:npm/jquery-ui@1.14.2",
         "pkg:npm/jquery@3.7.1",
         "pkg:npm/lodash@4.17.23",
@@ -42254,12 +42284,6 @@
         "pkg:npm/requirejs-angular-define@1.1.0",
         "pkg:npm/requirejs@2.3.8",
         "pkg:npm/superagent@10.3.0"
-      ]
-    },
-    {
-      "ref": "cd32a201-c701-4d06-a10c-dd391d6cae22",
-      "dependsOn": [
-        "ac84d88c-68cd-4a46-a3a5-01709afeea27"
       ]
     },
     {
@@ -42669,7 +42693,7 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/bpmn-js@18.12.0",
+      "ref": "pkg:npm/bpmn-js@18.12.1",
       "dependsOn": [
         "pkg:npm/bpmn-moddle@10.0.0",
         "pkg:npm/diagram-js-direct-editing@3.3.0",
@@ -43094,8 +43118,13 @@
       "dependsOn": []
     },
     {
-      "ref": "pkg:npm/fast-xml-parser@5.3.8",
+      "ref": "pkg:npm/fast-xml-builder@1.0.0",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:npm/fast-xml-parser@5.4.2",
       "dependsOn": [
+        "pkg:npm/fast-xml-builder@1.0.0",
         "pkg:npm/strnum@2.1.2"
       ]
     },
