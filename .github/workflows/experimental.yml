@@ -16,8 +16,7 @@ on:
 jobs:
   check-runner:
     runs-on: ubuntu-slim
-    permissions:
-      actions: read
+    permissions: read-all
     outputs:
       runner_type: ${{ steps.set-runner.outputs.type }}
     steps:
