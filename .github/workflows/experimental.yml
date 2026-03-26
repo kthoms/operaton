@@ -14,11 +14,32 @@ on:
     #   type: string
 
 jobs:
-  execute:
+  check-runner:
     runs-on: ubuntu-latest
-
+    outputs:
+      runner_type: ${{ steps.set-runner.outputs.type }}
     steps:
-    # Runs a single command using the runners shell
-    - name: Run commands
+    - name: Check if Mac Mini is online
+      id: set-runner
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "Done"
+        # Wir suchen nach einem Runner mit dem Label 'self-hosted', der 'online' ist
+        STATUS=$(gh api repos/${{ github.repository }}/actions/runners \
+          --jq '.runners[] | select(.labels[].name=="self-hosted") | .status' | head -n 1)
+        
+        if [ "$STATUS" = "online" ]; then
+          echo "type=self-hosted" >> $GITHUB_OUTPUT
+          echo "Mac Mini ist bereit."
+        else
+          echo "type=ubuntu-latest" >> $GITHUB_OUTPUT
+          echo "Mac Mini ist offline, weiche auf Ubuntu aus."
+        fi
+
+  build:
+    needs: check-runner
+    runs-on: ${{ needs.check-runner.outputs.runner_type }}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run Build
+      run: echo "Ich laufe auf ${{ needs.check-runner.outputs.runner_type }}"
